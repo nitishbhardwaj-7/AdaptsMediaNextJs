@@ -113,7 +113,7 @@ export default function RootLayout({
       <body>
         <CustomCursor />
         <SmoothScroll>
-          {/* <Navbar /> */}
+          <Navbar />
           <main style={{ paddingTop: '0px' }}>
             {children}
           </main>

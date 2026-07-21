@@ -153,7 +153,7 @@ const PerformanceMarketing = () => {
         {/* 1. TOP SECTION: Connected Thinking */}
         <div className="mb-32">
 
-          <h2 className="connected-title text-4xl md:text-7xl font-normal mb-8 leading-tight max-w-4xl">
+          <h2 className="connected-title text-4xl md:text-7xl mb-8 leading-tight max-w-4xl">
             Connected Thinking.<br/>Measureable Results.
           </h2>
           <p className="connected-desc text-lg md:text-3xl opacity-90 max-w-3xl font-light">

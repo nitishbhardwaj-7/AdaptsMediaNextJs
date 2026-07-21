@@ -35,6 +35,8 @@ export const useServiceDetailAnimation = (containerRef: RefObject<HTMLElement | 
         .line-parent {
           overflow: hidden;
           display: block;
+          padding-bottom: 0.25em !important;
+          margin-bottom: -0.25em !important;
         }
         .line-child {
           display: inline-block;

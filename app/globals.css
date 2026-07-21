@@ -49,11 +49,11 @@
   border: 1.5px solid rgba(255, 255, 255, 0.9);
   background: transparent;
   transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              border-color 0.35s ease,
-              background 0.35s ease,
-              opacity 0.2s ease;
+    height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.35s ease,
+    background 0.35s ease,
+    opacity 0.2s ease;
 }
 
 /* Expand ring on interactive targets */
@@ -72,6 +72,7 @@
 .cursor-ring.cursor-hidden {
   opacity: 0 !important;
 }
+
 /* ──────────────────────────────────────────────────────── */
 
 /* ─── ServicesSection GSAP ──────────────────────────────── */
@@ -89,6 +90,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .service-card,
   .service-item-row,
   .service-number,
@@ -97,6 +99,7 @@
     animation: none !important;
   }
 }
+
 /* ──────────────────────────────────────────────────────── */
 
 :root {
@@ -107,8 +110,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-body);
-  --font-heading: var(--font-heading);
+  --font-sans: var(--font-heading), sans-serif;
+  --font-heading: var(--font-heading), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -119,9 +122,19 @@
 }
 
 @keyframes scan {
-  0% { top: 0%; opacity: 0; }
-  50% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 
 .animate-scan {
@@ -129,18 +142,31 @@
 }
 
 @keyframes shine {
-  0% { transform: translateX(-200%); }
-  100% { transform: translateX(200%); }
+  0% {
+    transform: translateX(-200%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
 }
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  font-family: var(--font-heading), sans-serif;
 }
 
-h1 {
-  font-family: var(--font-heading), Arial, Helvetica, sans-serif;
-  font-weight: 600;
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), sans-serif;
+    font-weight: 300;
+  }
 }
 
 /* src/app/globals.css */
@@ -149,8 +175,10 @@ h1 {
 html,
 body,
 * {
-  -ms-overflow-style: none !important;  /* IE and Edge */
-  scrollbar-width: none !important;     /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
 }
 
 /* Target Chrome, Safari and Opera */
@@ -162,7 +190,7 @@ body::-webkit-scrollbar,
   height: 0 !important;
 }
 
-/* From Uiverse.io by karthik092726122003 */ 
+/* From Uiverse.io by karthik092726122003 */
 .styled-wrapper .button {
   display: block;
   position: relative;
@@ -181,7 +209,8 @@ body::-webkit-scrollbar,
   position: absolute;
   border-radius: 50%;
   inset: 7px;
-  border: 3px solid black; /* Update dynamically for light/dark mode */
+  border: 3px solid black;
+  /* Update dynamically for light/dark mode */
   transition:
     opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
     transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
@@ -246,8 +275,10 @@ body::-webkit-scrollbar,
 
 /* Hide scrollbar for IE, Edge and Firefox */
 * {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 
@@ -313,6 +344,7 @@ body::-webkit-scrollbar,
   color: #2563eb !important;
   font-weight: 700;
 }
+
 .reveal-text .word {
   opacity: 0.25;
   color: #9ca3af;
@@ -320,21 +352,21 @@ body::-webkit-scrollbar,
 }
 
 /* ─── Prevent SplitText line masking descender clipping ─── */
-.hero-left-title > div > div,
-.hero-right-title > div > div,
-.identity-title > div > div,
-.campaigns-title > div > div,
-.designsystems-title > div > div,
-.contentstrategy-title > div > div,
-.leverage-title > div > div,
-.intro-paragraph > div > div,
-.orange-heading > div > div,
-.services-heading > div > div,
-.orange-subheading > div > div,
-.service-card-title > div > div {
-  padding-bottom: 0.25em !important;
-  margin-bottom: -0.25em !important;
+.hero-left-title>div>div,
+.hero-right-title>div>div,
+.identity-title>div>div,
+.campaigns-title>div>div,
+.designsystems-title>div>div,
+.contentstrategy-title>div>div,
+.leverage-title>div>div,
+.intro-paragraph>div>div,
+.orange-heading>div>div,
+.services-heading>div>div,
+.orange-subheading>div>div,
+.service-card-title>div>div,
+.service-title>div>div,
+.service-title .line-parent,
+.line-parent {
+  padding-bottom: 0.35em !important;
+  margin-bottom: -0.35em !important;
 }
-
-
-

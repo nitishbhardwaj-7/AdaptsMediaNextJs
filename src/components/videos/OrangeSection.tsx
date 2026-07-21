@@ -178,10 +178,8 @@ const OrangeSection = () => {
 
     // --- Scroll Choreography Sequence ---
 
-    // A. Parallax Layers (balancing start and end to avoid crowding the top)
-    tl.fromTo(leftColRef.current, { y: 50 }, { y: -50, ease: "none" }, 0);
-    tl.fromTo(rightColRef.current, { y: 25 }, { y: -25, ease: "none" }, 0);
-    tl.fromTo(bgRef.current, { y: 15 }, { y: -15, ease: "none" }, 0);
+    // A. Parallax Layers removed to stop movement while pinned
+
 
     // B. Zoom-in around 80% scroll
     tl.to(containerRef.current, {
@@ -402,7 +400,7 @@ const OrangeSection = () => {
             <div className="w-full">
               
               {/* Animated Line-split Headline */}
-              <h1 className="text-[clamp(1.8rem,3.4vw,4.2rem)] font-heading font-medium tracking-tight leading-tight text-white mb-6 md:mb-8">
+              <h1 className="text-[clamp(1.8rem,3.4vw,4.2rem)] font-normal tracking-tight leading-tight text-white mb-6 md:mb-8">
                 {headlineLines.map((line, idx) => (
                   <span key={idx} className="block overflow-hidden py-[0.25em] -my-[0.25em]">
                     <span className="headline-line inline-block origin-bottom-left will-change-[transform,opacity,filter]">

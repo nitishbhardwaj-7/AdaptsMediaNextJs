@@ -166,8 +166,8 @@ const ClientsSection = () => {
           const rect = gridWrapper.getBoundingClientRect()
           const x = e.clientX - rect.left
           const y = e.clientY - rect.top
-          spotX(`${x}px`)
-          spotY(`${y}px`)
+          spotX(`${x}px` as any)
+          spotY(`${y}px` as any)
         }
 
         const onGridMouseEnter = () => {

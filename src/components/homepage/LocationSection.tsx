@@ -339,7 +339,7 @@ const LocationSection = () => {
     }
 
     // --- G. Cursor Spotlight on Map ---
-    const mapContainer = sectionRef.current?.querySelector(".map-container")
+    const mapContainer = sectionRef.current?.querySelector<HTMLElement>(".map-container")
     const mapSpotlight = sectionRef.current?.querySelector(".map-spotlight") as HTMLElement
 
     if (!isMobile && mapContainer && mapSpotlight) {
@@ -407,8 +407,8 @@ const LocationSection = () => {
       time += 0.05
       const x = 30 + Math.sin(time) * 15
       const y = 40 + Math.cos(time * 0.8) * 15
-      lightX(`${x}%`)
-      lightY(`${y}%`)
+      lightX(`${x}%` as any)
+      lightY(`${y}%` as any)
     }, 100)
     cleanups.push(() => clearInterval(lightInterval))
 

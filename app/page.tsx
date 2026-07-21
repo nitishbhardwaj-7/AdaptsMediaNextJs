@@ -63,7 +63,7 @@ export default async function Home() {
 
         <RecreateDesign />
 
-        {/* <InsightsSection /> */}
+        <InsightsSection />
 
         <ContactCTA />
 
@@ -71,7 +71,7 @@ export default async function Home() {
 
         <SocialBar />
 
-        {/* <Footer /> */}
+        <Footer />
       </main>
     </>
   );

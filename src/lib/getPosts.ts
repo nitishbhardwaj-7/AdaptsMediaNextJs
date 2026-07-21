@@ -68,3 +68,66 @@ export async function getSinglePost(slug: string) {
     return null;
   }
 }
+
+export async function getWordPressTeamMembers() {
+  const { teamMembers } = await import('@/data/teamData');
+  const teamUrl = BASE_URL ? `${BASE_URL}/team/` : 'https://adaptsmedia.com/team/';
+
+  try {
+    const res = await fetch(teamUrl, { cache: 'no-store' });
+    if (!res.ok) return teamMembers;
+
+    const html = await res.text();
+    const cardBlocks = html.split(/<div[^>]*class=["'][^"']*card-wrapper[^"']*["']/gi).slice(1);
+    
+    if (cardBlocks.length > 0) {
+      const parsed: any[] = [];
+      let id = 1;
+
+      for (const block of cardBlocks) {
+        const imgMatch = block.match(/<img[^>]+src=["']([^"']+)["']/i);
+        const nameMatch = block.match(/<h3[^>]*>(.*?)<\/h3>/i);
+        const roleMatch = block.match(/<h5[^>]*>(.*?)<\/h5>/i);
+        const bioMatch = block.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+
+        const img = imgMatch ? imgMatch[1] : '';
+        const name = nameMatch ? nameMatch[1].replace(/<[^>]+>/g, '').trim().replace(/&amp;/g, '&') : '';
+        const role = roleMatch ? roleMatch[1].replace(/<[^>]+>/g, '').trim().replace(/&amp;/g, '&') : '';
+        const bio = bioMatch ? bioMatch[1].replace(/<[^>]+>/g, '').trim().replace(/&amp;/g, '&') : '';
+        const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+        if (name && role && img) {
+          const existing = teamMembers.find(t => t.slug === slug || t.name.toLowerCase().includes(name.toLowerCase()));
+
+          parsed.push({
+            id: id++,
+            name,
+            slug,
+            role,
+            image: img, // Directly from WordPress card-wrapper
+            initials: name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase(),
+            initialsBg: existing?.initialsBg || "bg-blue-600",
+            bio: bio || existing?.bio || `${role} at Adapts Media.`,
+            location: existing?.location || "Dubai, UAE",
+            memberSince: existing?.memberSince || 2022,
+            expertise: existing?.expertise || ["Digital Marketing", "Strategy"],
+            topics: existing?.topics || ["Digital Marketing"],
+            aboutLong: bio || existing?.aboutLong || `${name} is ${role} at Adapts Media.`,
+            badges: existing?.badges || [role],
+            socials: existing?.socials || { linkedin: "https://www.linkedin.com/company/adaptsmedia", email: "info@adaptsmedia.com" }
+          });
+        }
+      }
+
+      if (parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching live WordPress team page:", error);
+  }
+
+  return teamMembers;
+}
+
+
