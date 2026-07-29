@@ -46,7 +46,7 @@ export default function PerformSection() {
               className="absolute z-10 pointer-events-none object-cover" 
             />
       
-      <div className="relative z-10 max-w-[1350px] px-8 md:px-16 w-full">
+      <div className="relative z-10 max-w-[1350px] 2xl:max-w-[1600px] px-8 md:px-16 w-full">
         {/* Header Section */}
         <div className="flex flex-col min-[1300px]:flex-row min-[1300px]:items-end min-[1300px]:justify-between gap-12 mb-20">
           <div className="flex flex-col items-start">

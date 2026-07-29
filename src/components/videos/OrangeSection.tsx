@@ -29,7 +29,7 @@ const OrangeSection = () => {
   ];
 
   const introWords = [
-    "We", "combine", "strategy,", "creativity,", "and", "technology", 
+    "We", "combine", "strategy,", "creativity,", "and", "technology",
     "to", "deliver", "marketing", "that", "performs", "not", "just", "looks", "good."
   ];
 
@@ -85,11 +85,11 @@ const OrangeSection = () => {
       const onMouseMove = (e: MouseEvent) => {
         const rect = sectionRef.current?.getBoundingClientRect();
         if (!rect) return;
-        
+
         // Calculate offset from center to influence orb position
         const x = (e.clientX - rect.left - rect.width / 2) * 0.08;
         const y = (e.clientY - rect.top - rect.height / 2) * 0.08;
-        
+
         orbXTo(x);
         orbYTo(y);
       };
@@ -129,12 +129,112 @@ const OrangeSection = () => {
       });
     }
 
+    // ─── MOBILE: subtle entrance animations (no pin, no scrub) ──────────────
+    if (isMobile) {
+      const headlineLinesElements = gsap.utils.toArray<HTMLElement>(".headline-line");
+      const introWordsElements = gsap.utils.toArray<HTMLElement>(".intro-word");
+      const bodyLines = gsap.utils.toArray<HTMLElement>(".body-line");
+      const cards = gsap.utils.toArray<HTMLElement>(".stats-card-3d");
+      const statNumbers = gsap.utils.toArray<HTMLElement>(".stat-number");
+
+      const countTargets = [
+        { val: 100, suffix: "+" },
+        { val: 500, suffix: "+" },
+        { val: 3, suffix: "X" },
+        { val: 5, suffix: "+" }
+      ];
+
+      // Set initial hidden states (same as desktop)
+      gsap.set(headlineLinesElements, { y: 24, opacity: 0, filter: "blur(4px)" });
+      gsap.set(introWordsElements, { y: 10, opacity: 0 });
+      gsap.set(bodyLines, { y: 16, opacity: 0 });
+      gsap.set(closingRef.current, { opacity: 0, y: 12, filter: "blur(6px)" });
+      gsap.set(".magnetic-button", { y: 20, opacity: 0 });
+      gsap.set(cards, { opacity: 0, y: 30, scale: 0.92 });
+
+      // One-shot entrance triggered when the section enters the viewport
+      const mobileTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        }
+      });
+
+      // Headline lines fade + slide up
+      mobileTl.to(headlineLinesElements, {
+        y: 0, opacity: 1, filter: "blur(0px)",
+        duration: 0.75, stagger: 0.18, ease: "power2.out"
+      }, 0);
+
+      // Intro words stagger in softly
+      mobileTl.to(introWordsElements, {
+        y: 0, opacity: 1,
+        duration: 0.55, stagger: 0.03, ease: "power2.out"
+      }, 0.3);
+
+      // Body lines slide up one by one
+      mobileTl.to(bodyLines, {
+        y: 0, opacity: 1,
+        duration: 0.6, stagger: 0.1, ease: "power2.out"
+      }, 0.6);
+
+      // Closing statement fades in
+      mobileTl.to(closingRef.current, {
+        opacity: 1, y: 0, filter: "blur(0px)",
+        duration: 0.7, ease: "power3.out"
+      }, 0.9);
+
+      // CTA buttons slide up
+      mobileTl.to(".magnetic-button", {
+        y: 0, opacity: 1,
+        duration: 0.55, stagger: 0.1, ease: "power3.out"
+      }, 1.1);
+
+      // Cards bloom in
+      mobileTl.to(cards, {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.65, stagger: 0.12, ease: "back.out(1.2)"
+      }, 0.4);
+
+      // Stat numbers count up once
+      statNumbers.forEach((el, index) => {
+        const target = countTargets[index];
+        if (!target) return;
+        const countObj = { val: 0 };
+        mobileTl.to(countObj, {
+          val: target.val,
+          duration: 1.2,
+          ease: "power2.out",
+          onUpdate: () => {
+            (el as HTMLElement).innerText = Math.floor(countObj.val) + target.suffix;
+          },
+          onComplete: () => {
+            gsap.to(el, { color: "#FAC02E", duration: 0.3, ease: "power2.out" });
+          }
+        }, 0.55 + index * 0.1);
+      });
+
+      // Ambient card float (same as desktop)
+      cards.forEach((card, i) => {
+        gsap.to(card, {
+          x: "random(-6, 6)", y: "random(-8, 8)", rotate: "random(-1, 1)",
+          duration: gsap.utils.random(4, 7),
+          repeat: -1, yoyo: true, ease: "sine.inOut",
+          delay: i * 0.25
+        });
+      });
+
+      return () => { cleanups.forEach((fn) => fn()); };
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     // --- 4. Master ScrollTrigger Timeline ---
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: isMobile ? "+=100%" : "+=150%", // Pinned shorter on mobile to improve UX
+        end: "+=150%",
         pin: true,
         scrub: 1.2,
         invalidateOnRefresh: true,
@@ -171,9 +271,9 @@ const OrangeSection = () => {
       opacity: 0,
       scale: 0.8,
       filter: "blur(10px)",
-      x: (i) => [ -50, 55, -60, 60 ][i] || 0,
-      y: (i) => [ 60, -70, -50, 60 ][i] || 0,
-      rotate: (i) => [ -6, 6, -5, 5 ][i] || 0
+      x: (i) => [-50, 55, -60, 60][i] || 0,
+      y: (i) => [60, -70, -50, 60][i] || 0,
+      rotate: (i) => [-6, 6, -5, 5][i] || 0
     });
 
     // --- Scroll Choreography Sequence ---
@@ -309,7 +409,7 @@ const OrangeSection = () => {
       const target = countTargets[index];
       if (!target) return;
       const countObj = { val: 0 };
-      
+
       tl.to(countObj, {
         val: target.val,
         duration: 1.6,
@@ -391,16 +491,16 @@ const OrangeSection = () => {
       {/* Main Structural Container */}
       <div
         ref={containerRef}
-        className="relative z-30 max-w-[1350px] w-full px-6 sm:px-8 md:px-16 will-change-transform"
+        className="relative z-30 max-w-[1350px] 2xl:max-w-[1600px] w-full px-6 sm:px-8 md:px-16 will-change-transform"
       >
         <div className="flex flex-col min-[1200px]:flex-row justify-between gap-12 md:gap-16 items-center">
-          
+
           {/* LEFT COLUMN */}
           <div ref={leftColRef} className="flex flex-col w-full min-[1200px]:w-[55%] will-change-[transform,opacity]">
             <div className="w-full">
-              
+
               {/* Animated Line-split Headline */}
-              <h1 className="text-[clamp(1.8rem,3.4vw,4.2rem)] font-normal tracking-tight leading-tight text-white mb-6 md:mb-8">
+              <h1 className="text-[clamp(1.8rem,3.4vw,4.2rem)] font-medium tracking-tight leading-tight text-white mb-6 md:mb-8">
                 {headlineLines.map((line, idx) => (
                   <span key={idx} className="block overflow-hidden py-[0.25em] -my-[0.25em]">
                     <span className="headline-line inline-block origin-bottom-left will-change-[transform,opacity,filter]">
@@ -418,9 +518,8 @@ const OrangeSection = () => {
                   return (
                     <span
                       key={idx}
-                      className={`intro-word inline-block mr-[0.22em] will-change-[transform,opacity,filter] ${
-                        important ? "font-normal text-white important-word" : "opacity-80"
-                      }`}
+                      className={`intro-word inline-block mr-[0.22em] will-change-[transform,opacity,filter] ${important ? "font-normal text-white important-word" : "opacity-80"
+                        }`}
                     >
                       {word}
                     </span>

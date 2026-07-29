@@ -16,7 +16,7 @@ const SocialBar = () => {
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-26">
         <h3 className="text-white text-3xl md:text-5xl font-heading font-thin tracking-wide">
           Follow us @
-        </h3> 
+        </h3>
         <div className="flex items-center gap-4 md:gap-12">
           {socialLinks.map((social) => (
             <motion.a

@@ -65,7 +65,7 @@ const PortfolioSection = () => {
       {/* Removed 'mx-auto' and 'max-w-screen' to pin content to the left.
         Changed to w-full to allow scroll to span the width.
       */}
-      <div className="relative z-20 max-w-[1350px] px-8 md:px-16 w-full">
+      <div className="relative z-20 max-w-[1350px] 2xl:max-w-[1600px] px-8 md:px-16 w-full">
         
         {/* Header Section: flex-col below 1300px to keep button left-aligned */}
         <div className="flex flex-col min-[1300px]:flex-row min-[1300px]:items-end justify-between gap-8 mb-16">

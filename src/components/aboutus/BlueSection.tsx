@@ -220,7 +220,7 @@ const BlueSection = () => {
       />
 
       {/* Main Structural Container */}
-      <div className="max-w-[1350px] w-full mx-auto px-6 sm:px-8 md:px-16 relative z-30 flex flex-col justify-between h-[85vh] min-h-[600px]">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-6 sm:px-8 md:px-16 relative z-30 flex flex-col justify-between h-[85vh] min-h-[600px]">
         
         {/* Top Section: Header & Small Paragraph & Lightbulb */}
         <div className="flex flex-col md:flex-row md:justify-between items-start md:items-start w-full gap-6 md:gap-12">

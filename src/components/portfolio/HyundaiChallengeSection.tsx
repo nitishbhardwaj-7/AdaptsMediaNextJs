@@ -21,7 +21,7 @@ export default function HyundaiChallengeSection() {
       />
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-[1350px] w-full mx-auto px-8 md:px-16 lg:px-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="relative z-10 max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 lg:px-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left Column: Challenge Info */}
         <div className="lg:col-span-7 service-content-wrapper flex flex-col justify-center text-left">
           <span className="service-category text-[#FAC02E] text-lg font-heading tracking-wider mb-3">

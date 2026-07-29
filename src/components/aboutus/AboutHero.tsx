@@ -94,10 +94,10 @@ const AboutHero = () => {
         />
       </div>
       {/* Hero Content */}
-      <div className="grid grid-cols-1 z-10 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] w-full px-8 md:px-16">
+      <div className="grid grid-cols-1 z-10 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16">
         {/* Left Side */}
         <div className="flex items-center">
-          <h1 className="hero-left-title text-5xl tracking-wide md:text-7xl font-opensans leading-[1.2] pb-4">
+          <h1 className="hero-left-title text-5xl tracking-wide md:text-7xl font-opensans font-medium leading-[1.2] pb-4">
             About Us
           </h1>
         </div>

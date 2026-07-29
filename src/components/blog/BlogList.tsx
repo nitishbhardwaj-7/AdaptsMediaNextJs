@@ -108,7 +108,7 @@ export default function BlogList({ posts }: { posts: any[] }) {
       
       {/* ── FILTER SECTION ── */}
       <div className="w-full bg-[#004dc3] py-10 relative z-50">
-        <div className="max-w-[1350px] mx-auto px-8 md:px-16 lg:px-20">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20">
           <h2 className="filter-title text-xl font-heading font-medium tracking-wide mb-6 text-white font-sans">
             Filter by
           </h2>
@@ -259,7 +259,7 @@ export default function BlogList({ posts }: { posts: any[] }) {
 
       {/* ── BLOGS GRID ── */}
       <div className="w-full bg-white py-20 relative z-10">
-        <div className="max-w-[1350px] mx-auto px-8 md:px-16 lg:px-20">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20">
           {displayedPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
               {displayedPosts.map((post: any) => (

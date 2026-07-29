@@ -140,7 +140,7 @@ export default function PortfolioList() {
     entranceTl.to(".filter-section-container", {
       opacity: 1,
       filter: "blur(0px)",
-      duration: 0.8,
+      duration: 0.35,
       ease: "power2.out",
     });
 
@@ -148,10 +148,10 @@ export default function PortfolioList() {
     entranceTl.to(titleSplit.chars, {
       opacity: 1,
       filter: "blur(0px)",
-      duration: 0.4,
+      duration: 0.2,
       ease: "power2.out",
-      stagger: 0.02,
-    }, "-=0.5");
+      stagger: 0.01,
+    }, "-=0.25");
 
     // C. Dropdowns stagger reveal and border drawing (no slide up)
     const fields = gsap.utils.toArray<HTMLElement>(".filter-item");
@@ -160,17 +160,17 @@ export default function PortfolioList() {
         opacity: 1,
         scale: 1,
         filter: "blur(0px)",
-        duration: 0.6,
+        duration: 0.25,
         ease: "power2.out",
-      }, `-=${idx === 0 ? 0.45 : 0.35}`);
+      }, `-=${idx === 0 ? 0.2 : 0.15}`);
 
       const path = field.querySelector(".border-draw-path");
       if (path) {
         entranceTl.to(path, {
           strokeDashoffset: 0,
-          duration: 1.0,
-          ease: "power2.inOut",
-        }, "-=0.3");
+          duration: 0.35,
+          ease: "power2.out",
+        }, "-=0.15");
       }
     });
 
@@ -179,9 +179,9 @@ export default function PortfolioList() {
       opacity: 1,
       scale: 1,
       filter: "blur(0px)",
-      duration: 0.6,
+      duration: 0.25,
       ease: "power2.out",
-    }, "-=0.35");
+    }, "-=0.15");
 
     // --- Background Radial Glow Breathing ---
     gsap.set(".filter-bg-light", { "--glow-x": "25%", "--glow-y": "40%" });
@@ -215,7 +215,7 @@ export default function PortfolioList() {
               y: top,
               width: width,
               height: height,
-              duration: 0.35,
+              duration: 0.2,
               ease: "power2.out",
             });
           }
@@ -231,7 +231,7 @@ export default function PortfolioList() {
           if (sharedGlowRef.current) {
             gsap.to(sharedGlowRef.current, {
               opacity: 0,
-              duration: 0.35,
+              duration: 0.2,
               ease: "power2.out",
             });
           }
@@ -252,7 +252,7 @@ export default function PortfolioList() {
           x: x * 0.28,
           y: y * 0.28,
           scale: 1.02,
-          duration: 0.3,
+          duration: 0.2,
           ease: "power2.out",
         });
       };
@@ -261,7 +261,7 @@ export default function PortfolioList() {
           x: 0,
           y: 0,
           scale: 1,
-          duration: 0.3,
+          duration: 0.2,
           ease: "power2.out",
         });
       };
@@ -286,11 +286,11 @@ export default function PortfolioList() {
     if (activeOpen) {
       gsap.fromTo(".dropdown-panel",
         { opacity: 0, y: -10, scaleY: 0.95, transformOrigin: "top center" },
-        { opacity: 1, y: 0, scaleY: 1, duration: 0.3, ease: "power2.out" }
+        { opacity: 1, y: 0, scaleY: 1, duration: 0.15, ease: "power2.out" }
       );
       gsap.fromTo(".dropdown-item",
         { opacity: 0, x: -6 },
-        { opacity: 1, x: 0, stagger: 0.03, duration: 0.2, ease: "power2.out", delay: 0.05 }
+        { opacity: 1, x: 0, stagger: 0.01, duration: 0.1, ease: "power2.out", delay: 0.02 }
       );
     }
   }, { scope: containerRef, dependencies: [isIndustryOpen, isServiceOpen, isObjectiveOpen] });
@@ -336,7 +336,7 @@ export default function PortfolioList() {
 
       {/* ── INTRO SECTION ── */}
       <div className="w-full bg-white py-28 md:py-36 text-[#17313B]">
-        <div className="max-w-[1350px] mx-auto px-8 md:px-16 lg:px-20">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20">
           <p className="portfolio-intro-text text-[clamp(24px,4.0vw,54px)] font-heading font-semibold leading-[1.38] tracking-tight max-w-[1050px] text-[#17313B] mx-auto text-center">
             Every brand has different goals,<br className="hidden md:inline" />
             challenges, and audiences.<br className="hidden md:inline" /><br className="hidden md:inline" />
@@ -356,7 +356,7 @@ export default function PortfolioList() {
         {/* Breathing background light */}
         <div className="filter-bg-light absolute inset-0 opacity-100" />
 
-        <div className="max-w-[1350px] mx-auto px-8 md:px-16 lg:px-20 relative z-10">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20 relative z-10">
           <h2 className="filter-title text-xl font-heading font-medium tracking-wide mb-6 uppercase text-white font-sans">
             Filter by
           </h2>

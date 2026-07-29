@@ -154,20 +154,20 @@ export default function StepGoals({ value, onChange }: StepGoalsProps) {
 
 
         <motion.h2
-          className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-[1.05]"
+          className="text-2xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-tight mb-2 sm:mb-4"
           style={{ fontFamily: "var(--font-heading), sans-serif" }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          What are you trying
-          <br />
+          What are you trying{" "}
+          <br className="hidden sm:block" />
           <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-[#FAC02D] to-[#C52A27]">
             to achieve?
           </span>
         </motion.h2>
         <motion.p 
-          className="text-xs md:text-sm text-white/40 mt-4 font-sans font-light"
+          className="text-xs md:text-sm text-white/40 mt-2 sm:mt-4 font-sans font-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -176,7 +176,7 @@ export default function StepGoals({ value, onChange }: StepGoalsProps) {
         </motion.p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto" style={{ perspective: 1500 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 md:gap-4 max-w-4xl mx-auto" style={{ perspective: 1500 }}>
         {PROJECT_GOALS.map((goal, i) => (
           <GoalCard
             key={goal.id}

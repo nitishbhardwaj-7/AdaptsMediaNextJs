@@ -29,13 +29,13 @@ const ContactCTA = () => {
 
 
 
-      <div className="relative z-10 group max-w-[1350px] w-full px-8 md:px-16 items-start justify-start">
+      <div className="relative z-10 group max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 items-start justify-start">
         <div className="flex flex-col gap-4 max-w-4xl">
 
 
 
           {/* Main Content */}
-          <h2 className="text-3xl md:text-7xl font-heading font-medium text-white leading-[1.3] tracking-tight">
+          <h2 className="text-3xl md:text-7xl font-heading font-normal text-white leading-[1.3] tracking-tight">
             Ready to start your next project or still exploring ideas?{' '}
 
             {/* INLINE BUTTON REPLACEMENT */}

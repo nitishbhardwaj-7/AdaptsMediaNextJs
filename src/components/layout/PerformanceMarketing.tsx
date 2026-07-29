@@ -148,12 +148,12 @@ const PerformanceMarketing = () => {
 
   return (
     <section ref={containerRef} className="bg-transparent relative text-white py-20 font-sans overflow-hidden">
-      <div className="relative z-50 max-w-[1350px] w-full px-8 md:px-16 mx-auto">
+      <div className="relative z-50 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 mx-auto">
         
         {/* 1. TOP SECTION: Connected Thinking */}
         <div className="mb-32">
 
-          <h2 className="connected-title text-4xl md:text-7xl mb-8 leading-tight max-w-4xl">
+          <h2 className="connected-title text-4xl md:text-7xl mb-8 leading-tight font-medium max-w-4xl">
             Connected Thinking.<br/>Measureable Results.
           </h2>
           <p className="connected-desc text-lg md:text-3xl opacity-90 max-w-3xl font-light">

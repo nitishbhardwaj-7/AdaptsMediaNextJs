@@ -101,7 +101,7 @@ export default function HyundaiProjectOverview() {
 
       <div
         ref={containerRef}
-        className="max-w-[1350px] w-full px-8 md:px-16 flex flex-col items-center"
+        className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col items-center"
       >
         {/* Label Tag */}
         <div className="mb-8 self-start md:self-center">

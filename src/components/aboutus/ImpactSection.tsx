@@ -292,7 +292,7 @@ const ImpactSection = () => {
         onMouseMove={handleMouseMove}
         className="w-full min-h-screen flex items-center py-16 px-8 md:px-16 overflow-hidden relative"
       >
-        <div className="max-w-[1350px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full relative z-10">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full relative z-10">
           {/* LEFT COLUMN (Fixed / Stationary on pin) */}
           <div className="impact-left-content lg:col-span-5 will-change-transform">
             <h2 className="impact-heading text-5xl md:text-7xl font-normal font-opensans text-[#002B7F] mb-10 leading-tight">

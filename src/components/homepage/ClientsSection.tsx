@@ -439,7 +439,7 @@ const ClientsSection = () => {
         }
       `}} />
 
-      <div className="max-w-[1350px] px-8 md:px-16 w-full">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] px-8 md:px-16 w-full">
         <h2 className="clients-heading text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-medium text-[#07476B] mb-10 md:mb-16 tracking-tight">
           Brands We Work With
         </h2>

@@ -58,7 +58,7 @@ const ServiceCategory = ({
         />
       )}
 
-      <div className="max-w-[1350px] z-50 w-full px-8 md:px-16">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] z-50 w-full px-8 md:px-16">
         {/* Header Section */}
         <motion.div className="mb-20" variants={fadeInUp}>
 

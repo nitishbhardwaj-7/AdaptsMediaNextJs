@@ -102,7 +102,7 @@ const ContactIntroText = () => {
 
       <div
         ref={containerRef}
-        className="max-w-[1350px] w-full px-8 md:px-16 lg:px-20 flex flex-col items-center"
+        className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 lg:px-20 flex flex-col items-center"
       >
         <div className="w-full max-w-[1100px] mx-auto">
           <p className="reveal-text text-[clamp(24px,3.8vw,48px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-left md:text-center">

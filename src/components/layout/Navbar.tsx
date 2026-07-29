@@ -30,7 +30,7 @@ const Navbar = () => {
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isHoveringNav = useRef(false);
 
-  const menuBarClass = "block w-[22px] h-[2px] bg-white rounded-[2px]";
+  const menuBarClass = "block w-[18px] md:w-[22px] h-[2px] bg-white rounded-[2px]";
   // Menu state and refs
   const [menuOpen, setMenuOpen] = useState(false);
   const topBarRef = useRef<HTMLSpanElement>(null);
@@ -151,37 +151,37 @@ const Navbar = () => {
           className={`
           mx-auto flex items-center justify-between transition-all duration-[800ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] pointer-events-auto
           ${isScrolled
-              ? "w-[calc(100%-4rem)] md:w-[calc(100%-8rem)] max-w-[calc(1350px-4rem)] md:max-w-[calc(1350px-8rem)] bg-white/10 backdrop-blur-md border border-white/20 px-6 md:px-8 py-3 rounded-full shadow-lg"
-              : "max-w-[1600px] w-full bg-transparent border-transparent px-8 md:px-12 py-4 rounded-none shadow-none"
+              ? "w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] md:w-[calc(100%-8rem)] max-w-[calc(1350px-4rem)] md:max-w-[calc(1350px-8rem)] bg-white/10 backdrop-blur-md border border-white/20 px-3.5 sm:px-6 md:px-8 py-2.5 sm:py-3 rounded-full shadow-lg"
+              : "max-w-[1600px] w-full bg-transparent border-transparent px-4 sm:px-8 md:px-12 py-4 rounded-none shadow-none"
             }
         `}
         >
-          <Link href="/" aria-label="Home" className="flex no-underline">
+          <Link href="/" aria-label="Home" className="flex no-underline shrink-0">
             <NavLogo />
           </Link>
 
-          <div className="flex items-center gap-4 md:gap-[28px]">
+          <div className="flex items-center gap-2.5 sm:gap-4 md:gap-[28px]">
             <Link
               href="/start-project"
               className="flex items-center gap-2 bg-[#3b6ef5] text-white border-none rounded-full 
-                       px-4 py-2 md:px-5 md:py-[10px] 
-                       text-[16px] md:text-[20px] font-regular tracking-[0.01em] 
-                       cursor-pointer transition-transform duration-200 ease-in-out hover:scale-105 no-underline"
+                       px-4 h-10 md:h-auto md:px-5 md:py-[10px] 
+                       text-[14.5px] sm:text-[16px] md:text-[20px] font-medium tracking-[0.01em] 
+                       cursor-pointer transition-transform duration-200 ease-in-out hover:scale-105 no-underline shrink-0 whitespace-nowrap"
             >
-              <span className="font-sans">Start a Project</span>
+              <span className="font-sans whitespace-nowrap">Start a Project</span>
               <Image
                 alt=""
                 src="/images/clock.png"
                 width={20}
                 height={20}
-                className="w-5 md:w-5 object-contain shrink-0"
+                className="w-[18px] h-[18px] sm:w-5 sm:h-5 object-contain shrink-0"
               />
             </Link>
 
             <button
               type="button"
               aria-label={menuOpen ? "Close Menu" : "Open Menu"}
-              className="w-10 h-10 md:w-12 md:h-12 bg-[#f5a623] border-none rounded-full 
+              className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#f5a623] border-none rounded-full shrink-0
                        flex flex-col items-center justify-center gap-1 cursor-pointer 
                        transition-transform duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)]"
               onClick={toggleMenu}

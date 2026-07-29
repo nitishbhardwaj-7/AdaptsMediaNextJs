@@ -21,7 +21,7 @@ export default function HyundaiApproachSection() {
       />
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-[1350px] w-full mx-auto px-8 md:px-16 lg:px-16 grid grid-cols-1 lg:grid-cols-12 items-center">
+      <div className="relative z-10 max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 lg:px-16 grid grid-cols-1 lg:grid-cols-12 items-center">
         {/* Left Column: Phones Illustration with Branding Creative GSAP Animations */}
         <div className="lg:col-span-7 flex items-center justify-center relative w-full h-[500px] md:h-[650px] order-2 lg:order-1">
           <div className="service-img-container relative w-full max-w-[480px] h-full flex items-center justify-center">

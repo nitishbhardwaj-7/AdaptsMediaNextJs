@@ -12,7 +12,14 @@ export default function CustomCursor() {
   // Lagging ring position
   const ring = useRef({ x: -100, y: -100 });
 
+  // Skip on touch / mobile devices — only activate for fine pointer (mouse)
+  const isMobile =
+    typeof window !== "undefined" &&
+    !window.matchMedia("(pointer: fine)").matches;
+
   useEffect(() => {
+    // Do nothing on mobile / touch-only devices
+    if (isMobile) return;
     const onMove = (e: MouseEvent) => {
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
@@ -74,6 +81,9 @@ export default function CustomCursor() {
       document.documentElement.classList.remove("custom-cursor-active");
     };
   }, []);
+
+  // Don't render cursor elements on touch/mobile devices
+  if (isMobile) return null;
 
   return (
     <>

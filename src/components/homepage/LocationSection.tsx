@@ -520,13 +520,13 @@ const LocationSection = () => {
         />
       </svg>
 
-      <div className="max-w-[1350px] w-full px-8 md:px-16 relative z-10">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 relative z-10">
         {/* Main Content Row */}
         <div className="flex flex-col lg:flex-row justify-between items-start mb-24 gap-12">
           {/* Left: Dubai Info */}
           <div className="w-full md:w-[70%] relative">
             <div className="relative">
-              <h2 className="location-heading text-5xl md:text-7xl font-heading font-medium mb-16 leading-tight tracking-tight">
+              <h2 className="location-heading text-3xl md:text-7xl font-heading font-medium mb-16 leading-tight tracking-tight">
                 Exactly Where <br /> You Need Us
               </h2>
               <Image

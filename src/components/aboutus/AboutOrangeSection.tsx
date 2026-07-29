@@ -12,7 +12,7 @@ const AboutOrangeSection = () => {
       />
 
       {/* LAYER 20: The Content Layer */}
-      <div className="relative z-20 max-w-[1350px] w-full px-8 md:px-16">
+      <div className="relative z-20 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16">
         <div className="flex flex-col min-[1200px]:flex-row justify-between items-start gap-8 md:gap-16">
           
           {/* LEFT COLUMN */}

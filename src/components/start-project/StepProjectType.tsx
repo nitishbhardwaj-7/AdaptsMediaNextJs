@@ -74,7 +74,7 @@ function ProjectCard({
         transformStyle: "preserve-3d",
       }}
       className={`
-        group relative text-left p-4 md:p-5 rounded-[1rem] border transition-all duration-700 backdrop-blur-xl outline-none
+        group relative text-left p-3.5 sm:p-4 md:p-5 rounded-[1rem] border transition-all duration-700 backdrop-blur-xl outline-none
         ${isSelected
           ? "bg-white/[0.08] border-[#FAC02D]/40 shadow-[0_10px_50px_rgba(250,192,45,0.15)]"
           : "bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.15]"
@@ -114,10 +114,10 @@ function ProjectCard({
       )}
 
       <div className="relative z-10" style={{ transform: "translateZ(40px)" }}>
-        <div className="flex justify-between items-start mb-3 md:mb-4">
+        <div className="flex justify-between items-start mb-2 sm:mb-3 md:mb-4">
           <motion.div
             className={`
-              w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-xl
+              w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-lg sm:text-xl
               transition-all duration-700 shadow-inner relative overflow-hidden
               ${isSelected
                 ? "bg-gradient-to-br from-[#C52A27]/20 to-[#FAC02D]/20 text-[#FAC02D] shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_0_25px_rgba(197,42,39,0.3)] border border-white/10"
@@ -204,21 +204,21 @@ export default function StepProjectType({ value, onChange }: StepProjectTypeProp
 
         
         <motion.h2
-          className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-[1.05]"
+          className="text-2xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-tight mb-2 sm:mb-4"
           style={{ fontFamily: "var(--font-heading), sans-serif" }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          What are we creating
-          <br />
+          What are we creating{" "}
+          <br className="hidden sm:block" />
           <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-[#FAC02D] to-[#C52A27]">
             together?
           </span>
         </motion.h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto" style={{ perspective: 1500 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 md:gap-4 max-w-4xl mx-auto" style={{ perspective: 1500 }}>
         {PROJECT_TYPES.map((type, i) => (
           <ProjectCard
             key={type.id}

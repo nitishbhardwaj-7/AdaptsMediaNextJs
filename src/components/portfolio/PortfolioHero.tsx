@@ -91,7 +91,7 @@ const PortfolioHero = () => {
       />
 
       {/* Hero Content */}
-      <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-2 max-w-[1350px] w-full px-8 md:px-16 lg:px-20 items-center mt-12 lg:mt-0">
+      <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 lg:px-20 items-center mt-12 lg:mt-0">
         {/* Left Side - Text */}
         <div className="flex flex-col justify-center text-left">
           <h1 className="hero-heading text-[clamp(38px,5.5vw,68px)] font-heading font-medium tracking-normal leading-[1.12] text-white font-sans max-w-xl">

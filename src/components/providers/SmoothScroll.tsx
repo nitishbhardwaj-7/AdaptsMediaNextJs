@@ -8,7 +8,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<any>(null);
 
+  // Detect touch/mobile devices — no smooth scroll on mobile
+  const isMobile =
+    typeof window !== "undefined" &&
+    !window.matchMedia("(pointer: fine)").matches;
+
   useEffect(() => {
+    // Skip Lenis setup on mobile devices
+    if (isMobile) return;
+
     // 1. Synchronize Lenis with GSAP ScrollTrigger
     function update(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000);
@@ -26,6 +34,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gsap.ticker.remove(update);
     };
   }, []);
+
+  // On mobile, render children directly without Lenis wrapper
+  if (isMobile) {
+    return <>{children}</>;
+  }
 
   return (
     <ReactLenis

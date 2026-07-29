@@ -141,7 +141,7 @@ export default function HyundaiOutcomeSection() {
   return (
     <div ref={rootRef} className="w-full bg-white text-left overflow-hidden">
       {/* ── 1. TOP HERO TEXT SECTION (BrandingIntro Typography & SplitText) ── */}
-      <div ref={textSectionRef} className="max-w-[1350px] w-full mx-auto px-8 md:px-16 lg:px-20 py-24 md:py-32 flex flex-col items-center">
+      <div ref={textSectionRef} className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 lg:px-20 py-24 md:py-32 flex flex-col items-center">
         <div className="mb-8 self-start md:self-center">
           <span className="inline-block text-base md:text-xl font-heading font-semibold text-[#d61e1b] tracking-wider uppercase bg-[#fdf2f2] border border-[#f8d7d7] px-6 py-2 rounded-full">
             The Outcome
@@ -184,7 +184,7 @@ export default function HyundaiOutcomeSection() {
         {/* Metrics Grid Container */}
         <div
           ref={statsGridRef}
-          className="relative z-10 max-w-[1350px] w-full mx-auto px-8 md:px-16 lg:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12 md:gap-y-16"
+          className="relative z-10 max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 lg:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12 md:gap-y-16"
         >
           {METRICS.map((m, idx) => {
             const displayVal = displayValues[idx] || "0";

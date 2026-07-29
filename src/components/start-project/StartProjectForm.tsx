@@ -152,7 +152,7 @@ export default function StartProjectForm() {
   const showNext = step > 0 && step < 7;
 
   return (
-    <div className="relative h-screen bg-black overflow-hidden">
+    <div className="relative min-h-screen bg-black overflow-x-hidden overflow-y-auto">
       <ParticleBackground />
 
       {/* Grain overlay — matches hero section */}
@@ -176,7 +176,7 @@ export default function StartProjectForm() {
 
       <ProgressBar currentStep={step} />
 
-      <div className="relative z-10 flex flex-col items-center justify-center h-full py-20">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen pt-28 pb-32 md:py-20">
         <div ref={stepContainerRef} className="w-full" key={step}>
           {step === 0 && <StepWelcome onNext={goNext} />}
           {step === 1 && <StepProjectType value={data.projectType} onChange={(v) => updateField("projectType", v)} />}
@@ -197,10 +197,10 @@ export default function StartProjectForm() {
         {/* Navigation buttons */}
         {(showBack || showNext) && (
           <motion.div
-            className="fixed bottom-8 left-0 w-full flex justify-between items-center px-6 md:px-12 z-30"
+            className="fixed bottom-0 left-0 right-0 z-40 bg-black/85 backdrop-blur-xl border-t border-white/10 px-4 py-3 sm:px-6 md:px-12 md:py-0 md:bg-transparent md:backdrop-blur-none md:border-none md:bottom-8 flex justify-between items-center max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.2 }}
           >
             {showBack ? (
               <MagneticButton variant="ghost" onClick={goBack}>
@@ -220,8 +220,6 @@ export default function StartProjectForm() {
             )}
           </motion.div>
         )}
-
-
       </div>
     </div>
   );

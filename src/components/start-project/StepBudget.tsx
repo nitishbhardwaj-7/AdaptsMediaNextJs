@@ -126,14 +126,14 @@ export default function StepBudget({ value, onChange }: StepBudgetProps) {
 
 
         <motion.h2
-          className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-[1.05]"
+          className="text-2xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-tight mb-2 sm:mb-4"
           style={{ fontFamily: "var(--font-heading), sans-serif" }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          What&apos;s your
-          <br />
+          What&apos;s your{" "}
+          <br className="hidden sm:block" />
           <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-[#FAC02D] to-[#C52A27]">
             investment range?
           </span>

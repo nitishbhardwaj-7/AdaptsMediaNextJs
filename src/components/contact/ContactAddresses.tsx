@@ -74,7 +74,7 @@ const ContactAddresses = () => {
         />
       </div>
 
-      <div className="max-w-[1350px] mx-auto px-8 md:px-16 lg:px-20 relative z-10">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-0">
           {addresses.map((item, idx) => {
             // Apply border-b to the first 5 items to match the exact line cut-off in the screenshot

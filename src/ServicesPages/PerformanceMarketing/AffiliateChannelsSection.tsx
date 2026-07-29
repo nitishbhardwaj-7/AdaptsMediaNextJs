@@ -29,7 +29,7 @@ const AffiliateChannelsSection = () => {
         className="absolute inset-0 z-0 pointer-events-none object-cover"
       />
 
-      <div className="max-w-[1350px] w-full px-8 md:px-16 flex flex-col gap-16 relative z-10">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col gap-16 relative z-10">
         {/* Top Content Row: Image Left, Text Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left Column: Illustration & CTA */}

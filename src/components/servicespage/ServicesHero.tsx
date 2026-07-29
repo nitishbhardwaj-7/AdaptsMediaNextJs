@@ -83,7 +83,7 @@ const ServicesHero = () => {
         className="hero-bg absolute z-10 pointer-events-none object-cover" 
       />
       {/* Hero Content */}
-      <div className="grid grid-cols-1 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] w-full px-8 md:px-16">
+      <div className="grid grid-cols-1 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16">
         {/* Left Side */}
         <div className="flex items-center">
           <h1 className="hero-title text-5xl tracking-wide md:text-7xl">

@@ -44,8 +44,9 @@ export default function StepReview({ data, onSubmit, isSubmitting }: StepReviewP
       <motion.div className="mb-6 md:mb-8 flex flex-col items-center text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
 
 
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-[1.05]" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
-          Ready to create<br />
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-extralight text-white tracking-[-0.03em] leading-tight mb-2 sm:mb-4" style={{ fontFamily: "var(--font-heading), sans-serif" }}>
+          Ready to create{" "}
+          <br className="hidden sm:block" />
           <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-[#FAC02D] to-[#C52A27]">
             something remarkable?
           </span>

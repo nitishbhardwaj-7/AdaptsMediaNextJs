@@ -180,7 +180,7 @@ export default function Footer() {
   };
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("hello@adaptsmedia.com");
+    navigator.clipboard.writeText("info@adaptsmedia.com");
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
@@ -211,9 +211,9 @@ export default function Footer() {
       {/* ========================================================================= */}
       <section
         ref={ctaSectionRef}
-        className="relative min-h-screen w-full flex flex-col items-center justify-center px-6 sm:px-8 md:px-16 py-20 z-20"
+        className="relative min-h-screen w-full flex flex-col items-center justify-center py-20 z-20"
       >
-        <div className="max-w-[1350px] w-full mx-auto text-center flex flex-col items-center justify-center">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 text-center flex flex-col items-center justify-center">
           {/* Main Editorial Headline with Bolder OpenSans */}
           <h2 className="footer-cta-heading text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-heading font-normal tracking-tight leading-[1.1] text-white mb-8 max-w-5xl">
             {renderSplitWords(
@@ -248,9 +248,9 @@ export default function Footer() {
       {/* ========================================================================= */}
       <section
         ref={gridSectionRef}
-        className="relative w-full pt-16 pb-12 px-6 sm:px-8 md:px-16 border-t border-white/10 bg-[#080d1a]/95 backdrop-blur-xl z-20 will-change-[transform,opacity]"
+        className="relative w-full pt-16 pb-12 border-t border-white/10 bg-[#080d1a]/95 backdrop-blur-xl z-20 will-change-[transform,opacity]"
       >
-        <div className="max-w-[1350px] mx-auto">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 mx-auto">
           {/* Main Grid Layout: 3 Columns */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start mb-16">
             {/* COLUMN 1: Brand Info & Availability (Span 5) */}
@@ -275,16 +275,7 @@ export default function Footer() {
                 technology and storytelling.
               </p>
 
-              {/* Availability Indicator */}
-              <div className="pt-2">
-                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium backdrop-blur-md">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
-                  </span>
-                  <span>Available for Projects</span>
-                </div>
-              </div>
+
             </div>
 
             {/* COLUMN 2: Navigation Links (Span 4) */}
@@ -352,7 +343,7 @@ export default function Footer() {
                   className="group flex items-center gap-3 text-white/90 text-sm md:text-base font-light hover:text-white transition-colors duration-300 text-left cursor-pointer"
                 >
                   <FaEnvelope className="text-white/60 w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-                  <span>hello@adaptsmedia.com</span>
+                  <span>info@adaptsmedia.com</span>
                   {isCopied && (
                     <span className="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                       Copied!

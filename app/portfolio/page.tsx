@@ -10,7 +10,7 @@ const PortfolioPage = () => {
     <div>
       <PortfolioHero />
       <PortfolioList />
-      <PortfolioSection/>
+      <PortfolioSection />
       <ContactCTA />
       <SocialBar />
       <Footer />

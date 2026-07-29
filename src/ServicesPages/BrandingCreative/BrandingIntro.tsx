@@ -118,7 +118,7 @@ const BrandingIntro = () => {
 
       <div
         ref={containerRef}
-        className="max-w-[1350px] w-full px-8 md:px-16 flex flex-col items-center"
+        className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col items-center"
       >
         {/* Paragraph Description */}
         <div className="w-full max-w-[1050px] mx-auto">

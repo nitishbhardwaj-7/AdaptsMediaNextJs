@@ -122,7 +122,7 @@ const PublicRelations = () => {
         className="absolute z-0 pointer-events-none object-cover opacity-50" 
       />
     
-      <div className="relative z-50 max-w-[1350px] w-full px-8 md:px-16 mx-auto">
+      <div className="relative z-50 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 mx-auto">
         
         {/* Flex Wrapper: Performance Marketing on Left, Image on Right */}
         <div className="flex flex-col min-[1200px]:flex-row gap-12 md:gap-36 items-start">

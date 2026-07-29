@@ -240,18 +240,18 @@ const ServicesSection = () => {
         className="absolute z-10 pointer-events-none object-cover"
       />
 
-      <div className="max-w-[1350px] z-50 w-full px-8 md:px-16">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] z-50 w-full px-8 md:px-16">
 
         {/* Header */}
         <div className="mb-20">
 
 
-          <h2 className="services-heading text-4xl md:text-6xl font-heading font-medium mb-8 leading-tight max-w-3xl">
-            Services Designed to <br /> Drive Growth
+          <h2 className="services-heading text-3xl md:text-6xl font-heading font-medium mb-8 leading-tight max-w-3xl">
+            Services Designed to <br className="hidden md:block" /> Drive Growth
           </h2>
 
           <p className="services-subtitle text-[clamp(1rem,1.6vw,1.35rem)] max-w-3xl font-light leading-relaxed">
-            End-to-end solutions built to help brands grow, connect, and <br /> perform across every touchpoint.
+            End-to-end solutions built to help brands grow, connect, and <br className="hidden md:block" /> perform across every touchpoint.
           </p>
         </div>
 

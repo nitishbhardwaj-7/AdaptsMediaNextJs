@@ -22,9 +22,9 @@ const page = () => {
     <ImpactSection/>
     <TeamSection/>
     <ClientsSection/>
-    <Recognized/>
+    {/* <Recognized/> */}
     <ContactCTA/>
-    <SocialBar/>
+    {/* <SocialBar/> */}
     <Footer/>
     </div>
   )
