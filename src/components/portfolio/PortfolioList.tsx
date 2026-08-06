@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import PortfolioShowcase from "../homepage/PortfolioShowcase";
 import { Project, allCaseStudies } from "@/data/portfolioData";
 import { gsap } from "gsap";
@@ -24,6 +24,7 @@ const ArrowDown = ({ isOpen }: { isOpen?: boolean }) => (
 export default function PortfolioList() {
   const containerRef = useRef<HTMLDivElement>(null);
   const sharedGlowRef = useRef<HTMLDivElement>(null);
+  const filterRowRef = useRef<HTMLDivElement>(null);
 
   const [selectedIndustry, setSelectedIndustry] = useState("All Case Studies");
   const [selectedService, setSelectedService] = useState("All Services");
@@ -36,6 +37,18 @@ export default function PortfolioList() {
   const [isIndustryOpen, setIsIndustryOpen] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
   const [isObjectiveOpen, setIsObjectiveOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (filterRowRef.current && !filterRowRef.current.contains(e.target as Node)) {
+        setIsIndustryOpen(false);
+        setIsServiceOpen(false);
+        setIsObjectiveOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // 1. Entrance Timeline, Scroll Parallax, and Hover Followers
   useGSAP(() => {
@@ -86,7 +99,7 @@ export default function PortfolioList() {
           trigger: introEl,
           start: "top 75%",
           end: "bottom 40%",
-          scrub: 1,
+          scrub: 0.8,
         },
       });
 
@@ -102,24 +115,20 @@ export default function PortfolioList() {
 
     gsap.set(".filter-section-container", {
       opacity: 0,
-      filter: "blur(6px)",
     });
 
     gsap.set(titleSplit.chars, {
       opacity: 0,
-      filter: "blur(4px)",
     });
 
     gsap.set(".filter-item", {
       opacity: 0,
-      scale: 0.98,
-      filter: "blur(4px)",
+      scale: 0.96,
     });
 
     gsap.set(".filter-btn-apply", {
       opacity: 0,
-      scale: 0.98,
-      filter: "blur(4px)",
+      scale: 0.96,
     });
 
     gsap.set(".border-draw-path", {
@@ -127,7 +136,7 @@ export default function PortfolioList() {
       strokeDashoffset: 800,
     });
 
-    // Master Entrance sequence for the filter section (triggers when the filter section container arrives)
+    // Master Entrance sequence for the filter section (slower, elegant pace)
     const entranceTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".filter-section-container",
@@ -136,52 +145,47 @@ export default function PortfolioList() {
       },
     });
 
-    // A. Blue filter panel fade in (no slide up)
+    // A. Blue filter panel fade in
     entranceTl.to(".filter-section-container", {
       opacity: 1,
-      filter: "blur(0px)",
-      duration: 0.35,
+      duration: 0.5,
       ease: "power2.out",
     });
 
-    // B. Character reveal for FILTER BY (no slide up)
+    // B. Character reveal for FILTER BY
     entranceTl.to(titleSplit.chars, {
       opacity: 1,
-      filter: "blur(0px)",
-      duration: 0.2,
+      duration: 0.35,
       ease: "power2.out",
-      stagger: 0.01,
-    }, "-=0.25");
+      stagger: 0.025,
+    }, "-=0.3");
 
-    // C. Dropdowns stagger reveal and border drawing (no slide up)
+    // C. Dropdowns stagger reveal and border drawing
     const fields = gsap.utils.toArray<HTMLElement>(".filter-item");
-    fields.forEach((field, idx) => {
-      entranceTl.to(field, {
-        opacity: 1,
-        scale: 1,
-        filter: "blur(0px)",
-        duration: 0.25,
-        ease: "power2.out",
-      }, `-=${idx === 0 ? 0.2 : 0.15}`);
+    const paths = fields.map((f) => f.querySelector(".border-draw-path")).filter(Boolean);
 
-      const path = field.querySelector(".border-draw-path");
-      if (path) {
-        entranceTl.to(path, {
-          strokeDashoffset: 0,
-          duration: 0.35,
-          ease: "power2.out",
-        }, "-=0.15");
-      }
-    });
+    entranceTl.to(fields, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.45,
+      ease: "power2.out",
+      stagger: 0.1,
+    }, "-=0.2");
 
-    // D. Apply button reveal (no slide up)
+    entranceTl.to(paths, {
+      strokeDashoffset: 0,
+      duration: 0.55,
+      ease: "power2.out",
+      stagger: 0.1,
+    }, "<");
+
+    // D. Apply button reveal
     entranceTl.to(".filter-btn-apply", {
       opacity: 1,
       scale: 1,
-      filter: "blur(0px)",
-      duration: 0.25,
+      duration: 0.45,
       ease: "power2.out",
-    }, "-=0.15");
+    }, "-=0.25");
 
     // --- Background Radial Glow Breathing ---
     gsap.set(".filter-bg-light", { "--glow-x": "25%", "--glow-y": "40%" });
@@ -285,12 +289,12 @@ export default function PortfolioList() {
     const activeOpen = isIndustryOpen || isServiceOpen || isObjectiveOpen;
     if (activeOpen) {
       gsap.fromTo(".dropdown-panel",
-        { opacity: 0, y: -10, scaleY: 0.95, transformOrigin: "top center" },
-        { opacity: 1, y: 0, scaleY: 1, duration: 0.15, ease: "power2.out" }
+        { opacity: 0, y: -10, scaleY: 0.94, transformOrigin: "top center" },
+        { opacity: 1, y: 0, scaleY: 1, duration: 0.25, ease: "power2.out" }
       );
       gsap.fromTo(".dropdown-item",
         { opacity: 0, x: -6 },
-        { opacity: 1, x: 0, stagger: 0.01, duration: 0.1, ease: "power2.out", delay: 0.02 }
+        { opacity: 1, x: 0, stagger: 0.02, duration: 0.18, ease: "power2.out" }
       );
     }
   }, { scope: containerRef, dependencies: [isIndustryOpen, isServiceOpen, isObjectiveOpen] });
@@ -356,16 +360,16 @@ export default function PortfolioList() {
         {/* Breathing background light */}
         <div className="filter-bg-light absolute inset-0 opacity-100" />
 
-        <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20 relative z-10">
-          <h2 className="filter-title text-xl font-heading font-medium tracking-wide mb-6 uppercase text-white font-sans">
+        <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20 relative z-10 flex flex-col items-center text-center">
+          <h2 className="filter-title text-xl font-heading font-medium tracking-wide mb-6 uppercase text-white font-sans text-center">
             Filter by
           </h2>
 
-          <div className="relative filter-fields-row flex flex-col lg:flex-row items-start lg:items-end gap-6 lg:gap-8 w-full z-30">
+          <div ref={filterRowRef} className="relative filter-fields-row flex flex-col sm:flex-row flex-wrap items-center lg:items-end justify-center gap-6 lg:gap-8 w-full z-30">
             {/* Shared Glow Follower */}
             <div
               ref={sharedGlowRef}
-              className="absolute border border-white rounded-full pointer-events-none opacity-0 transition-all duration-300 ease-out"
+              className="absolute border border-white rounded-full pointer-events-none opacity-0 transition-all duration-200 ease-out"
               style={{
                 left: 0,
                 top: 0,
@@ -378,7 +382,7 @@ export default function PortfolioList() {
             />
 
             {/* Industry Filter */}
-            <div className="filter-item relative w-full lg:w-72 flex flex-col gap-2">
+            <div className={`filter-item relative w-full sm:w-64 lg:w-72 flex flex-col gap-2 text-left ${isIndustryOpen ? "z-50" : "z-30"}`}>
               <span className="text-sm font-heading font-normal text-white/80">Industries:</span>
               <button
                 onClick={() => {
@@ -386,7 +390,7 @@ export default function PortfolioList() {
                   setIsServiceOpen(false);
                   setIsObjectiveOpen(false);
                 }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-300 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
               >
                 <span className="relative z-10">{selectedIndustry}</span>
                 <ArrowDown isOpen={isIndustryOpen} />
@@ -394,7 +398,7 @@ export default function PortfolioList() {
                 <div className="absolute inset-0 pointer-events-none rounded-full overflow-hidden">
                   <svg className="absolute inset-0 w-full h-full" fill="none">
                     <rect
-                      className="border-draw-path transition-all duration-300 group-hover:stroke-white group-hover:stroke-[1.5px]"
+                      className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
                       x="0.5"
                       y="0.5"
                       width="calc(100% - 1px)"
@@ -427,7 +431,7 @@ export default function PortfolioList() {
             </div>
 
             {/* Service Filter */}
-            <div className="filter-item relative w-full lg:w-72 flex flex-col gap-2">
+            <div className={`filter-item relative w-full sm:w-64 lg:w-72 flex flex-col gap-2 text-left ${isServiceOpen ? "z-50" : "z-20"}`}>
               <span className="text-sm font-heading font-normal text-white/80">Services:</span>
               <button
                 onClick={() => {
@@ -435,7 +439,7 @@ export default function PortfolioList() {
                   setIsIndustryOpen(false);
                   setIsObjectiveOpen(false);
                 }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-300 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
               >
                 <span className="relative z-10">{selectedService}</span>
                 <ArrowDown isOpen={isServiceOpen} />
@@ -443,7 +447,7 @@ export default function PortfolioList() {
                 <div className="absolute inset-0 pointer-events-none rounded-full overflow-hidden">
                   <svg className="absolute inset-0 w-full h-full" fill="none">
                     <rect
-                      className="border-draw-path transition-all duration-300 group-hover:stroke-white group-hover:stroke-[1.5px]"
+                      className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
                       x="0.5"
                       y="0.5"
                       width="calc(100% - 1px)"
@@ -476,7 +480,7 @@ export default function PortfolioList() {
             </div>
 
             {/* Objective Filter */}
-            <div className="filter-item relative w-full lg:w-72 flex flex-col gap-2">
+            <div className={`filter-item relative w-full sm:w-64 lg:w-72 flex flex-col gap-2 text-left ${isObjectiveOpen ? "z-50" : "z-10"}`}>
               <span className="text-sm font-heading font-normal text-white/80">Objective:</span>
               <button
                 onClick={() => {
@@ -484,7 +488,7 @@ export default function PortfolioList() {
                   setIsIndustryOpen(false);
                   setIsServiceOpen(false);
                 }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-300 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
               >
                 <span className="relative z-10">{selectedObjective}</span>
                 <ArrowDown isOpen={isObjectiveOpen} />
@@ -492,7 +496,7 @@ export default function PortfolioList() {
                 <div className="absolute inset-0 pointer-events-none rounded-full overflow-hidden">
                   <svg className="absolute inset-0 w-full h-full" fill="none">
                     <rect
-                      className="border-draw-path transition-all duration-300 group-hover:stroke-white group-hover:stroke-[1.5px]"
+                      className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
                       x="0.5"
                       y="0.5"
                       width="calc(100% - 1px)"
@@ -527,7 +531,7 @@ export default function PortfolioList() {
             {/* Apply Button */}
             <button
               onClick={filterStudies}
-              className="filter-btn-apply w-full lg:w-auto bg-white text-[#004dc3] hover:bg-white/95 hover:-translate-y-[2px] hover:shadow-[0_8px_25px_rgba(255,255,255,0.15)] active:scale-[0.97] font-heading font-semibold px-16 py-3 rounded-full text-sm tracking-wide transition-all duration-300 cursor-pointer relative"
+              className="filter-btn-apply w-full sm:w-auto bg-white text-[#004dc3] hover:bg-white/95 hover:-translate-y-[2px] hover:shadow-[0_8px_25px_rgba(255,255,255,0.15)] active:scale-[0.97] font-heading font-semibold px-16 py-3 rounded-full text-sm tracking-wide transition-all duration-200 cursor-pointer relative z-0"
               style={{ willChange: "transform, box-shadow" }}
             >
               Apply

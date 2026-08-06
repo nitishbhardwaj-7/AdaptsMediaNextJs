@@ -39,8 +39,8 @@ export default function AwardCard({ awardName, imagePath }: AwardCardProps) {
 
       // Dynamic tilt (weighted, premium lag)
       gsap.to(card, {
-        rotateX,
-        rotateY,
+        rotationX: rotateX,
+        rotationY: rotateY,
         transformPerspective: 1000,
         ease: "power3.out",
         duration: 1.2,
@@ -84,8 +84,8 @@ export default function AwardCard({ awardName, imagePath }: AwardCardProps) {
     const handleMouseLeave = () => {
       // Smoothly reset card tilt
       gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
+        rotationX: 0,
+        rotationY: 0,
         ease: "power3.out",
         duration: 1.4,
         overwrite: "auto"

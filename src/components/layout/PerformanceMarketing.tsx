@@ -147,7 +147,7 @@ const PerformanceMarketing = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-transparent relative text-white py-20 font-sans overflow-hidden">
+    <section ref={containerRef} className="bg-transparent relative text-white pt-32 pb-20 lg:pt-40 lg:pb-24 font-sans overflow-hidden">
       <div className="relative z-50 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 mx-auto">
         
         {/* 1. TOP SECTION: Connected Thinking */}

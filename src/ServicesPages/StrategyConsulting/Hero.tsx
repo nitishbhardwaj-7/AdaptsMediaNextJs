@@ -76,7 +76,7 @@ const Hero = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative min-h-[80vh] w-full overflow-hidden flex items-center justify-center py-12 text-white bg-transparent">
+    <section ref={containerRef} className="relative w-full overflow-hidden flex items-center justify-center pt-32 pb-20 lg:pt-40 lg:pb-24 text-white bg-transparent">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <Image
           src="/images/BrandingCreative/HeroImage.png" 
@@ -90,16 +90,16 @@ const Hero = () => {
       </div>
       <div className="grid grid-cols-1 z-10 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16">
         <div className="flex items-center">
-          <h1 className="hero-left-title text-5xl tracking-wide md:text-7xl font-heading leading-[1.2] pb-4">
+          <h1 className="hero-left-title text-5xl tracking-wide md:text-7xl font-opensans font-medium leading-[1.2] pb-4">
             Strategy & Consulting
           </h1>
         </div>
 
         <div className="relative z-10 flex flex-col justify-center max-w-xl">
-          <h2 className="hero-right-title mb-6 text-3xl leading-snug md:text-5xl font-heading leading-[1.2] pb-2">
+          <h2 className="hero-right-title mb-6 text-3xl leading-snug md:text-5xl font-opensans font-normal leading-[1.2] pb-2">
             Architecting Long-Term <br/> Market Dominance
           </h2>
-          <p className="hero-desc text-2xl font-extralight leading-tight tracking-wide text-white">
+          <p className="hero-desc text-2xl font-opensans font-extralight leading-tight tracking-wide text-white">
             Industry foresight, competitor analysis, tailor-made growth roadmaps, and lifecycle campaigns engineered to scale market value.
           </p>
         </div>

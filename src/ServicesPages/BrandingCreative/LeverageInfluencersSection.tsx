@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
+import ArrowButton from "@/components/buttons/ArrowButton";
 
 const LeverageInfluencersSection = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -37,7 +38,7 @@ const LeverageInfluencersSection = () => {
             <span className="service-category text-[#064ed3] text-lg tracking-wider mb-3">
               Leverage Influencers
             </span>
-            <h2 className="leverage-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl text-slate-900 font-heading">
+            <h2 className="leverage-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl text-slate-900 font-heading font-normal">
               Connecting Brands with the Right Voices
             </h2>
 
@@ -78,11 +79,8 @@ const LeverageInfluencersSection = () => {
 
             {/* Button Centered Under Image */}
             <div className="mt-8">
-              <a
-                href="#"
-                className="service-cta inline-flex items-center justify-center px-10 py-3.5 rounded-full border border-[#064ed3]/60 bg-transparent text-[#064ed3] font-semibold text-[15px] md:text-base tracking-wide transition-all duration-300 hover:bg-[#064ed3] hover:text-white hover:border-[#064ed3] shadow-md cursor-pointer"
-              >
-                View Work <span className="arrow ml-2">↗</span>
+              <a href="#" className="service-cta inline-block">
+                <ArrowButton title="View Work" variant="blue" />
               </a>
             </div>
           </div>

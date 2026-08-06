@@ -163,7 +163,7 @@ const OrangeSection = () => {
 
       // Headline lines fade + slide up
       mobileTl.to(headlineLinesElements, {
-        y: 0, opacity: 1, filter: "blur(0px)",
+        y: 0, opacity: 1, filter: "blur(0px)", clearProps: "filter",
         duration: 0.75, stagger: 0.18, ease: "power2.out"
       }, 0);
 
@@ -181,7 +181,7 @@ const OrangeSection = () => {
 
       // Closing statement fades in
       mobileTl.to(closingRef.current, {
-        opacity: 1, y: 0, filter: "blur(0px)",
+        opacity: 1, y: 0, filter: "blur(0px)", clearProps: "filter",
         duration: 0.7, ease: "power3.out"
       }, 0.9);
 
@@ -251,20 +251,24 @@ const OrangeSection = () => {
 
     // Initialize state
     gsap.set(headlineLinesElements, {
-      y: 20,
+      y: 35,
       opacity: 0,
-      filter: "blur(4px)"
+      filter: "blur(6px)",
+      transformOrigin: "left bottom"
     });
 
     gsap.set(introWordsElements, {
-      y: 10,
+      y: 18,
       opacity: 0,
-      filter: "blur(3px)"
+      scale: 0.92,
+      filter: "blur(4px)"
     });
 
     gsap.set(bodyLines, {
-      y: 15,
-      opacity: 0
+      y: 20,
+      x: -12,
+      opacity: 0,
+      filter: "blur(3px)"
     });
 
     gsap.set(cards, {
@@ -276,18 +280,6 @@ const OrangeSection = () => {
       rotate: (i) => [-6, 6, -5, 5][i] || 0
     });
 
-    // --- Scroll Choreography Sequence ---
-
-    // A. Parallax Layers removed to stop movement while pinned
-
-
-    // B. Zoom-in around 80% scroll
-    tl.to(containerRef.current, {
-      scale: 1.03,
-      duration: 0.7,
-      ease: "power2.inOut"
-    }, 2.5);
-
     // --- Independent Text Reveal (Happens BEFORE pinning) ---
     const introTl = gsap.timeline({
       scrollTrigger: {
@@ -297,52 +289,58 @@ const OrangeSection = () => {
       }
     });
 
-    // C. Headline Line-by-Line Reveal
+    // C. Headline Line-by-Line Reveal with smooth 3D tilt & blur dissipation
     introTl.to(headlineLinesElements, {
       y: 0,
       opacity: 1,
       filter: "blur(0px)",
-      duration: 1.0,
-      ease: "power2.out",
-      stagger: 0.2
+      clearProps: "filter",
+      duration: 1.1,
+      ease: "power3.out",
+      stagger: 0.18
     }, 0);
 
-    // E. Intro Paragraph Word-by-Word Reveal
+    // E. Intro Paragraph Word-by-Word Wave Reveal
     introTl.to(introWordsElements, {
       y: 0,
       opacity: 1,
+      scale: 1,
       filter: "blur(0px)",
-      duration: 0.8,
-      stagger: 0.04,
-      ease: "power2.out"
-    }, 0.5);
+      clearProps: "filter",
+      duration: 0.7,
+      stagger: 0.035,
+      ease: "back.out(1.3)"
+    }, 0.35);
 
-    // F. Important Words Brightness Pulse
+    // F. Important Words Glow Pulse
     importantWordsElements.forEach((el) => {
       const idx = introWordsElements.indexOf(el);
-      const revealTime = 0.5 + (idx * 0.04);
+      const revealTime = 0.35 + (idx * 0.035);
       introTl.to(el, {
-        filter: "brightness(1.5)",
-        textShadow: "0 0 12px rgba(255, 255, 255, 0.45)",
-        duration: 0.35,
+        color: "#FAC02E",
+        textShadow: "0 0 16px rgba(250, 192, 46, 0.65)",
+        duration: 0.4,
         yoyo: true,
         repeat: 1,
         ease: "power2.out"
       }, revealTime);
     });
 
-    // G. Body Copy Line-by-Line Reveal
+    // G. Body Copy Line-by-Line Slide & Fade Reveal
     bodyLines.forEach((line, i) => {
-      const time = 1.0 + (i * 0.15);
+      const time = 0.8 + (i * 0.12);
       introTl.to(line, {
         y: 0,
+        x: 0,
         opacity: 1,
-        duration: 0.75,
+        filter: "blur(0px)",
+        clearProps: "filter",
+        duration: 0.8,
         ease: "power2.out"
       }, time);
     });
 
-    // H. Closing Statement (climax scale, letter-space tighten, blur fade)
+    // H. Closing Statement (climax letter-space tighten, blur fade)
     tl.fromTo(closingRef.current,
       {
         opacity: 0,
@@ -355,10 +353,11 @@ const OrangeSection = () => {
         scale: 1,
         letterSpacing: "-0.01em",
         filter: "blur(0px) brightness(1.15)",
+        clearProps: "filter",
         duration: 1.4,
         ease: "power4.out"
       },
-      2.6
+      2.2
     );
 
     // Pause/Hold climax
@@ -496,8 +495,8 @@ const OrangeSection = () => {
         <div className="flex flex-col min-[1200px]:flex-row justify-between gap-12 md:gap-16 items-center">
 
           {/* LEFT COLUMN */}
-          <div ref={leftColRef} className="flex flex-col w-full min-[1200px]:w-[55%] will-change-[transform,opacity]">
-            <div className="w-full">
+          <div ref={leftColRef} className="flex flex-col w-full min-[1200px]:w-[55%] will-change-[transform,opacity] items-center min-[1200px]:items-start text-center min-[1200px]:text-left">
+            <div className="w-full flex flex-col items-center min-[1200px]:items-start">
 
               {/* Animated Line-split Headline */}
               <h1 className="text-[clamp(1.8rem,3.4vw,4.2rem)] font-medium tracking-tight leading-tight text-white mb-6 md:mb-8">
@@ -556,7 +555,7 @@ const OrangeSection = () => {
               </div>
 
               {/* Interactive CTA Buttons */}
-              <div ref={buttonsContainerRef} className="orange-cta flex flex-wrap justify-start gap-4 sm:gap-6 items-center">
+              <div ref={buttonsContainerRef} className="orange-cta flex flex-wrap justify-center min-[1200px]:justify-start gap-4 sm:gap-6 items-center">
                 <div className="magnetic-button p-4 -m-4">
                   <ArrowButton title="Read More" width="md" />
                 </div>
@@ -571,14 +570,14 @@ const OrangeSection = () => {
           {/* RIGHT COLUMN (Stats Cards) */}
           <div
             ref={rightColRef}
-            className="flex gap-4 md:gap-6 mt-8 w-auto lg:w-auto lg:flex-shrink lg:justify-start min-[1200px]:-translate-x-4 min-[1400px]:-translate-x-8 will-change-[transform]"
+            className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 mt-8 w-full sm:w-auto lg:w-auto lg:flex-shrink lg:justify-start min-[1200px]:-translate-x-4 min-[1400px]:-translate-x-8 will-change-[transform]"
             style={{ perspective: "1000px" }}
           >
-            <div className="flex flex-col gap-3 sm:gap-4 lg:flex-none">
+            <div className="flex flex-col gap-3 sm:gap-4 items-center sm:items-stretch lg:flex-none">
               <StatsCard className="stats-card-3d" value="100+" title={`Brands Scaled\n Across Industries`} useGsapCount={true} />
               <StatsCard className="stats-card-3d" value="500+" title={`Successfully Executed Campaigns`} useGsapCount={true} />
             </div>
-            <div className="flex flex-col gap-3 sm:gap-4 mt-6 md:mt-8 flex-1 lg:flex-none">
+            <div className="flex flex-col gap-3 sm:gap-4 mt-3 sm:mt-6 md:mt-8 items-center sm:items-stretch flex-1 lg:flex-none">
               <StatsCard className="stats-card-3d" value="3X" title={`Average Campaign Performance Uplift`} useGsapCount={true} />
               <StatsCard className="stats-card-3d" value="5+" title={`Key Market Presence`} useGsapCount={true} />
             </div>

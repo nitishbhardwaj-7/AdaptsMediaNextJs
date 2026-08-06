@@ -81,7 +81,7 @@ const AboutHero = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative min-h-[80vh] w-full overflow-hidden flex items-center justify-center py-12 text-white bg-[#032d57]">
+    <section ref={containerRef} className="relative w-full overflow-hidden flex items-center justify-center pt-32 pb-20 lg:pt-40 lg:pb-24 text-white bg-[#032d57]">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <Image
           src="/images/aboutus/HeroMask.png" 
@@ -104,7 +104,7 @@ const AboutHero = () => {
 
         {/* Right Side */}
         <div className="relative z-10 flex flex-col justify-center max-w-lg">
-          <h2 className="hero-right-title mb-6 text-3xl leading-snug md:text-5xl font-opensans leading-[1.2] pb-2">
+          <h2 className="hero-right-title mb-6 text-3xl leading-snug md:text-5xl font-opensans font-normal leading-[1.2] pb-2">
             Built for Brands <br /> That Want to Grow, <br/> Not Just Exist.
           </h2>
           <p className="hero-desc text-2xl  font-opensans font-extralight leading-tight tracking-wide text-white">

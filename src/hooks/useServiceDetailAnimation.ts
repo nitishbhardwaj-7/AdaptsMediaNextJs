@@ -32,6 +32,9 @@ export const useServiceDetailAnimation = (containerRef: RefObject<HTMLElement | 
           pointer-events: none;
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
+        .service-title {
+          font-weight: 400 !important;
+        }
         .line-parent {
           overflow: hidden;
           display: block;
@@ -47,6 +50,9 @@ export const useServiceDetailAnimation = (containerRef: RefObject<HTMLElement | 
         }
         .service-cta {
           position: relative;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease !important;
           will-change: transform, box-shadow;
         }
@@ -55,11 +61,13 @@ export const useServiceDetailAnimation = (containerRef: RefObject<HTMLElement | 
           box-shadow: 0 0 25px rgba(255, 255, 255, 0.18);
         }
         .service-cta span.arrow {
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .service-cta:hover span.arrow {
-          transform: translate(3px, -3px);
+          transform: translate(2px, -2px);
         }
       `;
       document.head.appendChild(style);

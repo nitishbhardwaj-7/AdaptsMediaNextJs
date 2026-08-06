@@ -9,13 +9,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   FaLinkedinIn,
   FaInstagram,
-  FaBehance,
-  FaDribbble,
+  FaFacebookF,
+  FaXTwitter,
+  FaYoutube,
   FaArrowUp,
   FaEnvelope,
-  FaLocationDot,
+  FaGlobe,
+  FaPhone,
+  FaPaperPlane,
 } from "react-icons/fa6";
 import ArrowButton from "@/components/buttons/ArrowButton";
+import SocialBar from "@/components/layout/SocialBar";
 import { useLenis } from 'lenis/react';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -26,6 +30,7 @@ export default function Footer() {
   const ctaSectionRef = useRef<HTMLDivElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const buttonWrapperRef = useRef<HTMLDivElement>(null);
+  const socialBarRef = useRef<HTMLDivElement>(null);
   const gridSectionRef = useRef<HTMLDivElement>(null);
   const backToTopRef = useRef<HTMLButtonElement>(null);
 
@@ -55,7 +60,7 @@ export default function Footer() {
 
       if (prefersReducedMotion) {
         gsap.set(".footer-cta-word", { yPercent: 0, opacity: 1, filter: "none" });
-        gsap.set([paragraphRef.current, buttonWrapperRef.current, gridSectionRef.current], {
+        gsap.set([paragraphRef.current, buttonWrapperRef.current, socialBarRef.current, gridSectionRef.current], {
           opacity: 1,
           y: 0,
         });
@@ -73,6 +78,7 @@ export default function Footer() {
 
       gsap.set(paragraphRef.current, { opacity: 0, y: 24 });
       gsap.set(buttonWrapperRef.current, { opacity: 0, y: 30 });
+      gsap.set(socialBarRef.current, { opacity: 0, y: 36 });
       gsap.set(gridSectionRef.current, { opacity: 0, y: 40 });
 
       // 1. Entrance Timeline on Scroll into view
@@ -114,6 +120,16 @@ export default function Footer() {
             ease: "power3.out",
           },
           "-=0.5"
+        )
+        .to(
+          socialBarRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.4"
         );
 
       // 2. Smooth Scroll Pinning & Transition into Footer Grid
@@ -141,6 +157,24 @@ export default function Footer() {
         )
         .to(
           paragraphRef.current,
+          {
+            y: -15,
+            opacity: 0.8,
+            ease: "none",
+          },
+          0
+        )
+        .to(
+          buttonWrapperRef.current,
+          {
+            y: -15,
+            opacity: 0.8,
+            ease: "none",
+          },
+          0
+        )
+        .to(
+          socialBarRef.current,
           {
             y: -15,
             opacity: 0.8,
@@ -234,211 +268,214 @@ export default function Footer() {
           {/* Standard Adapts Media Arrow Button */}
           <div
             ref={buttonWrapperRef}
-            className="will-change-[transform,opacity]"
+            className="will-change-[transform,opacity] mb-10 md:mb-12"
           >
             <Link href="/contact" className="inline-block">
               <ArrowButton title="Start Your Project" width="lg" variant="light" />
             </Link>
           </div>
+
+          {/* Integrated Social Bar with GSAP scroll entrance animation */}
+          <div
+            ref={socialBarRef}
+            className="w-full will-change-[transform,opacity]"
+          >
+            <SocialBar />
+          </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SECTION 2 & 3 — EDITORIAL FOOTER GRID LAYOUT */}
+      {/* SECTION 2 & 3 — FOOTER GRID LAYOUT WITH AWARDS */}
       {/* ========================================================================= */}
       <section
         ref={gridSectionRef}
-        className="relative w-full pt-16 pb-12 border-t border-white/10 bg-[#080d1a]/95 backdrop-blur-xl z-20 will-change-[transform,opacity]"
+        className="relative w-full pt-12 pb-10 bg-[#16171b] border-t border-white/10 text-white z-20 will-change-[transform,opacity]"
       >
         <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 mx-auto">
-          {/* Main Grid Layout: 3 Columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start mb-16">
-            {/* COLUMN 1: Brand Info & Availability (Span 5) */}
-            <div className="lg:col-span-5 flex flex-col items-start space-y-6">
-              {/* Logo */}
-              <Link href="/" className="group inline-block relative">
-                <div className="relative w-56 h-12 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/footerlogo.png"
-                    alt="Adapts Media Logo"
-                    fill
-                    sizes="(max-width: 768px) 224px, 224px"
-                    className="object-contain"
-                    priority
-                  />
-                </div>
+          {/* Top Row: Logo & Social Icons */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-10 mb-10 border-b border-white/10">
+            {/* Logo */}
+            <Link href="/" className="group inline-block">
+              <div className="relative w-52 h-10 transition-transform duration-300 group-hover:scale-105">
+                <Image
+                  src="/images/footerlogo.png"
+                  alt="Adapts Media Logo"
+                  fill
+                  sizes="(max-width: 768px) 208px, 208px"
+                  className="object-contain object-left"
+                  priority
+                />
+              </div>
+            </Link>
+
+            {/* Top Right Social Icons */}
+            <div className="flex items-center gap-3">
+              {[
+                { name: "Facebook", icon: <FaFacebookF className="w-3.5 h-3.5" />, href: "https://facebook.com" },
+                { name: "Twitter / X", icon: <FaXTwitter className="w-3.5 h-3.5" />, href: "https://x.com" },
+                { name: "Instagram", icon: <FaInstagram className="w-3.5 h-3.5" />, href: "https://instagram.com" },
+                { name: "LinkedIn", icon: <FaLinkedinIn className="w-3.5 h-3.5" />, href: "https://linkedin.com" },
+                { name: "YouTube", icon: <FaYoutube className="w-3.5 h-3.5" />, href: "https://youtube.com" },
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 hover:border-white transition-all duration-300"
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Main Footer Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 items-start mb-12">
+            
+            {/* COLUMN 1: About Us & Services (lg:col-span-3) */}
+            <div className="lg:col-span-3 flex flex-col space-y-6">
+              <Link href="/about-us" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                About Us
               </Link>
 
-              {/* Description */}
-              <p className="text-white/70 text-sm md:text-base leading-relaxed max-w-sm font-light">
-                We create digital experiences that move brands forward through design,
-                technology and storytelling.
-              </p>
-
-
-            </div>
-
-            {/* COLUMN 2: Navigation Links (Span 4) */}
-            <div className="lg:col-span-4 grid grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xs uppercase tracking-widest text-white/50 font-semibold mb-6">
-                  Navigation
-                </h3>
-                <ul className="space-y-4">
-                  {[
-                    { name: "Work", href: "/portfolio" },
-                    { name: "Services", href: "/services" },
-                    { name: "About", href: "/about-us" },
-                  ].map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        href={link.href}
-                        className="group relative inline-flex items-center text-white/80 text-sm md:text-base font-light transition-all duration-300 hover:text-white"
-                      >
-                        <span className="group-hover:translate-x-1.5 transition-transform duration-300">
-                          {link.name}
-                        </span>
-                        <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-xs uppercase tracking-widest text-white/50 font-semibold mb-6 opacity-0 md:opacity-100">
-                  Explore
-                </h3>
-                <ul className="space-y-4">
-                  {[
-                    { name: "Case Studies", href: "/portfolio" },
-                    { name: "Insights", href: "/blogs" },
-                    { name: "Contact", href: "/contact" },
-                  ].map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        href={link.href}
-                        className="group relative inline-flex items-center text-white/80 text-sm md:text-base font-light transition-all duration-300 hover:text-white"
-                      >
-                        <span className="group-hover:translate-x-1.5 transition-transform duration-300">
-                          {link.name}
-                        </span>
-                        <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-                      </Link>
-                    </li>
-                  ))}
+                <h4 className="text-sm font-semibold text-white mb-3">Services</h4>
+                <ul className="space-y-2 text-xs text-white/70 font-light">
+                  <li><Link href="/services" className="hover:text-white transition-colors">SEM Agency</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Best Data Analytics Services</Link></li>
+                  <li><Link href="/branding-creative" className="hover:text-white transition-colors">Creative Designing</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">SEO Services</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">SMS Campaign</Link></li>
+                  <li><Link href="/social-content" className="hover:text-white transition-colors">Social Media Marketing</Link></li>
+                  <li><Link href="/web-digital-experience" className="hover:text-white transition-colors">Web Development</Link></li>
+                  <li><Link href="/performance-marketing" className="hover:text-white transition-colors">Display Campaign Management</Link></li>
+                  <li><Link href="/performance-marketing" className="hover:text-white transition-colors">Programmatic Advertising</Link></li>
+                  <li><Link href="/services" className="hover:text-white transition-colors">Ad Operations for Advertising Agencies</Link></li>
                 </ul>
               </div>
             </div>
 
-            {/* COLUMN 3: Contact & Locations & Socials (Span 3) */}
-            <div className="lg:col-span-3 flex flex-col space-y-8">
-              {/* Contact Email */}
-              <div>
-                <h3 className="text-xs uppercase tracking-widest text-white/50 font-semibold mb-4">
-                  Contact
-                </h3>
-                <button
-                  onClick={handleCopyEmail}
-                  className="group flex items-center gap-3 text-white/90 text-sm md:text-base font-light hover:text-white transition-colors duration-300 text-left cursor-pointer"
-                >
-                  <FaEnvelope className="text-white/60 w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-                  <span>info@adaptsmedia.com</span>
-                  {isCopied && (
-                    <span className="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                      Copied!
-                    </span>
-                  )}
-                </button>
-              </div>
+            {/* COLUMN 2: Clients & Our Work & Head Office (lg:col-span-3) */}
+            <div className="lg:col-span-3 flex flex-col space-y-6">
+              <Link href="/portfolio" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                Clients &amp; Our Work
+              </Link>
 
-              {/* Global Hubs */}
               <div>
-                <h3 className="text-xs uppercase tracking-widest text-white/50 font-semibold mb-3">
-                  Locations
-                </h3>
-                <div className="flex items-center gap-3 text-xs md:text-sm text-white/80">
-                  <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1 rounded-full">
-                    <FaLocationDot className="text-white/60 w-3 h-3" /> Dubai
-                  </span>
-                  <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1 rounded-full">
-                    <FaLocationDot className="text-white/60 w-3 h-3" /> India
-                  </span>
+                <h4 className="text-sm font-semibold text-white mb-3">Head Office - Dubai</h4>
+                <p className="text-xs text-white/70 leading-relaxed font-light mb-4">
+                  702, Warsan Tower, Near Media Rotana,<br />
+                  Tecom, Barsha Heights, Dubai,<br />
+                  United Arab Emirates
+                </p>
+                <div className="text-xs text-white/70 leading-relaxed font-light space-y-1">
+                  <p>Contact Number: +971 58 560 1701</p>
+                  <p>Landline: +971 043257279</p>
+                  <p>
+                    Email:{" "}
+                    <button onClick={handleCopyEmail} className="hover:text-white transition-colors inline-flex items-center gap-1.5 text-left cursor-pointer">
+                      <span>Info@adaptsmedia.com</span>
+                      {isCopied && <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">Copied!</span>}
+                    </button>
+                  </p>
                 </div>
               </div>
+            </div>
 
-              {/* Social Channels */}
+            {/* COLUMN 3: Meet The Team, Blog, Other Location (lg:col-span-2) */}
+            <div className="lg:col-span-2 flex flex-col space-y-6">
+              <Link href="/about-us" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                Meet The Team
+              </Link>
+
               <div>
-                <h3 className="text-xs uppercase tracking-widest text-white/50 font-semibold mb-4">
-                  Socials
-                </h3>
-                <div className="flex items-center gap-3">
-                  {[
-                    {
-                      name: "LinkedIn",
-                      icon: <FaLinkedinIn className="w-4 h-4" />,
-                      href: "https://linkedin.com",
-                    },
-                    {
-                      name: "Instagram",
-                      icon: <FaInstagram className="w-4 h-4" />,
-                      href: "https://instagram.com",
-                    },
-                    {
-                      name: "Behance",
-                      icon: <FaBehance className="w-4 h-4" />,
-                      href: "https://behance.net",
-                    },
-                    {
-                      name: "Dribbble",
-                      icon: <FaDribbble className="w-4 h-4" />,
-                      href: "https://dribbble.com",
-                    },
-                  ].map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.name}
-                      className="group w-10 h-10 rounded-full bg-white/5 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/15 hover:border-white/40 transition-all duration-300"
-                    >
-                      <span className="group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300">
-                        {social.icon}
-                      </span>
-                    </a>
-                  ))}
-                </div>
+                <Link href="/blogs" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors block mb-3">
+                  Blog
+                </Link>
+                <h4 className="text-sm font-semibold text-white mb-3">Other Location</h4>
+                <ul className="space-y-1.5 text-xs text-white/70 font-light">
+                  <li>India</li>
+                  <li>Philippines</li>
+                  <li>London</li>
+                  <li>United States</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* COLUMN 4: Contact Us & Locations (lg:col-span-1) */}
+            <div className="lg:col-span-1 flex flex-col space-y-6">
+              <Link href="/contact" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                Contact Us
+              </Link>
+
+              <Link href="/services" className="text-sm font-semibold text-white hover:text-sky-400 transition-colors">
+                Locations
+              </Link>
+            </div>
+
+            {/* COLUMN 5: Awards Section (lg:col-span-3) */}
+            <div className="lg:col-span-3 flex flex-col items-start space-y-4">
+              <h4 className="text-sm font-semibold text-white">Awards</h4>
+
+              {/* Awards Box */}
+              <div className="w-full bg-white/[0.03] border border-white/15 rounded-xl p-3 sm:p-4 flex items-center justify-between gap-2 shadow-lg backdrop-blur-md">
+                {[
+                  { name: "TechBehemoths 2025 Winner", src: "/images/techbehemoths.png" },
+                  { name: "Clutch Top Digital Marketing", src: "/images/digitalmarketing.png" },
+                  { name: "Clutch Top Web Developers", src: "/images/webdevelopment.png" },
+                  { name: "Clutch Top Technical SEO", src: "/images/technicalseo.png" },
+                ].map((award, i) => (
+                  <div key={i} className="relative w-14 h-16 sm:w-16 sm:h-20 shrink-0 hover:scale-105 transition-transform duration-300">
+                    <Image
+                      src={award.src}
+                      alt={award.name}
+                      fill
+                      sizes="80px"
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Icon Buttons under Awards Box */}
+              <div className="w-full flex items-center justify-end gap-3 pt-2">
+                {[
+                  { icon: <FaGlobe className="w-3.5 h-3.5" />, href: "#" },
+                  { icon: <FaPhone className="w-3.5 h-3.5" />, href: "tel:+971585601701" },
+                  { icon: <FaEnvelope className="w-3.5 h-3.5" />, href: "mailto:info@adaptsmedia.com" },
+                  { icon: <FaPaperPlane className="w-3.5 h-3.5" />, href: "/contact" },
+                ].map((item, idx) => (
+                  <a
+                    key={idx}
+                    href={item.href}
+                    className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 hover:border-white transition-all duration-300"
+                  >
+                    {item.icon}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* ========================================================================= */}
-          {/* BOTTOM COPYRIGHT BAR */}
-          {/* ========================================================================= */}
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60 font-light">
+          {/* Bottom Copyright Bar */}
+          <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50 font-light">
             {/* Left */}
             <div>
-              <p>© 2026 Adapts Media. All rights reserved.</p>
+              <p>© 2026 Adapts Media® | All Rights Reserved.</p>
             </div>
 
-            {/* Center */}
-            <div className="text-center">
-              <p>Designed &amp; Developed with precision.</p>
-            </div>
-
-            {/* Right: Back To Top Button */}
-            <div>
-              <button
-                ref={backToTopRef}
-                onClick={handleBackToTop}
-                className="group inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 cursor-pointer"
-              >
-                <span>Back to Top</span>
-                <span className="top-arrow flex items-center justify-center w-7 h-7 rounded-full bg-white/5 border border-white/15 group-hover:bg-white group-hover:text-[#064ED3] transition-all duration-300">
-                  <FaArrowUp className="w-3 h-3 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                </span>
-              </button>
+            {/* Right: Privacy Policy & Terms */}
+            <div className="flex items-center gap-4">
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <span>|</span>
+              <Link href="/terms-and-conditions" className="hover:text-white transition-colors">
+                Terms And Conditions
+              </Link>
             </div>
           </div>
         </div>

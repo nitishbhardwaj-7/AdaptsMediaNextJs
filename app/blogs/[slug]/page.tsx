@@ -1,4 +1,4 @@
-import { getSinglePost, getWordPressPosts } from "@/lib/getPosts";
+import { getSinglePost, getWordPressPosts, getResolvedAuthor } from "@/lib/getPosts";
 import { Metadata } from 'next';
 
 type Props = {
@@ -68,10 +68,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     );
   }
 
-  let authorName = "Shruti Goswami";
-  if (post._embedded?.author && post._embedded.author.length > 0) {
-    authorName = post._embedded.author[0].name;
-  }
+  const authorData = await getResolvedAuthor(post);
+  const authorName = authorData.name;
   
   const parsedDate = post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : "June 30, 2026";
   
@@ -202,7 +200,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* Dynamic Author Section */}
-        <AuthorSection author={post._embedded?.author?.[0]} />
+        <AuthorSection author={authorData} />
 
         {/* Related Posts Section */}
         {relatedPosts.length > 0 && (

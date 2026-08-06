@@ -1,4 +1,4 @@
-const Tailwind3DCard = ({ title, image }: { title: string; image: string }) => {
+const Tailwind3DCard = ({ title, image, label = "Blog Post" }: { title: string; image: string; label?: string }) => {
   return (
     <div className="w-full">
       <div className="
@@ -30,7 +30,7 @@ const Tailwind3DCard = ({ title, image }: { title: string; image: string }) => {
           className="absolute bottom-0 left-0 right-0 p-8 z-20 transition-all duration-500"
         >
           <span className="text-[10px] font-bold tracking-[0.3em] text-[#f5a623] uppercase mb-3 block opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700">
-            Blog Post
+            {label}
           </span>
           <h3 className="text-2xl font-heading font-light leading-tight text-white">
             {title}

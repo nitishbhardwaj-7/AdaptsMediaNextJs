@@ -3,18 +3,26 @@ import Link from "next/link";
 import { FaEnvelope, FaLinkedinIn } from "react-icons/fa";
 
 interface AuthorSectionProps {
-  author: any;
+  author: {
+    name: string;
+    slug: string;
+    description: string;
+    avatar: string;
+    role: string;
+    linkedin: string;
+    email: string;
+  };
 }
 
 const AuthorSection = ({ author }: AuthorSectionProps) => {
   if (!author) return null;
 
-  const authorName = author.name || "Shruti Goswami";
-  const authorDesc = author.description || "A results-driven SEO professional with 8+ years of experience across e-commerce, healthcare, B2B and affiliate domains. Specializes in leading end-to-end SEO projects, combining technical expertise, data-driven strategy, and cross-team collaboration to deliver sustainable organic growth. Passionate about building scalable SEO...";
-  const authorAvatar = author.avatar_urls?.['96'] || "/images/team/shruti.jpg";
-  const authorRole = "SEO Project Manager"; // Fallback role if not in WP
-  const email = "mailto:info@adaptsmedia.com";
-  const linkedin = "https://linkedin.com/company/adaptsmedia";
+  const authorName = author.name;
+  const authorDesc = author.description;
+  const authorAvatar = author.avatar;
+  const authorRole = author.role;
+  const email = author.email.startsWith("mailto:") ? author.email : `mailto:${author.email}`;
+  const linkedin = author.linkedin;
 
   return (
     <section className="w-full bg-gradient-to-r from-[#083c8a] to-[#1565c0] py-16 px-6">
@@ -55,7 +63,7 @@ const AuthorSection = ({ author }: AuthorSectionProps) => {
 
           <div className="mt-auto">
             <Link 
-              href={`/author/${author.slug || "shruti-goswami"}`}
+              href={`/author/${author.slug}`}
               className="inline-block border-2 border-white rounded-full px-6 py-2 text-sm font-semibold hover:bg-white hover:text-[#083c8a] transition-all"
             >
               View All Posts by {authorName}

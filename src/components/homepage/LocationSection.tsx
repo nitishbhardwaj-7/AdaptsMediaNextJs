@@ -327,17 +327,6 @@ const LocationSection = () => {
     }
 
     // --- F. Map Subtle Ambient Float ---
-    if (mapImage) {
-      gsap.to(mapImage, {
-        x: "random(-4, 4)",
-        y: "random(-3, 3)",
-        duration: gsap.utils.random(8, 12),
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      })
-    }
-
     // --- G. Cursor Spotlight on Map ---
     const mapContainer = sectionRef.current?.querySelector<HTMLElement>(".map-container")
     const mapSpotlight = sectionRef.current?.querySelector(".map-spotlight") as HTMLElement
@@ -371,32 +360,6 @@ const LocationSection = () => {
         mapContainer.removeEventListener("mouseenter", onMapMouseEnter)
         mapContainer.removeEventListener("mouseleave", onMapMouseLeave)
       })
-    }
-
-    // --- H. Mouse Layered Parallax ---
-    if (!isMobile) {
-      const parallaxBg = gsap.quickTo(".location-bg-light", "x", { duration: 0.8, ease: "power2.out" })
-      const parallaxBgY = gsap.quickTo(".location-bg-light", "y", { duration: 0.8, ease: "power2.out" })
-      const parallaxMap = gsap.quickTo(".map-image-el", "x", { duration: 0.8, ease: "power2.out" })
-      const parallaxMapY = gsap.quickTo(".map-image-el", "y", { duration: 0.8, ease: "power2.out" })
-      const parallaxPins = gsap.quickTo(".map-pin-element", "x", { duration: 0.8, ease: "power2.out" })
-      const parallaxPinsY = gsap.quickTo(".map-pin-element", "y", { duration: 0.8, ease: "power2.out" })
-
-      const onSectionMouseMove = (e: MouseEvent) => {
-        const rect = sectionRef.current!.getBoundingClientRect()
-        const normX = (e.clientX - rect.left) / rect.width - 0.5
-        const normY = (e.clientY - rect.top) / rect.height - 0.5
-
-        parallaxBg(normX * 8)
-        parallaxBgY(normY * 8)
-        parallaxMap(normX * 16)
-        parallaxMapY(normY * 16)
-        parallaxPins(normX * 24)
-        parallaxPinsY(normY * 24)
-      }
-
-      sectionRef.current?.addEventListener("mousemove", onSectionMouseMove)
-      cleanups.push(() => sectionRef.current?.removeEventListener("mousemove", onSectionMouseMove))
     }
 
     // --- I. Background Gradient Slow Animation ---
@@ -527,15 +490,18 @@ const LocationSection = () => {
           <div className="w-full md:w-[70%] relative">
             <div className="relative">
               <h2 className="location-heading text-3xl md:text-7xl font-heading font-medium mb-16 leading-tight tracking-tight">
-                Exactly Where <br /> You Need Us
+                Exactly Where <br />
+                <span className="inline-flex items-center gap-3 md:gap-5">
+                  You Need Us
+                  <Image
+                    src='/images/Arrow.png'
+                    alt="Arrow"
+                    width={32}
+                    height={32}
+                    className="location-arrow w-6 h-6 md:w-10 md:h-10 object-contain inline-block"
+                  />
+                </span>
               </h2>
-              <Image
-                src='/images/Arrow.png'
-                alt=""
-                width={20}
-                height={20}
-                className="location-arrow hidden md:block lg:block md:absolute lg:absolute right-6 top-28"
-              />
             </div>
 
             <div

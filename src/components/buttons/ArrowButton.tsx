@@ -18,10 +18,10 @@ const ArrowButton = ({ title, width = 'auto', onClick, variant = 'light' }: Arro
 
   const isBlue = variant === 'blue';
   
-  const borderClass = isBlue ? 'border-[#8dafe2] bg-transparent' : 'border-white/50 bg-white/5 hover:bg-white/5';
-  const textClass = isBlue ? 'text-[#6a9bd6] group-hover:text-white' : 'text-white';
-  const beforeBgClass = isBlue ? 'before:bg-[#6a9bd6]' : 'before:bg-white';
-  const iconBorderClass = isBlue ? 'border-[#8dafe2] text-[#6a9bd6]' : 'border-white/40 text-white';
+  const borderClass = isBlue ? 'border-[#064ed3]/60 bg-transparent' : 'border-white/50 bg-white/5 hover:bg-white/5';
+  const textClass = isBlue ? 'text-[#064ed3] group-hover:text-white' : 'text-white';
+  const beforeBgClass = isBlue ? 'before:bg-[#064ed3]' : 'before:bg-white';
+  const iconBorderClass = isBlue ? 'border-[#064ed3]/60 text-[#064ed3]' : 'border-white/40 text-white';
   const iconHoverClass = isBlue ? 'group-hover:border-white/40 group-hover:text-white group-hover:bg-transparent' : 'group-hover:border-none group-hover:bg-white group-hover:text-black';
 
   return (

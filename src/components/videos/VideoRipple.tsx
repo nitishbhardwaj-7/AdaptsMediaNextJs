@@ -262,16 +262,16 @@ export default function VideoRipple() {
     // STEP 6: ANIMATION LOOP
     // ═══════════════════════════════════════════════════════════════
 
-    const clock = new THREE.Clock()
+    const startTime = performance.now()
     let animId: number
 
     const animate = () => {
       animId = requestAnimationFrame(animate)
 
-      const elapsed = clock.getElapsedTime()
+      const elapsed = (performance.now() - startTime) * 0.001
 
       smoothMouse.lerp(rawMouse, 0.08)
-
+      
       const lerpSpeed = isMoving ? 0.18 : 0.04
       intensity += (targetIntensity - intensity) * lerpSpeed
 

@@ -87,7 +87,7 @@ const ContactHero = () => {
       <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto px-8 md:px-16 lg:px-20 w-full relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Side Text */}
         <div className="flex-1 text-white z-20">
-          <h1 className="hero-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6">
+          <h1 className="hero-heading text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] mb-6">
             Let's Build<br />
             What's Next
           </h1>

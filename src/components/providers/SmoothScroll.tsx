@@ -17,7 +17,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     // Skip Lenis setup on mobile devices
     if (isMobile) return;
 
-    // 1. Synchronize Lenis with GSAP ScrollTrigger
+    // 1. Disable GSAP lag smoothing to prevent smooth scroll freezing on frame drops
+    gsap.ticker.lagSmoothing(0);
+
+    // 2. Synchronize Lenis with GSAP ScrollTrigger
     function update(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000);
     }
@@ -30,10 +33,20 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lenis.on("scroll", ScrollTrigger.update);
     }
 
+    // 3. Monitor page body resizing to automatically recalculate scroll limits & triggers
+    const resizeObserver = new ResizeObserver(() => {
+      if (lenisRef.current?.lenis) {
+        lenisRef.current.lenis.resize();
+      }
+      ScrollTrigger.refresh();
+    });
+    resizeObserver.observe(document.body);
+
     return () => {
       gsap.ticker.remove(update);
+      resizeObserver.disconnect();
     };
-  }, []);
+  }, [isMobile]);
 
   // On mobile, render children directly without Lenis wrapper
   if (isMobile) {

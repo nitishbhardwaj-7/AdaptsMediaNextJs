@@ -16,12 +16,12 @@ const AboutOrangeSection = () => {
         <div className="flex flex-col min-[1200px]:flex-row justify-between items-start gap-8 md:gap-16">
           
           {/* LEFT COLUMN */}
-          <div className="flex flex-col w-full min-[1200px]:w-[58%]">
-            <h1 className="text-[clamp(1.5rem,3.2vw,4rem)] font-extralight mb-6 md:mb-8 tracking-wider leading-tight">
+          <div className="flex flex-col w-full min-[1200px]:w-[58%] items-center min-[1200px]:items-start text-center min-[1200px]:text-left">
+            <h1 className="text-[clamp(1.5rem,3.2vw,4rem)] font-semibold mb-6 md:mb-8 tracking-wider leading-tight">
               More Than an Agency. <br /> A Growth Partner.
             </h1>
             
-            <div className="w-full">
+            <div className="w-full flex flex-col items-center min-[1200px]:items-start">
               <h2 className="text-[clamp(1rem,1.6vw,1.67rem)] mb-4 md:mb-6 text-gray-200 font-thin font-sans">
                 In a world where attention is limited and competition is constant, brands need more than just marketing, they need direction.
               </h2>

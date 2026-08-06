@@ -46,7 +46,7 @@ export default function StatsCard({
 
   return (
     <div
-      className={`relative w-full sm:w-[15rem] h-[8.5rem] ${className}`}
+      className={`relative w-[17rem] sm:w-[15rem] h-[8.5rem] ${className}`}
       style={{ transformStyle: "preserve-3d" }}
     >
       {/* 1. THE CARD */}

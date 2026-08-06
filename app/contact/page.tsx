@@ -20,8 +20,6 @@ export default function ContactPage() {
       <ContactFormSection />
 
       <ContactAddresses />
-
-      <SocialBar />
       <Footer />
     </main>
   );

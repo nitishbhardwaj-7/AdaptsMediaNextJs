@@ -28,7 +28,7 @@ const PortfolioHero = () => {
       rotationX: -15,
       transformOrigin: "0% 50% -100px",
       duration: 1.2,
-      ease: "expo.out",
+      ease: "power3.out",
       stagger: 0.12,
     });
 
@@ -42,20 +42,20 @@ const PortfolioHero = () => {
       yPercent: 100,
       opacity: 0,
       duration: 0.85,
-      ease: "expo.out",
+      ease: "power3.out",
       stagger: 0.03,
       delay: 0.25,
     });
 
     // 2. Entrance for right-side visual assets
     gsap.fromTo(".hero-target",
-      { scale: 0.1, rotate: -35, opacity: 0, z: 50 },
-      { scale: 1, rotate: 0, opacity: 1, z: 50, duration: 1.5, ease: "elastic.out(0.8, 0.6)", delay: 0.35 }
+      { scale: 0.2, rotate: -20, opacity: 0, z: 50 },
+      { scale: 1, rotate: 0, opacity: 1, z: 50, duration: 1.3, ease: "power3.out", delay: 0.3 }
     );
 
     gsap.fromTo(".hero-pattern",
       { scale: 0.6, opacity: 0, z: -50 },
-      { scale: 1, opacity: 1, z: -50, duration: 1.2, ease: "power3.out", delay: 0.15 }
+      { scale: 1, opacity: 1, z: -50, duration: 1.1, ease: "power3.out", delay: 0.15 }
     );
 
     // 3. Ambient floating animations

@@ -2,47 +2,7 @@ import Image from "next/image";
 import ArrowButton from "../buttons/ArrowButton";
 import Tailwind3DCard from "../cards/Tailwind3DCard";
 import Link from "next/link";
-
-const insights = [
-  {
-    title: "Social Media Marketing: Facts You Need to Know This Year",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    title: "Types of Web Development That Businesses Must Know",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    title: "Top AI Tools Digital Marketers Should Be Using Today!",
-    image: "https://images.unsplash.com/photo-1698628472751-b65c74f247a9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "4 Simple Steps to Optimize Your Dubai Business for Web",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    title: "Social Media Marketing: Facts You Need to Know This Year",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    title: "Types of Web Development That Businesses Must Know",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    title: "Top AI Tools Digital Marketers Should Be Using Today!",
-    image: "https://images.unsplash.com/photo-1698628472751-b65c74f247a9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "4 Simple Steps to Optimize Your Dubai Business for Web",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
-  }
-  // Adding more cards here will now automatically enable horizontal scrolling
-];
-interface Insight {
-  title: string;
-  image: string;
-  slug?: string;
-}
+import { allCaseStudies } from "@/data/portfolioData";
 
 const PortfolioSection = () => {
   // Fetching real data from your WordPress backend via the helper function
@@ -86,19 +46,25 @@ const PortfolioSection = () => {
             goes edge-to-edge but content aligns with the text.
         */}
         <div className="flex overflow-x-auto gap-8 pb-8 snap-x snap-mandatory scrollbar-hide px-8 min-[1300px]:mx-0 min-[1300px]:px-0">
-          {insights.map((item: Insight, index: number) => (
-            <Link 
-              key={index} 
-              href={`/blogs/${item.slug}`} 
-              className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] snap-start"
-            >
-              {/* The card is now a child of the Link */}
-              <Tailwind3DCard 
-                title={item.title} 
-                image={item.image} 
-              />
-            </Link>
-          ))}
+          {allCaseStudies.map((project, index: number) => {
+            const name = project.displayName || project.brand;
+            const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+            const title = `${name}: ${project.tagline}`;
+            
+            return (
+              <Link 
+                key={project.id} 
+                href={`/portfolio/${slug}`} 
+                className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] snap-start"
+              >
+                <Tailwind3DCard 
+                  title={title} 
+                  image={project.bgImage} 
+                  label="Portfolio"
+                />
+              </Link>
+            );
+          })}
         </div>
         {/* ---------------------------------- */}
 

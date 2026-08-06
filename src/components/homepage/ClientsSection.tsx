@@ -199,8 +199,8 @@ const ClientsSection = () => {
         if (!inner || !img) return
 
         // 3D Tilt QuickTo set
-        const tiltX = gsap.quickTo(inner, "rotateX", { duration: 0.4, ease: "power2.out" })
-        const tiltY = gsap.quickTo(inner, "rotateY", { duration: 0.4, ease: "power2.out" })
+        const tiltX = gsap.quickTo(inner, "rotationX", { duration: 0.4, ease: "power2.out" })
+        const tiltY = gsap.quickTo(inner, "rotationY", { duration: 0.4, ease: "power2.out" })
         const moveX = gsap.quickTo(inner, "x", { duration: 0.4, ease: "power2.out" })
         const moveY = gsap.quickTo(inner, "y", { duration: 0.4, ease: "power2.out" })
 
@@ -376,12 +376,6 @@ const ClientsSection = () => {
           overflow: hidden;
         }
 
-        .grid-lines-wrapper {
-          mask-image: radial-gradient(circle, black var(--grid-mask, 0%), transparent calc(var(--grid-mask, 0%) + 15%));
-          -webkit-mask-image: radial-gradient(circle, black var(--grid-mask, 0%), transparent calc(var(--grid-mask, 0%) + 15%));
-          --grid-mask: 0%;
-        }
-
         .clients-spotlight {
           position: absolute;
           inset: 0;
@@ -445,13 +439,6 @@ const ClientsSection = () => {
         </h2>
 
         <div ref={gridWrapperRef} className="clients-grid-wrapper grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
-          {/* Animated Grid Lines Overlay */}
-          <div className="grid-lines-wrapper absolute inset-0 pointer-events-none grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 border-t border-l border-gray-300 z-10">
-            {brands.map((_, index) => (
-              <div key={index} className="border-r border-b border-gray-300" />
-            ))}
-          </div>
-
           {/* Mouse-following Spotlight Overlay */}
           <div className="clients-spotlight" />
 

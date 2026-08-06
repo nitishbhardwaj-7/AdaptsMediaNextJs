@@ -24,7 +24,6 @@ const page = () => {
         <PortfolioSection/>
         <ClientsSection/>
         <ContactCTA/>
-        <SocialBar/>
         <Footer/>
     </div>
   )

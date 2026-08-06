@@ -127,8 +127,17 @@ export default function HyundaiMobisCaseStudy() {
       {/* ── PROJECT OVERVIEW SECTION ── */}
       <HyundaiProjectOverview />
 
+      {/* ── THE CHALLENGE SECTION ── */}
+      <HyundaiChallengeSection />
+
+      {/* ── OUR APPROACH SECTION ── */}
+      <HyundaiApproachSection />
+
       {/* ── SERVICES DELIVERED SECTION ── */}
       <HyundaiServicesSection />
+
+      {/* ── THE OUTCOME SECTION ── */}
+      <HyundaiOutcomeSection />
 
       <PortfolioSection />
       <ContactCTA />

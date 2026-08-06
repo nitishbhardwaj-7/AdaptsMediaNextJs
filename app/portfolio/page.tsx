@@ -1,21 +1,22 @@
 import PortfolioHero from "@/components/portfolio/PortfolioHero";
 import PortfolioList from "@/components/portfolio/PortfolioList";
-import ContactCTA from "@/components/homepage/ContactCTA";
-import SocialBar from "@/components/layout/SocialBar";
-import Footer from "@/components/layout/Footer";
 import PortfolioSection from "@/components/servicespage/PortfolioSection";
+import ContactCTA from "@/components/homepage/ContactCTA";
+import Footer from "@/components/layout/Footer";
 
-const PortfolioPage = () => {
+export const metadata = {
+  title: "Portfolio | Adapts Media",
+  description: "Explore our featured portfolio of high-impact creative campaigns, brand design, and digital experiences.",
+};
+
+export default function PortfolioPage() {
   return (
-    <div>
+    <main className="w-full bg-[#0c121c] text-white">
       <PortfolioHero />
       <PortfolioList />
       <PortfolioSection />
       <ContactCTA />
-      <SocialBar />
       <Footer />
-    </div>
+    </main>
   );
-};
-
-export default PortfolioPage;
+}

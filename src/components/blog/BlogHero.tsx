@@ -62,7 +62,7 @@ const BlogHero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[90vh] lg:min-h-screen w-full overflow-hidden flex items-center justify-center py-20 text-white"
+      className="relative w-full flex-1 flex flex-col justify-center pt-24 pb-4 lg:pt-28 lg:pb-6 text-white overflow-hidden min-h-[350px]"
     >
       {/* Hero Background Image */}
       <Image
@@ -76,10 +76,10 @@ const BlogHero = () => {
       />
 
       {/* Hero Content */}
-      <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 lg:px-20 items-center mt-12 lg:mt-0">
+      <div className="relative z-10 grid grid-cols-1 gap-6 lg:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 lg:px-20 items-center">
         {/* Left Side - Text */}
         <div className="flex flex-col justify-center text-left">
-          <h1 className="hero-heading text-[clamp(38px,5.5vw,68px)] font-heading font-medium tracking-normal leading-[1.24] text-white font-sans max-w-xl">
+          <h1 className="hero-heading text-[clamp(32px,4vw,54px)] font-heading font-medium tracking-normal leading-[1.2] text-white font-sans max-w-xl">
             Insights That <br />
             Move Brands <br />
             Forward
@@ -87,9 +87,9 @@ const BlogHero = () => {
         </div>
 
         {/* Right Side - Images */}
-        <div className="relative w-full flex items-center justify-center lg:justify-end min-h-[350px] md:min-h-[500px]">
+        <div className="relative w-full flex items-center justify-center lg:justify-end min-h-[220px] md:min-h-[320px]">
           {/* Main container that aligns Layer 1 behind the target */}
-          <div className="relative w-full max-w-[520px] aspect-square flex items-center justify-center" style={{ perspective: 1000, transformStyle: "preserve-3d" }}>
+          <div className="relative w-full max-w-[380px] aspect-square flex items-center justify-center" style={{ perspective: 1000, transformStyle: "preserve-3d" }}>
             {/* Pattern layer - static background */}
             <div className="hero-pattern absolute w-[100%] h-[100%] pointer-events-none z-0">
               <Image

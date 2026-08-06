@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
+import ArrowButton from "@/components/buttons/ArrowButton";
 
 const CampaignsSection = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -55,11 +56,8 @@ const CampaignsSection = () => {
 
             {/* Button Centered Under Image */}
             <div className="mt-8">
-              <a
-                href="#"
-                className="service-cta inline-flex items-center justify-center px-10 py-3.5 rounded-full border border-white/60 bg-transparent text-white font-semibold text-[15px] md:text-base tracking-wide transition-all duration-300 hover:bg-white hover:text-[#1e1e1e] hover:border-white shadow-md cursor-pointer"
-              >
-                View Work <span className="arrow ml-2">↗</span>
+              <a href="#" className="service-cta inline-block">
+                <ArrowButton title="View Work" variant="light" />
               </a>
             </div>
           </div>
@@ -69,7 +67,7 @@ const CampaignsSection = () => {
             <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
               Campaigns
             </span>
-            <h2 className="campaigns-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading">
+            <h2 className="campaigns-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
               Creative Campaigns Designed to Make an Impact
             </h2>
 
