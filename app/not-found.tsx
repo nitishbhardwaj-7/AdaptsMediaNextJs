@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "@/components/layout/Footer";
-import SocialBar from "@/components/layout/SocialBar";
 import ArrowButton from "@/components/buttons/ArrowButton";
 import { motion } from "framer-motion";
 

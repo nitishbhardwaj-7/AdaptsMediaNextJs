@@ -11,11 +11,14 @@ const Intro = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const pills = [
+    "Social Media Management",
+    "Paid Social Advertising",
+    "Influencer Marketing",
     "Content Strategy",
-    "Leverage Influencers",
-    "Paid Social",
-    "Copywriting & Storytelling",
-    "Community Building",
+    "Content Creation",
+    "Community Management",
+    "Email Marketing",
+    "SMS Marketing"
   ];
 
   useGSAP(() => {
@@ -111,19 +114,17 @@ const Intro = () => {
 
       <div
         ref={containerRef}
-        className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col items-center"
+        className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col items-center"
       >
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
-            We build strategic narratives<br className="hidden md:inline" />
-            and high-performing creative assets<br className="hidden md:inline" />
-            to position your brand as <span className="highlight text-[#2563eb] font-bold">socially magnetic</span>,<br className="hidden md:inline" />
-            <span className="highlight text-[#2563eb] font-bold">culturally relevant</span>,<br className="hidden md:inline" />
-            and engineered for lasting authority.<br className="hidden md:inline" /><br className="hidden md:inline" />
-            From content architecture to paid social campaigns,<br className="hidden md:inline" />
-            every strategy is designed to yield<br className="hidden md:inline" />
-            genuine user connection<br className="hidden md:inline" />
-            and <span className="highlight text-[#2563eb] font-bold">memorable storytelling</span> across all social touchpoints.
+            Attention is hard to earn. Even harder to keep.<br className="hidden md:inline" />
+            Merging sharp cultural awareness with <span className="highlight text-[#2563eb] font-bold">data-backed performance</span>,<br className="hidden md:inline" />
+            we capture mindshare across every channel,<br className="hidden md:inline" />
+            managing the <span className="highlight text-[#2563eb] font-bold">entire lifecycle of your brand’s voice</span><br className="hidden md:inline" />
+            from strategy and creation to community and conversion.<br className="hidden md:inline" />
+            Collaborate with us to build social & content strategies<br className="hidden md:inline" />
+            designed to drive <span className="highlight text-[#2563eb] font-bold">real revenue & brand equity</span>.
           </p>
         </div>
 

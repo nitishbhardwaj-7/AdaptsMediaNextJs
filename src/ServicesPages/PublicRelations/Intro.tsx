@@ -12,10 +12,11 @@ const Intro = () => {
   
   const pills = [
     "Strategic PR",
-    "Press Releases",
-    "Events and Activation",
-    "Crisis Management",
-    "Media Placement",
+    "Press Releases & Media Outreach",
+    "Events & Activations",
+    "Sponsorship & Partnerships",
+    "Influencer & Ambassador Programmes",
+    "Crisis Communications"
   ];
 
   useGSAP(() => {
@@ -111,19 +112,15 @@ const Intro = () => {
 
       <div
         ref={containerRef}
-        className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col items-center"
+        className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col items-center"
       >
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
-            We architect targeted communication programs<br className="hidden md:inline" />
-            and high-profile media activations<br className="hidden md:inline" />
-            to position your brand as <span className="highlight text-[#2563eb] font-bold">culturally authoritative</span>,<br className="hidden md:inline" />
-            <span className="highlight text-[#2563eb] font-bold">socially influential</span>,<br className="hidden md:inline" />
-            and trusted in your market.<br className="hidden md:inline" /><br className="hidden md:inline" />
-            From press relations to curated events,<br className="hidden md:inline" />
-            every media touchpoint is designed to earn<br className="hidden md:inline" />
-            public credibility<br className="hidden md:inline" />
-            and <span className="highlight text-[#2563eb] font-bold">outstanding press relevance</span> across global regions.
+            Paid media can buy reach. <span className="highlight text-[#2563eb] font-bold">PR earns it</span>.<br className="hidden md:inline" />
+            When your brand gets written about, talked about and remembered,<br className="hidden md:inline" />
+            it builds a <span className="highlight text-[#2563eb] font-bold">layer of credibility</span> no ad budget can replicate.<br className="hidden md:inline" />
+            We handle the <span className="highlight text-[#2563eb] font-bold">full scope of brand communications</span>,<br className="hidden md:inline" />
+            from media relations and press to live events and brand activations.
           </p>
         </div>
 

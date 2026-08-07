@@ -1,8 +1,13 @@
 import Hero from "@/ServicesPages/SocialContent/Hero";
 import Intro from "@/ServicesPages/SocialContent/Intro";
+import SocialMediaSection from "@/ServicesPages/SocialContent/SocialMediaSection";
+import PaidSocialAdvertisingSection from "@/ServicesPages/SocialContent/PaidSocialAdvertisingSection";
+import InfluencerMarketingSection from "@/ServicesPages/SocialContent/InfluencerMarketingSection";
 import ContentStrategySection from "@/ServicesPages/SocialContent/ContentStrategySection";
-import LeverageInfluencersSection from "@/ServicesPages/SocialContent/LeverageInfluencersSection";
-import PaidSocialSection from "@/ServicesPages/SocialContent/PaidSocialSection";
+import ContentCreationSection from "@/ServicesPages/SocialContent/ContentCreationSection";
+import CommunityManagementSection from "@/ServicesPages/SocialContent/CommunityManagementSection";
+import EmailMarketingSection from "@/ServicesPages/SocialContent/EmailMarketingSection";
+import SmsMarketingSection from "@/ServicesPages/SocialContent/SmsMarketingSection";
 import ContactCTA from "@/components/homepage/ContactCTA";
 import SocialBar from "@/components/layout/SocialBar";
 import Footer from "@/components/layout/Footer";
@@ -14,9 +19,14 @@ const page = () => {
     <div>
         <Hero/>
         <Intro/>
+        <SocialMediaSection/>
+        <PaidSocialAdvertisingSection/>
+        <InfluencerMarketingSection/>
         <ContentStrategySection/>
-        <LeverageInfluencersSection/>
-        <PaidSocialSection/>
+        <ContentCreationSection/>
+        <CommunityManagementSection/>
+        <EmailMarketingSection/>
+        <SmsMarketingSection/>
         <PortfolioSection/>
         <ClientsSection/>
         <ContactCTA/>

@@ -3,83 +3,78 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
+import ArrowButton from "@/components/buttons/ArrowButton";
 
 const UxUiSection = () => {
   const containerRef = useRef<HTMLElement>(null);
-  
+
   const deliverables = [
-    "Wireframing & Prototyping",
+    "Frictionless User Journeys",
+    "Pixel-Perfect Interfaces",
     "Interactive Design Systems",
-    "User Journey Mapping",
-    "Usability Research & Audits",
-    "High-Fidelity UI Presentation",
+    "Rapid Prototyping",
+    "Developer-Ready Handoffs",
   ];
 
   useServiceDetailAnimation(containerRef);
 
   return (
-    <section ref={containerRef} className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden bg-[#002f6c] text-white">
-      {/* Background Image */}
-      <Image
-        src="/images/BrandingCreative/DarkBlueBg.png"
-        alt="UX/UI Background"
-        fill
-        priority={true}
-        quality={90}
-        className="absolute inset-0 z-0 pointer-events-none object-cover opacity-60 mix-blend-color-dodge"
-      />
-
-      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col gap-16 relative z-10">
-        {/* Top Content Row: Image Left, Text Right */}
+    <section
+      ref={containerRef}
+      className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden text-white"
+      style={{
+        background: "radial-gradient(circle 600px at top left, rgba(7, 71, 107, 0.75) 0%, transparent 100%), radial-gradient(circle 600px at bottom right, rgba(7, 71, 107, 0.75) 0%, transparent 100%), #064ED3"
+      }}
+    >
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
+        {/* Top Content Row: Text Left, Image Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* Left Column: Illustration & CTA */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center order-2 lg:order-1">
+          {/* Left Column: Text Content */}
+          <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start">
+            <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
+              UX & UI Design
+            </span>
+            <h2 className="uxui-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
+              Intuitive Interfaces that Make Conversion Effortless
+            </h2>
+
+            <div className="uxui-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
+              <p>
+                Design isn’t just how it looks. It’s how it works. We craft high-impact interfaces with clean, functional design that make navigation frictionless & turn casual visitors into loyal customers. Bad UX costs sales. Good UX creates momentum.
+              </p>
+              <p>
+                We map every user touchpoint using behavioral insights, clear wireframes and modern visual systems. The result? Interfaces that look sharp, feel natural and guide users directly toward high-value actions.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Illustration & CTA */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center">
             {/* Illustration Container */}
             <div className="uxui-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
               <div className="w-full h-full relative">
                 {/* Background Grid */}
-                <img 
-                  src="/images/BrandingCreative/LogoBgBlue.png" 
-                  className="uxui-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-80 pointer-events-none" 
-                  alt="Logo Background Grid" 
+                <img
+                  src="/images/BrandingCreative/LogoBgBlue.png"
+                  className="uxui-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
+                  style={{ filter: 'brightness(0)' }}
+                  alt="Logo Background Grid"
                 />
-              
+
                 {/* Main Illustration */}
-                <img 
-                  src="/images/services/i3.png" 
-                  className="uxui-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]" 
-                  alt="UX/UI Illustration" 
+                <img
+                  src="/images/BrandingCreative/LogoBlue.png"
+                  className="uxui-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
+                  alt="UX/UI Illustration"
                 />
               </div>
             </div>
 
             {/* Button Centered Under Image */}
             <div className="mt-8">
-              <a
-                href="#"
-                className="service-cta inline-flex items-center justify-center px-10 py-3.5 rounded-full border border-white/60 bg-transparent text-white font-semibold text-[15px] md:text-base tracking-wide transition-all duration-300 hover:bg-white hover:text-[#002f6c] hover:border-white shadow-md cursor-pointer"
-              >
-                View Work <span className="arrow ml-2">↗</span>
+              <a href="#" className="service-cta inline-block">
+                <ArrowButton title="View Work" variant="light" />
               </a>
-            </div>
-          </div>
-
-          {/* Right Column: Text Content */}
-          <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start order-1 lg:order-2">
-            <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Design
-            </span>
-            <h2 className="uxui-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading">
-              User Interfaces Driven by Intuition
-            </h2>
-
-            <div className="uxui-desc service-desc space-y-6 max-w-xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-100/90">
-              <p>
-                Great products feel natural. We construct digital interfaces that match user intent, minimizing friction while expressing your brand's unique identity.
-              </p>
-              <p>
-                From structural layout wireframes to delightful micro-interactions, our UX/UI design processes ensure visual perfection across screens.
-              </p>
             </div>
           </div>
         </div>

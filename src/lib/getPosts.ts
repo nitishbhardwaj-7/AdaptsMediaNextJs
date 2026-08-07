@@ -123,17 +123,25 @@ export async function getPostsByAuthor(authorSlug: string) {
 export async function getSinglePost(slug: string) {
   if (!BASE_URL) return null;
 
+  const url = `${BASE_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`;
+
   try {
-    const res = await fetch(
-      `${BASE_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`,
-      { next: { revalidate: 600 } }
-    );
+    // Use no-store so we always get fresh data (revalidate:600 can cache a failed/empty response)
+    const res = await fetch(url, { cache: "no-store" });
 
     if (!res.ok) return null;
 
     const posts = await res.json();
-    
-    if (!posts || posts.length === 0) return null;
+
+    if (!posts || posts.length === 0) {
+      // Retry once — WP REST API occasionally returns empty transiently
+      await new Promise((r) => setTimeout(r, 400));
+      const retry = await fetch(url, { cache: "no-store" });
+      if (!retry.ok) return null;
+      const retryPosts = await retry.json();
+      if (!retryPosts || retryPosts.length === 0) return null;
+      return retryPosts[0];
+    }
 
     return posts[0];
   } catch (error) {
@@ -141,6 +149,7 @@ export async function getSinglePost(slug: string) {
     return null;
   }
 }
+
 
 export async function getWordPressTeamMembers() {
   const { teamMembers } = await import('@/data/teamData');

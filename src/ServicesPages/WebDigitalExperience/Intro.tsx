@@ -11,11 +11,14 @@ const Intro = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const pills = [
-    "UX/UI Design",
-    "Front-End Engineering",
-    "Back-End Engineering",
-    "API & Cloud Integration",
-    "Performance Optimization",
+    "UX & UI Design",
+    "Web Development",
+    "E-commerce Development",
+    "CMS Implementation",
+    "API & System Integration",
+    "Landing Page Design",
+    "Website Maintenance & Support",
+    "Conversion Rate Optimisation (CRO)"
   ];
 
   useGSAP(() => {
@@ -115,15 +118,14 @@ const Intro = () => {
       >
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
-            We merge visual excellence with modern engineering<br className="hidden md:inline" />
-            to ship digital experiences<br className="hidden md:inline" />
-            that are <span className="highlight text-[#2563eb] font-bold">highly interactive</span>,<br className="hidden md:inline" />
-            <span className="highlight text-[#2563eb] font-bold">technologically robust</span>,<br className="hidden md:inline" />
-            and optimized for top speed.<br className="hidden md:inline" /><br className="hidden md:inline" />
-            From immersive interfaces to deep API integrations,<br className="hidden md:inline" />
-            every line of code is written to ensure<br className="hidden md:inline" />
-            flawless customer journeys<br className="hidden md:inline" />
-            and <span className="highlight text-[#2563eb] font-bold">measurable business impact</span> across every digital touchpoint.
+            Your website is your most valuable digital asset.<br className="hidden md:inline" />
+            It’s where your brand identity meets real commercial intent.<br className="hidden md:inline" />
+            You need to offer a <span className="highlight text-[#2563eb] font-bold">UX designed to convert</span>,<br className="hidden md:inline" />
+            scale & stay fast under load.<br className="hidden md:inline" />
+            No slow load times, no clunky interfaces<br className="hidden md:inline" />
+            & no confusing user journeys.<br className="hidden md:inline" />
+            Just <span className="highlight text-[#2563eb] font-bold">clean design</span>, <span className="highlight text-[#2563eb] font-bold">robust architecture</span><br className="hidden md:inline" />
+            and <span className="highlight text-[#2563eb] font-bold">flawless execution</span>.
           </p>
         </div>
 

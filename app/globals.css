@@ -370,3 +370,13 @@ body::-webkit-scrollbar,
   padding-bottom: 0.35em !important;
   margin-bottom: -0.35em !important;
 }
+
+/* Ensure left alignment for hero text and GSAP SplitText elements */
+.hero-left-title,
+.hero-left-title div,
+.hero-right-title,
+.hero-right-title div,
+.hero-desc,
+.hero-desc div {
+  text-align: left !important;
+}

@@ -8,7 +8,6 @@ import TeamSection from '@/components/aboutus/TeamSection'
 import ClientsSection from '@/components/homepage/ClientsSection'
 import ContactCTA from '@/components/homepage/ContactCTA'
 import Footer from '@/components/layout/Footer'
-import SocialBar from '@/components/layout/SocialBar'
 import PerformSection from '@/components/servicespage/PerformSection'
 
 const page = () => {
@@ -24,7 +23,6 @@ const page = () => {
     <ClientsSection/>
     {/* <Recognized/> */}
     <ContactCTA/>
-    {/* <SocialBar/> */}
     <Footer/>
     </div>
   )

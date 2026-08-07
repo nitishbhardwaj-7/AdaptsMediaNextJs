@@ -10,13 +10,12 @@ import ServicesHero from "@/components/servicespage/ServicesHero"
 const page = () => {
   return (
     <div>
-      {/* <ServicesHero/> */}
+      <ServicesHero/>
     <ConnectedThinkingServices/>
     <PortfolioSection/>
     <ClientsSection/>
     <PerformSection/>
     <ContactCTA/>
-    <SocialBar/>
     <Footer/>
     </div>
   )

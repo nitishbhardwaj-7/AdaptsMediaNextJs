@@ -3,33 +3,30 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
+import ArrowButton from "@/components/buttons/ArrowButton";
 
 const TargetedCampaignsSection = () => {
   const containerRef = useRef<HTMLElement>(null);
-  
+
   const deliverables = [
-    "Omnichannel Ad Campaign Planning",
-    "Lifecycle Email Auto-flows",
-    "Customer Segments Optimization",
-    "Re-engagement & Retention Tactics",
-    "Campaign Performance Audits",
+    "Campaign Brief & Objective Setting",
+    "Channel & Budget Planning",
+    "KPI Framework Development",
+    "Pre-Launch Readiness Review",
+    "Post-Campaign Attribution Reporting",
   ];
 
   useServiceDetailAnimation(containerRef);
 
   return (
-    <section ref={containerRef} className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden bg-[#0f4c75] text-white">
-      {/* Background Image */}
-      <Image
-        src="/images/BrandingCreative/DarkBlueBg.png"
-        alt="Targeted Ads and Email Campaigns Background"
-        fill
-        priority={true}
-        quality={90}
-        className="absolute inset-0 z-0 pointer-events-none object-cover opacity-60 mix-blend-color-burn"
-      />
-
-      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col gap-16 relative z-10">
+    <section
+      ref={containerRef}
+      className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden text-white"
+      style={{
+        background: "radial-gradient(circle 600px at top left, rgba(250, 192, 46, 0.75) 0%, transparent 100%), radial-gradient(circle 600px at bottom right, rgba(250, 192, 46, 0.75) 0%, transparent 100%), #C12126"
+      }}
+    >
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
         {/* Top Content Row: Image Left, Text Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left Column: Illustration & CTA */}
@@ -38,29 +35,26 @@ const TargetedCampaignsSection = () => {
             <div className="campaigns-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
               <div className="w-full h-full relative">
                 {/* Background Grid */}
-                <img 
-                  src="/images/BrandingCreative/DarkBlueLogoBg.png" 
-                  className="campaigns-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none" 
-                  style={{ filter: "hue-rotate(200deg)" }}
-                  alt="Logo Background Grid" 
+                <img
+                  src="/images/BrandingCreative/DesignSystemLogoBg.png"
+                  className="campaigns-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
+                  style={{ filter: 'brightness(0)' }}
+                  alt="Campaigns Background Grid"
                 />
-              
+
                 {/* Main Illustration */}
-                <img 
-                  src="/images/services/i6.png" 
-                  className="campaigns-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]" 
-                  alt="Targeted Ads Illustration" 
+                <img
+                  src="/images/BrandingCreative/DesignSystemLogo.png"
+                  className="campaigns-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
+                  alt="Campaigns Illustration"
                 />
               </div>
             </div>
 
             {/* Button Centered Under Image */}
             <div className="mt-8">
-              <a
-                href="#"
-                className="service-cta inline-flex items-center justify-center px-10 py-3.5 rounded-full border border-white/60 bg-transparent text-white font-semibold text-[15px] md:text-base tracking-wide transition-all duration-300 hover:bg-white hover:text-[#0f4c75] hover:border-white shadow-md cursor-pointer"
-              >
-                View Work <span className="arrow ml-2">↗</span>
+              <a href="#" className="service-cta inline-block">
+                <ArrowButton title="View Work" variant="light" />
               </a>
             </div>
           </div>
@@ -68,18 +62,18 @@ const TargetedCampaignsSection = () => {
           {/* Right Column: Text Content */}
           <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start order-1 lg:order-2">
             <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Campaigns
+              Campaign Planning & Measurement
             </span>
-            <h2 className="campaigns-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading">
-              Ads & Lifecycle Journeys Joined
+            <h2 className="campaigns-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
+              Every Campaign Starts with a Clear Brief and Ends with Real Data.
             </h2>
 
-            <div className="campaigns-desc service-desc space-y-6 max-w-xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-100/90">
+            <div className="campaigns-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
               <p>
-                Reach your audience at the perfect moment. We merge outbound paid ads with sophisticated lifecycle email flows, building a continuous conversion loop.
+                Campaigns without proper planning produce results nobody can interpret. Without clear objectives, defined audiences and agreed KPIs set before launch, you end up with data that does not tell you anything useful and a post-campaign review that reaches no conclusions.
               </p>
               <p>
-                By personalizing messaging based on user behavioral signals, we reduce checkout drop-offs and drive higher repeat purchase rates.
+                Our campaign planning process covers objective setting, audience definition, channel selection, budget modelling, KPI framework and measurement plan. Post-campaign, we provide a full performance analysis with attribution reporting that shows which activities drove which results and what to repeat.
               </p>
             </div>
           </div>

@@ -3,33 +3,30 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
+import ArrowButton from "@/components/buttons/ArrowButton";
 
-const PaidSocialSection = () => {
+const PaidSocialAdvertisingSection = () => {
   const containerRef = useRef<HTMLElement>(null);
-  
+
   const deliverables = [
-    "Paid Campaign Strategy",
-    "Ad Creative & Copywriting",
-    "A/B Testing & Audience Definition",
-    "Pixel & Conversion API Integration",
-    "ROAS & Scaling Reports",
+    "High-ROAS Campaign Architecture",
+    "Rapid Creative Iteration",
+    "Hyper-Targeted Audience Segmentation",
+    "Conversion-Focused Copy & Assets",
+    "Real-Time ROAS Optimization",
   ];
 
   useServiceDetailAnimation(containerRef);
 
   return (
-    <section ref={containerRef} className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden bg-[#130026] text-white">
-      {/* Background Image */}
-      <Image
-        src="/images/BrandingCreative/CampaignsBg.png"
-        alt="Paid Social Background"
-        fill
-        priority={true}
-        quality={90}
-        className="absolute inset-0 z-0 pointer-events-none object-cover opacity-50 mix-blend-color-burn"
-      />
-
-      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col gap-16 relative z-10">
+    <section
+      ref={containerRef}
+      className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden text-white"
+      style={{
+        background: "radial-gradient(circle 600px at top left, rgba(255, 255, 255, 0.15) 0%, transparent 100%), radial-gradient(circle 600px at bottom right, rgba(255, 255, 255, 0.15) 0%, transparent 100%), #262626"
+      }}
+    >
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
         {/* Top Content Row: Image Left, Text Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left Column: Illustration & CTA */}
@@ -38,29 +35,26 @@ const PaidSocialSection = () => {
             <div className="paidsocial-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
               <div className="w-full h-full relative">
                 {/* Background Grid */}
-                <img 
-                  src="/images/BrandingCreative/LogoBgBlue.png" 
-                  className="paidsocial-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none" 
-                  style={{ filter: "hue-rotate(270deg)" }}
-                  alt="Logo Background Grid" 
+                <img
+                  src="/images/BrandingCreative/DigitalMarketingLogoBg.png"
+                  className="paidsocial-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
+                  style={{ filter: 'brightness(0)' }}
+                  alt="Paid Social Background Grid"
                 />
-              
+
                 {/* Main Illustration */}
-                <img 
-                  src="/images/services/i2.png" 
-                  className="paidsocial-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]" 
-                  alt="Paid Social Illustration" 
+                <img
+                  src="/images/BrandingCreative/DigitalMarketingLogo.png"
+                  className="paidsocial-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
+                  alt="Paid Social Illustration"
                 />
               </div>
             </div>
 
             {/* Button Centered Under Image */}
             <div className="mt-8">
-              <a
-                href="#"
-                className="service-cta inline-flex items-center justify-center px-10 py-3.5 rounded-full border border-white/60 bg-transparent text-white font-semibold text-[15px] md:text-base tracking-wide transition-all duration-300 hover:bg-white hover:text-[#130026] hover:border-white shadow-md cursor-pointer"
-              >
-                View Work <span className="arrow ml-2">↗</span>
+              <a href="#" className="service-cta inline-block">
+                <ArrowButton title="View Work" variant="light" />
               </a>
             </div>
           </div>
@@ -68,18 +62,18 @@ const PaidSocialSection = () => {
           {/* Right Column: Text Content */}
           <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start order-1 lg:order-2">
             <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Paid Social
+              Paid Social Advertising
             </span>
-            <h2 className="paidsocial-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading">
-              Ad Spend Driven by Conversion Science
+            <h2 className="paidsocial-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
+              Predictable, Scalable Revenue Growth with Higher ROAS
             </h2>
 
-            <div className="paidsocial-desc service-desc space-y-6 max-w-xl text-[17px] md:text-[19px] font-light leading-relaxed text-purple-100/90">
+            <div className="paidsocial-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-gray-300">
               <p>
-                Targeting is only half the battle. We create high-converting ad units optimized specifically for social platform algorithms.
+                Stop burning ad spend on unoptimized campaigns. We build high-converting paid social campaigns across Meta, TikTok, LinkedIn & YouTube engineered to acquire customers at scale. With targeted audience segmentation & rapid creative iteration, our agency relentlessly optimizes ROAS.
               </p>
               <p>
-                From platform-native hooks to pixel setups, we scale social advertising spend with a clear focus on Return on Ad Spend (ROAS).
+                Combining thumb-stopping visual creative with precise performance tracking, we drive qualified traffic directly into your conversion funnel, resulting in lower customer acquisition costs (CAC).
               </p>
             </div>
           </div>
@@ -114,4 +108,4 @@ const PaidSocialSection = () => {
   );
 };
 
-export default PaidSocialSection;
+export default PaidSocialAdvertisingSection;

@@ -11,11 +11,17 @@ const Intro = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const pills = [
-    "Affiliate Channels",
-    "Cost Per Action",
-    "ROI Model",
-    "Conversion Rate Optimization",
-    "Acquisition Analytics",
+    "SEO Services",
+    "SEM / Google Ads",
+    "Programmatic Advertising",
+    "Display Campaign Management",
+    "Performance Marketing",
+    "Media Planning & Buying",
+    "Ad Operations for Advertising Agencies",
+    "Ad Operations for Publishers",
+    "Affiliate Marketing",
+    "Retargeting & Remarketing",
+    "Retail Media & Marketplace Advertising"
   ];
 
   useGSAP(() => {
@@ -111,19 +117,17 @@ const Intro = () => {
 
       <div
         ref={containerRef}
-        className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col items-center"
+        className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col items-center"
       >
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
-            We align analytics with creative optimization<br className="hidden md:inline" />
-            to scale your acquisition channels and build campaigns<br className="hidden md:inline" />
-            that are <span className="highlight text-[#2563eb] font-bold">highly efficient</span>,<br className="hidden md:inline" />
-            <span className="highlight text-[#2563eb] font-bold">computationally targeted</span>,<br className="hidden md:inline" />
-            and positioned for maximum return.<br className="hidden md:inline" /><br className="hidden md:inline" />
-            From cost per action campaigns to ROI modeling,<br className="hidden md:inline" />
-            every element is designed to drive<br className="hidden md:inline" />
-            predictable revenue growth<br className="hidden md:inline" />
-            and <span className="highlight text-[#2563eb] font-bold">quantifiable impact</span> across every touchpoint.
+            Paid media without strategy is burning budget.<br className="hidden md:inline" />
+            We build <span className="highlight text-[#2563eb] font-bold">performance-led campaigns</span> across search,<br className="hidden md:inline" />
+            social, programmatic and direct channels,<br className="hidden md:inline" />
+            combining <span className="highlight text-[#2563eb] font-bold">precise audience targeting</span><br className="hidden md:inline" />
+            with <span className="highlight text-[#2563eb] font-bold">relentless optimisation</span><br className="hidden md:inline" />
+            to drive qualified traffic, lower acquisition costs<br className="hidden md:inline" />
+            and scale what delivers returns.
           </p>
         </div>
 

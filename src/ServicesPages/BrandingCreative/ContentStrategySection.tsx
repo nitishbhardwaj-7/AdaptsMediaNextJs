@@ -30,7 +30,7 @@ const ContentStrategySection = () => {
         className="absolute inset-0 z-0 pointer-events-none object-cover"
       />
 
-      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col gap-16 relative z-10">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
         {/* Top Content Row: Image Left, Text Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left Column: Illustration & CTA */}
@@ -71,7 +71,7 @@ const ContentStrategySection = () => {
               Content Built Around Audience and Intent
             </h2>
 
-            <div className="contentstrategy-desc service-desc space-y-6 max-w-xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
+            <div className="contentstrategy-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
               <p>
                 Great content starts with understanding people. We develop
                 content strategies that align your messaging with audience

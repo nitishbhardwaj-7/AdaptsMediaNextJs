@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/all";
+import { ScrollTrigger, SplitText } from "gsap/all";
 
-gsap.registerPlugin(SplitText, useGSAP);
+gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const ServicesHero = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -15,90 +15,118 @@ const ServicesHero = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const splits: any[] = [];
 
-    // 1. Split and animate the main "Services" heading
-    const titleSplit = SplitText.create(".hero-title", {
-      type: "chars",
-    });
-    splits.push(titleSplit);
-
-    gsap.from(titleSplit.chars, {
-      opacity: 0,
-      yPercent: 120,
-      rotateX: -90,
-      stagger: 0.05,
-      duration: 1.2,
-      ease: "expo.out",
-      transformOrigin: "50% 100%",
-    });
-
-    // 2. Split and animate the right side heading with masked lines
-    const subtitleSplit = SplitText.create(".hero-subtitle", {
+    // Title line mask reveal
+    const leftTitleSplit = SplitText.create(".hero-left-title", {
       type: "lines",
       mask: "lines",
     });
-    splits.push(subtitleSplit);
+    splits.push(leftTitleSplit);
 
-    gsap.from(subtitleSplit.lines, {
-      opacity: 0,
+    gsap.from(leftTitleSplit.lines, {
       yPercent: 110,
-      rotationX: -12,
-      transformOrigin: "0% 50% -60px",
-      stagger: 0.1,
+      opacity: 0,
+      rotationX: -10,
+      transformOrigin: "0% 50% -50px",
       duration: 1.2,
       ease: "expo.out",
+      stagger: 0.1,
+    });
+
+    // Right subtitle line mask reveal
+    const rightTitleSplit = SplitText.create(".hero-right-title", {
+      type: "lines",
+      mask: "lines",
+    });
+    splits.push(rightTitleSplit);
+
+    gsap.from(rightTitleSplit.lines, {
+      yPercent: 110,
+      opacity: 0,
+      rotationX: -10,
+      transformOrigin: "0% 50% -50px",
+      duration: 1.2,
+      ease: "expo.out",
+      stagger: 0.08,
       delay: 0.2,
     });
 
-    // 3. Fade up the description paragraph
+    // Description paragraph fade up
     gsap.from(".hero-desc", {
+      y: 30,
       opacity: 0,
-      y: 28,
-      duration: 1,
+      duration: 1.0,
       ease: "power3.out",
       delay: 0.5,
     });
 
-    // 4. Subtle zoom and fade on background image
-    gsap.from(".hero-bg", {
-      scale: 1.1,
-      opacity: 0,
-      duration: 1.8,
-      ease: "power2.out",
-    });
+    // Cursor-tracking radial gradient background animation
+    const container = containerRef.current;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      gsap.to(container, {
+        "--mouse-x": x,
+        "--mouse-y": y,
+        duration: 1.4,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    };
+
+    if (container) {
+      container.addEventListener("mousemove", handleMouseMove);
+    }
 
     return () => {
-      splits.forEach((split) => split.revert());
+      splits.forEach((s) => s.revert());
+      if (container) {
+        container.removeEventListener("mousemove", handleMouseMove);
+      }
     };
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative min-h-[80vh] w-full overflow-hidden bg-gradient-to-br from-[#4c3592] via-[#e21b22] to-[#4c3592] flex items-center justify-center py-12 text-white">
-      <Image
-        src="/images/services/HeroMaskGroup.png" 
-        alt="Hero Background"
-        fill
-        priority={true}
-        sizes="100vw"
-        quality={85}
-        className="hero-bg absolute z-10 pointer-events-none object-cover" 
-      />
+    <section
+      ref={containerRef}
+      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center pt-28 pb-16 text-white"
+      style={{
+        "--mouse-x": 80,
+        "--mouse-y": 50,
+        background: "radial-gradient(circle 800px at calc(var(--mouse-x, 80) * 1%) calc(var(--mouse-y, 50) * 1%), #064ED3 0%, #761da1 60%, #C12126 100%)",
+      } as React.CSSProperties}
+    >
+      {/* Globe Watermark in Right Bottom of Page */}
+      <div className="absolute right-30 bottom-0 w-[280px] h-[280px] md:w-[420px] md:h-[420px] opacity-55 pointer-events-none z-0">
+        <Image
+          src="/images/Logo_01.png"
+          alt="Adapts Globe Grid"
+          fill
+          sizes="(max-width: 768px) 420px, 620px"
+          className="object-contain"
+          priority
+        />
+      </div>
+
       {/* Hero Content */}
-      <div className="grid grid-cols-1 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16">
+      <div className="grid grid-cols-1 z-10 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16">
         {/* Left Side */}
-        <div className="flex items-center">
-          <h1 className="hero-title text-5xl tracking-wide md:text-7xl">
+        <div className="flex items-center justify-center">
+          <h1 className="hero-left-title text-5xl tracking-wide md:text-7xl font-opensans font-medium leading-[1.2] pb-4 text-left">
             Services
           </h1>
         </div>
 
         {/* Right Side */}
-        <div className="relative z-10 flex flex-col justify-center max-w-md">
-          <h2 className="hero-subtitle mb-6 text-3xl leading-snug md:text-5xl">
+        <div className="relative z-10 flex flex-col justify-center items-start text-left max-w-lg mx-auto w-full">
+          <h2 className="hero-right-title mb-6 text-3xl leading-snug md:text-5xl font-opensans font-normal leading-[1.2] pb-2 text-left w-full">
             Services Built to <br /> Drive Real Growth.
           </h2>
-          <p className="hero-desc text-2xl font-extralight leading-tight tracking-wide text-white">
-            From strategy to execution, we create integrated solutions 
-            that help brands connect, perform, and scale.
+          <p className="hero-desc text-2xl font-opensans font-extralight leading-tight tracking-wide text-white text-left w-full">
+            From strategy to execution, we create integrated solutions that help brands connect, perform, and scale.
           </p>
         </div>
       </div>

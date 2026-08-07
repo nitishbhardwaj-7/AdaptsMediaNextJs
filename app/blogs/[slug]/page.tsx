@@ -50,8 +50,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 import SingleBlogHero from "@/components/blog/SingleBlogHero";
 import AuthorSection from "@/components/blog/AuthorSection";
 import BlogGridCard from "@/components/cards/BlogGridCard";
+import BlogContentAnimator from "@/components/blog/BlogContentAnimator";
 import ContactCTA from "@/components/homepage/ContactCTA";
-import SocialBar from "@/components/layout/SocialBar";
 import Footer from "@/components/layout/Footer";
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
@@ -62,11 +62,16 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-white">
-        Post not found
+      <div className="min-h-screen flex flex-col items-center justify-center bg-white text-[#17313B] gap-4">
+        <h1 className="text-3xl font-bold">Post not found</h1>
+        <p className="text-gray-500">This article may have been moved or deleted.</p>
+        <a href="/blogs" className="mt-4 px-6 py-2 bg-[#064ED3] text-white rounded-full text-sm font-semibold hover:bg-[#0540a8] transition-colors">
+          ← Back to Blog
+        </a>
       </div>
     );
   }
+
 
   const authorData = await getResolvedAuthor(post);
   const authorName = authorData.name;
@@ -88,6 +93,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       )}
 
       <article className="bg-white min-h-screen text-[#17313B]">
+        {/* Client-side: progress bar + all scroll animations */}
+        <BlogContentAnimator />
         <SingleBlogHero 
           title={decodedTitle}
           author={authorName}
@@ -97,8 +104,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
         {/* Featured Image Overlap */}
         {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
-          <div className="relative z-20 max-w-5xl mx-auto px-6 -mt-32 md:-mt-40 mb-12">
-            <div className="relative w-full overflow-hidden shadow-2xl bg-gray-100">
+          <div
+            className="blog-featured-image relative z-20 max-w-5xl mx-auto px-6 -mt-32 md:-mt-40 mb-12"
+            style={{ opacity: 0 }}
+          >
+            <div className="relative w-full overflow-hidden shadow-2xl bg-gray-100 rounded-xl">
               <img 
                 src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url} 
                 alt="Featured Image"
@@ -108,9 +118,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </div>
         )}
 
+
         {/* Content */}
         <div className="max-w-4xl mx-auto px-6 pb-20">
-          <div className="
+          <div className="blog-body
             /* Style Paragraphs */
             [&_p]:text-[#4a5568] [&_p]:leading-relaxed [&_p]:mb-6 [&_p]:text-base
             
@@ -200,24 +211,27 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* Dynamic Author Section */}
-        <AuthorSection author={authorData} />
+        <div className="blog-author-section">
+          <AuthorSection author={authorData} />
+        </div>
 
         {/* Related Posts Section */}
         {relatedPosts.length > 0 && (
           <div className="w-full bg-white py-20">
             <div className="max-w-[1350px] mx-auto px-8 md:px-16 lg:px-20">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#C52A27] mb-12">Related Posts</h2>
+              <h2 className="blog-related-heading text-3xl md:text-4xl font-bold text-[#C52A27] mb-12">Related Posts</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {relatedPosts.map((rp: any) => (
-                  <BlogGridCard 
-                    key={rp.slug}
-                    title={rp.title}
-                    image={rp.image}
-                    slug={rp.slug}
-                    author={rp.author}
-                    date={rp.date}
-                    tags={rp.categories}
-                  />
+                  <div key={rp.slug} className="blog-related-card">
+                    <BlogGridCard 
+                      title={rp.title}
+                      image={rp.image}
+                      slug={rp.slug}
+                      author={rp.author}
+                      date={rp.date}
+                      tags={rp.categories}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
@@ -225,7 +239,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         )}
 
         <ContactCTA/>
-        <SocialBar/>
         <Footer/>
       </article>
     </>

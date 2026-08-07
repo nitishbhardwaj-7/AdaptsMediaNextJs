@@ -6,16 +6,14 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import FullscreenMenu from "./FullscreenMenu";
+import AdaptsLogoSvg from "./AdaptsLogoSvg";
 
-const NavLogo = () => (
-  <div className="relative w-[60px] h-[40px]">
-    <Image
-      alt="Company Logo"
-      src="/images/navlogo.png"
-      fill
-      sizes="60px"
-      className="object-contain"
-    />
+const NavLogo = ({ isScrolled }: { isScrolled: boolean }) => (
+  <div
+    className="relative h-[40px] overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+    style={{ width: isScrolled ? "35px" : "183px" }}
+  >
+    <AdaptsLogoSvg isScrolled={isScrolled} />
   </div>
 );
 
@@ -157,7 +155,7 @@ const Navbar = () => {
         `}
         >
           <Link href="/" aria-label="Home" className="flex no-underline shrink-0">
-            <NavLogo />
+            <NavLogo isScrolled={isScrolled} />
           </Link>
 
           <div className="flex items-center gap-2.5 sm:gap-4 md:gap-[28px]">

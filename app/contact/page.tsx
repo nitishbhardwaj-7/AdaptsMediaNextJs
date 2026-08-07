@@ -2,7 +2,6 @@ import ContactHero from "@/components/contact/ContactHero";
 import ContactIntroText from "@/components/contact/ContactIntroText";
 import ContactFormSection from "@/components/contact/ContactFormSection";
 import ContactAddresses from "@/components/contact/ContactAddresses";
-import SocialBar from "@/components/layout/SocialBar";
 import Footer from "@/components/layout/Footer";
 
 export const metadata = {

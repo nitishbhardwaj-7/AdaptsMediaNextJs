@@ -19,18 +19,15 @@ const IdentitySection = () => {
   useServiceDetailAnimation(containerRef);
 
   return (
-    <section ref={containerRef} className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden bg-[#064ed3] text-white">
-      {/* Background Image */}
-      <Image
-        src="/images/BrandingCreative/IdentityBg.png"
-        alt="Identity Background"
-        fill
-        priority={true}
-        quality={90}
-        className="absolute inset-0 z-0 pointer-events-none object-cover"
-      />
+    <section
+      ref={containerRef}
+      className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden text-white"
+      style={{
+        background: "radial-gradient(circle 600px at top left, rgba(7, 71, 107, 0.75) 0%, transparent 100%), radial-gradient(circle 600px at bottom right, rgba(7, 71, 107, 0.75) 0%, transparent 100%), #064ED3"
+      }}
+    >
 
-      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col gap-16 relative z-10">
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
         {/* Top Content Row: Text Left, Image Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left Column: Text Content */}
@@ -42,7 +39,7 @@ const IdentitySection = () => {
               Creating Brands with Purpose and Personality
             </h2>
 
-            <div className="identity-desc service-desc space-y-6 max-w-xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
+            <div className="identity-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
               <p>
                 A strong identity creates recognition, trust, and differentiation. We develop brand identities that go beyond aesthetics — building systems that communicate who you are, what you stand for, and why your audience should care.
               </p>

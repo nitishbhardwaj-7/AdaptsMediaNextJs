@@ -11,11 +11,13 @@ const Intro = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const pills = [
-    "Competitor Analysis",
-    "Tailor-Made Growth Strategies",
-    "Lifecycle Ads & Email Campaigns",
     "Market Research",
-    "Brand Positioning",
+    "Industry & Competitor Analysis",
+    "Audience & Consumer Insights",
+    "Tailor-made Growth Strategies",
+    "Digital Audit",
+    "Campaign Planning & Measurement",
+    "Data & Analytics Consulting"
   ];
 
   useGSAP(() => {
@@ -111,19 +113,15 @@ const Intro = () => {
 
       <div
         ref={containerRef}
-        className="max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16 flex flex-col items-center"
+        className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col items-center"
       >
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
-            We map competitive Landscapes<br className="hidden md:inline" />
-            and engineer custom corporate blueprints<br className="hidden md:inline" />
-            to position your enterprise with <span className="highlight text-[#2563eb] font-bold">maximum leverage</span>,<br className="hidden md:inline" />
-            <span className="highlight text-[#2563eb] font-bold">scalable growth channels</span>,<br className="hidden md:inline" />
-            and permanent market value.<br className="hidden md:inline" /><br className="hidden md:inline" />
-            From business analysis to lifecycle advertising planning,<br className="hidden md:inline" />
-            every strategy is designed to deliver<br className="hidden md:inline" />
-            sustainable revenue<br className="hidden md:inline" />
-            and <span className="highlight text-[#2563eb] font-bold">quantifiable market leadership</span> across your industry.
+            Most marketing problems are strategy problems.<br className="hidden md:inline" />
+            Brands waste budget because they <span className="highlight text-[#2563eb] font-bold">do not know their market</span> well enough,<br className="hidden md:inline" />
+            their messaging <span className="highlight text-[#2563eb] font-bold">does not match what their audience cares about</span><br className="hidden md:inline" />
+            or their campaigns <span className="highlight text-[#2563eb] font-bold">have no clear commercial objective</span>.<br className="hidden md:inline" />
+            We fix that before the first ad runs.
           </p>
         </div>
 

@@ -1,0 +1,111 @@
+"use client";
+
+import Image from "next/image";
+import { useRef } from "react";
+import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
+import ArrowButton from "@/components/buttons/ArrowButton";
+
+const LandingPageSection = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
+  const deliverables = [
+    "High-Converting Layouts",
+    "Rapid Load Speed",
+    "Laser-Focused CTAs",
+    "Campaign-Aligned Messaging",
+    "A/B Testing Ready",
+  ];
+
+  useServiceDetailAnimation(containerRef);
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden text-white"
+      style={{
+        background: "radial-gradient(circle 600px at top left, rgba(250, 192, 46, 0.75) 0%, transparent 100%), radial-gradient(circle 600px at bottom right, rgba(250, 192, 46, 0.75) 0%, transparent 100%), #C12126"
+      }}
+    >
+      <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
+        {/* Top Content Row: Image Left, Text Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+          {/* Left Column: Illustration & CTA */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center order-2 lg:order-1">
+            {/* Illustration Container */}
+            <div className="landing-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
+              <div className="w-full h-full relative">
+                {/* Background Grid */}
+                <img
+                  src="/images/BrandingCreative/DesignSystemLogoBg.png"
+                  className="landing-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
+                  style={{ filter: 'brightness(0)' }}
+                  alt="Landing Page Background Grid"
+                />
+
+                {/* Main Illustration */}
+                <img
+                  src="/images/BrandingCreative/DesignSystemLogo.png"
+                  className="landing-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
+                  alt="Landing Page Illustration"
+                />
+              </div>
+            </div>
+
+            {/* Button Centered Under Image */}
+            <div className="mt-8">
+              <a href="#" className="service-cta inline-block">
+                <ArrowButton title="View Work" variant="light" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Text Content */}
+          <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start order-1 lg:order-2">
+            <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
+              Landing Page Design
+            </span>
+            <h2 className="landing-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
+              One Page. One Goal. Maximum Conversions.
+            </h2>
+
+            <div className="landing-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
+              <p>
+                We employ punchy copy structure, strategic visual hierarchy & instant load times and design targeted, high-performance landing pages built specifically to turn campaign traffic into qualified leads and sales.
+              </p>
+              <p>
+                Our team aligns every headline, visual and CTA with your acquisition campaigns to maximize return on ad spend (ROAS). Land your target audience on pages tested for performance, optimized for action & built to convert.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Content Row: What We Deliver */}
+        <div className="w-full mt-8">
+          <h3 className="landing-deliverables-header service-deliverables-header text-xl md:text-2xl mb-6">
+            What We Deliver
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4">
+            {deliverables.map((item, idx) => (
+              <div key={idx} className="landing-deliverable-item service-deliverable-item flex items-start gap-2.5">
+                <div className="service-deliverable-icon mt-1 flex-shrink-0">
+                  <svg
+                    className="w-4 h-4 text-[#FAC02E]"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z" />
+                  </svg>
+                </div>
+                <span className="service-deliverable-text text-sm md:text-[15px] text-white/90 leading-snug">
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default LandingPageSection;

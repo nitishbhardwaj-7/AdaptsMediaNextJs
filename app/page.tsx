@@ -69,8 +69,6 @@ export default async function Home() {
 
         <LocationSection />
 
-        <SocialBar />
-
         <Footer />
       </main>
     </>

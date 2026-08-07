@@ -6,7 +6,6 @@ import DesignSystemsSection from "@/ServicesPages/BrandingCreative/DesignSystems
 import ContentStrategySection from "@/ServicesPages/BrandingCreative/ContentStrategySection"
 import LeverageInfluencersSection from "@/ServicesPages/BrandingCreative/LeverageInfluencersSection"
 import ContactCTA from "@/components/homepage/ContactCTA"
-import SocialBar from "@/components/layout/SocialBar"
 import Footer from "@/components/layout/Footer"
 import PortfolioSection from "@/components/servicespage/PortfolioSection"
 import ClientsSection from "@/components/homepage/ClientsSection"

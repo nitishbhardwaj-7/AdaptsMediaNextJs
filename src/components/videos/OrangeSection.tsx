@@ -45,6 +45,9 @@ const OrangeSection = () => {
     "audience, and your growth ambitions."
   ];
 
+  const bodyParagraph1Words = bodyParagraph1.join(" ").split(" ");
+  const bodyParagraph2Words = bodyParagraph2.join(" ").split(" ");
+
   useGSAP(() => {
     const cleanups: (() => void)[] = [];
     const isMobile = window.matchMedia("(max-width: 1024px)").matches;
@@ -133,7 +136,7 @@ const OrangeSection = () => {
     if (isMobile) {
       const headlineLinesElements = gsap.utils.toArray<HTMLElement>(".headline-line");
       const introWordsElements = gsap.utils.toArray<HTMLElement>(".intro-word");
-      const bodyLines = gsap.utils.toArray<HTMLElement>(".body-line");
+      const bodyParagraphs = gsap.utils.toArray<HTMLElement>(".body-paragraph");
       const cards = gsap.utils.toArray<HTMLElement>(".stats-card-3d");
       const statNumbers = gsap.utils.toArray<HTMLElement>(".stat-number");
 
@@ -147,7 +150,7 @@ const OrangeSection = () => {
       // Set initial hidden states (same as desktop)
       gsap.set(headlineLinesElements, { y: 24, opacity: 0, filter: "blur(4px)" });
       gsap.set(introWordsElements, { y: 10, opacity: 0 });
-      gsap.set(bodyLines, { y: 16, opacity: 0 });
+      gsap.set(bodyParagraphs, { y: 16, opacity: 0 });
       gsap.set(closingRef.current, { opacity: 0, y: 12, filter: "blur(6px)" });
       gsap.set(".magnetic-button", { y: 20, opacity: 0 });
       gsap.set(cards, { opacity: 0, y: 30, scale: 0.92 });
@@ -173,10 +176,10 @@ const OrangeSection = () => {
         duration: 0.55, stagger: 0.03, ease: "power2.out"
       }, 0.3);
 
-      // Body lines slide up one by one
-      mobileTl.to(bodyLines, {
+      // Body paragraphs slide up one by one
+      mobileTl.to(bodyParagraphs, {
         y: 0, opacity: 1,
-        duration: 0.6, stagger: 0.1, ease: "power2.out"
+        duration: 0.6, stagger: 0.15, ease: "power2.out"
       }, 0.6);
 
       // Closing statement fades in
@@ -230,6 +233,93 @@ const OrangeSection = () => {
     // ─────────────────────────────────────────────────────────────────────────
 
     // --- 4. Master ScrollTrigger Timeline ---
+    // --- 4a. Unpinned Scroll-Scrub Timeline for Text Reveals ---
+    const textRevealTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 65%",
+        end: "+=150%",
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    // Selectors
+    const headlineLinesElements = gsap.utils.toArray<HTMLElement>(".headline-line");
+      const introWordsElements = gsap.utils.toArray<HTMLElement>(".intro-word");
+      const importantWordsElements = gsap.utils.toArray<HTMLElement>(".important-word");
+      const bodyWordsElements = gsap.utils.toArray<HTMLElement>(".body-word");
+      const cards = gsap.utils.toArray<HTMLElement>(".stats-card-3d");
+      const statNumbers = gsap.utils.toArray<HTMLElement>(".stat-number");
+
+      // Initialize state
+      gsap.set(headlineLinesElements, {
+        y: 35,
+        opacity: 0,
+        filter: "blur(6px)",
+        transformOrigin: "left bottom"
+      });
+
+      gsap.set(introWordsElements, {
+        opacity: 0,
+        filter: "blur(4px)"
+      });
+
+      gsap.set(bodyWordsElements, {
+        opacity: 0,
+        filter: "blur(4px)"
+      });
+
+      gsap.set(cards, {
+        opacity: 0,
+        scale: 0.8,
+        filter: "blur(10px)",
+        x: (i) => [-50, 55, -60, 60][i] || 0,
+        y: (i) => [60, -70, -50, 60][i] || 0,
+        rotate: (i) => [-6, 6, -5, 5][i] || 0
+      });
+
+      // A. Title Lines Reveal (Scroll-Interactive, Unpinned)
+      textRevealTl.to(headlineLinesElements, {
+        y: 0,
+        opacity: 1,
+        filter: "blur(0px)",
+        clearProps: "filter",
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power2.out"
+      }, 0.0);
+
+      // B. Intro Paragraph Word-by-Word Reveal ("writing effect", Unpinned)
+      textRevealTl.to(introWordsElements, {
+        opacity: 1,
+        filter: "blur(0px)",
+        clearProps: "filter",
+        duration: 0.4,
+        stagger: 0.05,
+        ease: "power1.out"
+      }, 0.3);
+
+      // C. Important Words Highlight (Unpinned)
+      textRevealTl.to(importantWordsElements, {
+        color: "#FAC02E",
+        textShadow: "0 0 12px rgba(250, 192, 46, 0.4)",
+        duration: 0.4,
+        stagger: 0.05,
+        ease: "power2.out"
+      }, 0.7);
+
+      // D. Body Copy Words Reveal ("writing effect", Unpinned)
+      textRevealTl.to(bodyWordsElements, {
+        opacity: 1,
+        filter: "blur(0px)",
+        clearProps: "filter",
+        duration: 0.4,
+        stagger: 0.02,
+        ease: "power1.out"
+      }, 0.9);
+
+    // --- 4b. Pinned Master Timeline for Cards & Buttons ---
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -241,149 +331,7 @@ const OrangeSection = () => {
       }
     });
 
-    // Selectors
-    const headlineLinesElements = gsap.utils.toArray<HTMLElement>(".headline-line");
-    const introWordsElements = gsap.utils.toArray<HTMLElement>(".intro-word");
-    const importantWordsElements = gsap.utils.toArray<HTMLElement>(".important-word");
-    const bodyLines = gsap.utils.toArray<HTMLElement>(".body-line");
-    const cards = gsap.utils.toArray<HTMLElement>(".stats-card-3d");
-    const statNumbers = gsap.utils.toArray<HTMLElement>(".stat-number");
-
-    // Initialize state
-    gsap.set(headlineLinesElements, {
-      y: 35,
-      opacity: 0,
-      filter: "blur(6px)",
-      transformOrigin: "left bottom"
-    });
-
-    gsap.set(introWordsElements, {
-      y: 18,
-      opacity: 0,
-      scale: 0.92,
-      filter: "blur(4px)"
-    });
-
-    gsap.set(bodyLines, {
-      y: 20,
-      x: -12,
-      opacity: 0,
-      filter: "blur(3px)"
-    });
-
-    gsap.set(cards, {
-      opacity: 0,
-      scale: 0.8,
-      filter: "blur(10px)",
-      x: (i) => [-50, 55, -60, 60][i] || 0,
-      y: (i) => [60, -70, -50, 60][i] || 0,
-      rotate: (i) => [-6, 6, -5, 5][i] || 0
-    });
-
-    // --- Independent Text Reveal (Happens BEFORE pinning) ---
-    const introTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 75%", // Trigger when section is partially in view, before pinning at top
-        toggleActions: "play none none none"
-      }
-    });
-
-    // C. Headline Line-by-Line Reveal with smooth 3D tilt & blur dissipation
-    introTl.to(headlineLinesElements, {
-      y: 0,
-      opacity: 1,
-      filter: "blur(0px)",
-      clearProps: "filter",
-      duration: 1.1,
-      ease: "power3.out",
-      stagger: 0.18
-    }, 0);
-
-    // E. Intro Paragraph Word-by-Word Wave Reveal
-    introTl.to(introWordsElements, {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      filter: "blur(0px)",
-      clearProps: "filter",
-      duration: 0.7,
-      stagger: 0.035,
-      ease: "back.out(1.3)"
-    }, 0.35);
-
-    // F. Important Words Glow Pulse
-    importantWordsElements.forEach((el) => {
-      const idx = introWordsElements.indexOf(el);
-      const revealTime = 0.35 + (idx * 0.035);
-      introTl.to(el, {
-        color: "#FAC02E",
-        textShadow: "0 0 16px rgba(250, 192, 46, 0.65)",
-        duration: 0.4,
-        yoyo: true,
-        repeat: 1,
-        ease: "power2.out"
-      }, revealTime);
-    });
-
-    // G. Body Copy Line-by-Line Slide & Fade Reveal
-    bodyLines.forEach((line, i) => {
-      const time = 0.8 + (i * 0.12);
-      introTl.to(line, {
-        y: 0,
-        x: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        clearProps: "filter",
-        duration: 0.8,
-        ease: "power2.out"
-      }, time);
-    });
-
-    // H. Closing Statement (climax letter-space tighten, blur fade)
-    tl.fromTo(closingRef.current,
-      {
-        opacity: 0,
-        scale: 0.96,
-        letterSpacing: "0.04em",
-        filter: "blur(8px) brightness(0.9)"
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        letterSpacing: "-0.01em",
-        filter: "blur(0px) brightness(1.15)",
-        clearProps: "filter",
-        duration: 1.4,
-        ease: "power4.out"
-      },
-      2.2
-    );
-
-    // Pause/Hold climax
-    tl.to({}, { duration: 0.5 });
-
-    // I. CTA Buttons Slide up & scale
-    tl.fromTo(".magnetic-button",
-      {
-        y: 35,
-        rotate: 2,
-        scale: 0.9,
-        opacity: 0
-      },
-      {
-        y: 0,
-        rotate: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: "power3.out"
-      },
-      3.1
-    );
-
-    // J. Right Stats Cards Composition (overshoot inertia)
+    // E. Stats Cards Reveal Composition
     tl.to(cards, {
       opacity: 1,
       scale: 1,
@@ -391,12 +339,12 @@ const OrangeSection = () => {
       x: 0,
       y: 0,
       rotate: 0,
-      duration: 1.5,
-      stagger: 0.15,
-      ease: "back.out(1.1)" // Slight overshoot inertia landing
-    }, 0.6);
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "back.out(1.1)"
+    }, 0.7);
 
-    // K. Stat Numbers Count-Up
+    // F. Stat Numbers Count-Up
     const countTargets = [
       { val: 100, suffix: "+" },
       { val: 500, suffix: "+" },
@@ -411,7 +359,7 @@ const OrangeSection = () => {
 
       tl.to(countObj, {
         val: target.val,
-        duration: 1.6,
+        duration: 0.8,
         ease: "power2.out",
         onUpdate: () => {
           el.innerText = Math.floor(countObj.val) + target.suffix;
@@ -419,13 +367,53 @@ const OrangeSection = () => {
         onComplete: () => {
           gsap.fromTo(el,
             { scale: 1.18, color: "#FFFFFF" },
-            { scale: 1, color: "#FAC02E", duration: 0.45, ease: "power2.out" }
+            { scale: 1, color: "#FAC02E", duration: 0.3, ease: "power2.out" }
           );
         }
-      }, 0.8 + index * 0.15);
+      }, 0.8 + index * 0.1);
     });
 
-    // L. Cards Ambient floating loops (Trigger after entry composition finishes)
+    // G. Closing Statement Reveal
+    tl.fromTo(closingRef.current,
+      {
+        opacity: 0,
+        scale: 0.96,
+        letterSpacing: "0.04em",
+        filter: "blur(8px) brightness(0.9)"
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        letterSpacing: "-0.01em",
+        filter: "blur(0px) brightness(1.15)",
+        clearProps: "filter",
+        duration: 0.6,
+        ease: "power4.out"
+      },
+      1.4
+    );
+
+    // H. CTA Buttons Slide up & scale
+    tl.fromTo(".magnetic-button",
+      {
+        y: 35,
+        rotate: 2,
+        scale: 0.9,
+        opacity: 0
+      },
+      {
+        y: 0,
+        rotate: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power3.out"
+      },
+      1.7
+    );
+
+    // I. Cards Ambient floating loops
     tl.add(() => {
       cards.forEach((card, i) => {
         gsap.to(card, {
@@ -439,7 +427,7 @@ const OrangeSection = () => {
           delay: i * 0.25
         });
       });
-    }, 2.0);
+    }, 1.5);
 
     // Cleanup
     return () => {
@@ -509,49 +497,55 @@ const OrangeSection = () => {
                 ))}
               </h1>
 
-              {/* Word-by-word Intro Paragraph */}
-              <h2 className="text-[clamp(1.05rem,1.5vw,1.6rem)] mb-6 text-gray-200 font-thin font-sans leading-relaxed">
-                {introWords.map((word, idx) => {
-                  const cleanWord = word.toLowerCase().replace(/[^a-z]/g, "");
-                  const important = ["strategy", "creativity", "technology", "marketing", "performs"].includes(cleanWord);
-                  return (
+              {/* Constrained Text Wrapper to match Title Width */}
+              <div className="w-full max-w-[620px] flex flex-col items-center min-[1200px]:items-start">
+                {/* Word-by-word Intro Paragraph */}
+                <h2 className="text-[clamp(1.05rem,1.5vw,1.6rem)] mb-6 text-gray-200 font-thin font-sans leading-relaxed">
+                  {introWords.map((word, idx) => {
+                    const cleanWord = word.toLowerCase().replace(/[^a-z]/g, "");
+                    const important = ["strategy", "creativity", "technology", "marketing", "performs"].includes(cleanWord);
+                    return (
+                      <span
+                        key={idx}
+                        className={`intro-word inline-block mr-[0.22em] will-change-[transform,opacity,filter] ${important ? "font-normal text-white important-word" : "opacity-80"
+                          }`}
+                      >
+                        {word}
+                      </span>
+                    );
+                  })}
+                </h2>
+
+                {/* Word-by-word body paragraph 1 */}
+                <p className="body-paragraph text-[clamp(0.85rem,1.05vw,1.02rem)] text-white/90 font-thin leading-relaxed mb-4 text-center min-[1200px]:text-left">
+                  {bodyParagraph1Words.map((word, idx) => (
                     <span
                       key={idx}
-                      className={`intro-word inline-block mr-[0.22em] will-change-[transform,opacity,filter] ${important ? "font-normal text-white important-word" : "opacity-80"
-                        }`}
+                      className="body-word inline-block mr-[0.22em] will-change-[transform,opacity,filter]"
                     >
                       {word}
                     </span>
-                  );
-                })}
-              </h2>
+                  ))}
+                </p>
 
-              {/* Line-masked supporting body copy */}
-              <div className="mb-4">
-                {bodyParagraph1.map((line, idx) => (
-                  <span key={idx} className="block overflow-hidden py-[0.2em] -my-[0.2em]">
-                    <span className="body-line inline-block text-[clamp(0.85rem,1.05vw,1.02rem)] text-white/90 font-thin leading-relaxed will-change-[transform,opacity]">
-                      {line}
+                {/* Word-by-word body paragraph 2 */}
+                <p className="body-paragraph text-[clamp(0.85rem,1.05vw,1.02rem)] text-white/90 font-thin leading-relaxed mb-8 text-center min-[1200px]:text-left">
+                  {bodyParagraph2Words.map((word, idx) => (
+                    <span
+                      key={idx}
+                      className="body-word inline-block mr-[0.22em] will-change-[transform,opacity,filter]"
+                    >
+                      {word}
                     </span>
-                  </span>
-                ))}
-              </div>
+                  ))}
+                </p>
 
-              <div className="mb-8">
-                {bodyParagraph2.map((line, idx) => (
-                  <span key={idx} className="block overflow-hidden py-[0.2em] -my-[0.2em]">
-                    <span className="body-line inline-block text-[clamp(0.85rem,1.05vw,1.02rem)] text-white/90 font-thin leading-relaxed will-change-[transform,opacity]">
-                      {line}
-                    </span>
-                  </span>
-                ))}
-              </div>
-
-              {/* Emotional climax closing statement */}
-              <div ref={closingRef} className="mb-8 opacity-0 will-change-[transform,opacity,filter] py-2">
-                <h2 className="text-[clamp(1.1rem,1.8vw,1.65rem)] bg-gradient-to-r from-white to-[#FAC02E] bg-clip-text text-transparent font-heading font-medium leading-tight">
-                  We don&apos;t just deliver campaigns. <br /> We build momentum.
-                </h2>
+                {/* Emotional climax closing statement */}
+                <div ref={closingRef} className="mb-8 opacity-0 will-change-[transform,opacity,filter] py-2">
+                  <h2 className="text-[clamp(1.1rem,1.8vw,1.65rem)] bg-gradient-to-r from-white to-[#FAC02E] bg-clip-text text-transparent font-heading font-medium leading-tight">
+                    We don&apos;t just deliver campaigns. <br /> We build momentum.
+                  </h2>
+                </div>
               </div>
 
               {/* Interactive CTA Buttons */}

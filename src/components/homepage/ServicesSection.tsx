@@ -45,7 +45,7 @@ const ServicesSection = () => {
     const splits: any[] = []
 
 
-    // ── 2. Heading — SplitText line mask reveal ────────────────────────────
+    // ── 2. Heading — SplitText line mask reveal (Scroll-Interactive) ─────────
     const headingSplit = SplitText.create(".services-heading", {
       type: "lines",
       mask: "lines",
@@ -57,86 +57,92 @@ const ServicesSection = () => {
       opacity: 0,
       rotationX: -12,
       transformOrigin: "0% 50% -60px",
-      duration: 1.0,
-      ease: "expo.out",
       stagger: 0.12,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: ".services-heading",
-        start: "top 82%",
-        toggleActions: "play none none none",
+        start: "top 95%",
+        end: "top 60%",
+        scrub: 1.2,
       },
     })
 
-    // ── 3. Subtitle fade-up ───────────────────────────────────────────────
+    // ── 3. Subtitle fade-up (Scroll-Interactive) ────────────────────────────
     gsap.from(".services-subtitle", {
       opacity: 0,
       y: 28,
-      duration: 0.8,
-      ease: "power3.out",
-      delay: 0.3,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: ".services-heading",
-        start: "top 82%",
-        toggleActions: "play none none none",
+        start: "top 85%",
+        end: "top 60%",
+        scrub: 1.2,
       },
     })
 
-    // ── 4. Card 3D batch entrance ─────────────────────────────────────────
-    ScrollTrigger.batch(".service-card", {
-      start: "top 85%",
-      onEnter: (batch) => {
-        gsap.from(batch, {
-          opacity: 0,
-          y: isMobile ? 35 : 70,
-          rotationX: isMobile ? 0 : 22,
-          rotationY: (i: number) => isMobile ? 0 : i % 2 === 0 ? -6 : 6,
-          scale: 0.94,
-          transformOrigin: "center top",
-          duration: 0.95,
-          ease: "expo.out",
-          stagger: 0.1,
-          clearProps: "all",
-        })
-      },
-    })
+    // ── 4. Master Services Grid Scroll-Scrub Timeline ──────────────────────
+    const servicesTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".services-grid",
+        start: "top 92%",
+        end: "bottom 70%",
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+      }
+    });
 
-    // ── 5. Service numbers pop-in ─────────────────────────────────────────
+    // A. Service Cards (Slide, Fade & 3D Tilt)
+    servicesTl.from(".service-card", {
+      opacity: 0,
+      y: isMobile ? 35 : 70,
+      rotationX: isMobile ? 0 : 22,
+      rotationY: (i: number) => isMobile ? 0 : i % 2 === 0 ? -6 : 6,
+      scale: 0.94,
+      transformOrigin: "center top",
+      stagger: 0.15,
+      ease: "power1.out",
+    }, 0.0);
+
+    // B. Service Numbers
     gsap.utils.toArray<HTMLElement>(".service-number").forEach((num, i) => {
-      gsap.from(num, {
+      servicesTl.from(num, {
         opacity: 0,
         x: -20,
         scale: 0.75,
-        duration: 0.55,
         ease: "back.out(1.7)",
-        delay: i * 0.1 + 0.2,
-        scrollTrigger: {
-          trigger: num,
-          start: "top 88%",
-          toggleActions: "play none none none",
-        },
-      })
-    })
+      }, 0.1 + i * 0.08);
+    });
 
-    // ── 6. Card title word reveal ─────────────────────────────────────────
-    gsap.utils.toArray<HTMLElement>(".service-card-title").forEach((title) => {
+    // C. Card Title Word Reveal
+    gsap.utils.toArray<HTMLElement>(".service-card-title").forEach((title, i) => {
       const split = SplitText.create(title, { type: "words", mask: "words" })
       splits.push(split)
-      gsap.from(split.words, {
+      servicesTl.from(split.words, {
         yPercent: 100,
         opacity: 0,
-        duration: 0.65,
-        ease: "expo.out",
-        stagger: 0.06,
-        scrollTrigger: {
-          trigger: title,
-          start: "top 87%",
-          toggleActions: "play none none none",
-        },
-      })
-    })
+        stagger: 0.04,
+        ease: "power1.out",
+      }, 0.2 + i * 0.08);
+    });
 
+    // D. Divider Line Draw-In
+    servicesTl.from(".service-divider", {
+      scaleX: 0,
+      transformOrigin: "left center",
+      stagger: 0.05,
+      ease: "power1.out",
+    }, 0.1);
 
-    // ── 9. Item row hover (desktop) ───────────────────────────────────────
+    // E. CTA Buttons Fade-Up
+    servicesTl.from(".services-cta-buttons > *", {
+      opacity: 0,
+      y: 30,
+      scale: 0.96,
+      stagger: 0.12,
+      ease: "back.out(1.4)",
+    }, 0.8);
+
+    // ── 9. Item row hover (desktop, remains trigger-based) ─────────────────
     if (!isMobile) {
       gsap.utils.toArray<HTMLElement>(".service-item-row").forEach((row) => {
         const arrow = row.querySelector<HTMLElement>(".service-item-arrow")
@@ -163,36 +169,6 @@ const ServicesSection = () => {
         })
       })
     }
-
-    // ── 10. Divider line draw-in ──────────────────────────────────────────
-    gsap.utils.toArray<HTMLElement>(".service-divider").forEach((line) => {
-      gsap.from(line, {
-        scaleX: 0,
-        transformOrigin: "left center",
-        duration: 0.7,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: line,
-          start: "top 90%",
-          toggleActions: "play none none none",
-        },
-      })
-    })
-
-    // ── 11. CTA buttons fade-up + magnetic gold button ────────────────────
-    gsap.from(".services-cta-buttons > *", {
-      opacity: 0,
-      y: 30,
-      scale: 0.96,
-      duration: 0.7,
-      ease: "back.out(1.4)",
-      stagger: 0.12,
-      scrollTrigger: {
-        trigger: ".services-cta-buttons",
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-    })
 
     if (!isMobile && sectionRef.current) {
       const goldBtn = sectionRef.current.querySelector<HTMLElement>(".btn-start-project")
@@ -255,7 +231,7 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 min-[1300px]:grid-cols-3 gap-x-12 gap-y-6 md:gap-y-16">
+        <div className="services-grid grid grid-cols-1 min-[1300px]:grid-cols-3 gap-x-12 gap-y-6 md:gap-y-16">
           {services.map((service, index) => (
             <div key={index} style={{ perspective: "900px" }}>
               <Link href={service.href} className="no-underline text-white block">
