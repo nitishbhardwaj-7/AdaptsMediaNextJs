@@ -11,14 +11,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const services = [
   {
-    number: "01",
-    title: "Performance Marketing",
-    items: ["Affiliate Channels", "Cost Per Action", "ROI Model"],
+    items: ["SEM & Google Ads", "SEO Services", "Affiliate Marketing", "Display Campaigns"],
+    links: ["/performance-marketing#sem-google-ads", "/performance-marketing#seo-services", "/performance-marketing#affiliate-marketing", "/performance-marketing#display-campaigns"],
   },
   {
-    number: "02",
-    title: "Social & Content",
-    items: ["Content Strategy", "Leverage Influencers", "Paid Social"],
+    items: ["Media Planning", "Retail Media", "Retargeting", "AdOps Solutions"],
+    links: ["/performance-marketing#media-planning", "/performance-marketing#retail-media", "/performance-marketing#retargeting", "/performance-marketing#adops-solutions"],
   },
 ];
 
@@ -166,7 +164,7 @@ const PerformanceMarketing = () => {
           
           {/* Content Column */}
           <div className="flex-grow w-full">
-            <h2 className="perf-title text-2xl md:text-6xl font-light mb-8 leading-tight">
+            <h2 className="perf-title text-4xl md:text-7xl font-light mb-8 leading-tight">
               Performance <br/> Marketing
             </h2>
             <p className="perf-desc text-lg md:text-3xl opacity-90 mb-20 font-light">
@@ -176,7 +174,7 @@ const PerformanceMarketing = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 w-full">
               {services && services.map((service, index) => (
                 <div key={index} className="perf-list w-full">
-                  <ServiceList items={service.items} />
+                  <ServiceList items={service.items} links={service.links} />
                 </div>
               ))}
             </div>

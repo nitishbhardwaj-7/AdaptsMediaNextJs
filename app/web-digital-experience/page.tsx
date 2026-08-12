@@ -18,11 +18,11 @@ const page = () => {
     <div>
         <Hero/>
         <Intro/>
-        <UxUiSection/>
-        <WebDevelopmentSection/>
+        <div id="ux-ui"><UxUiSection/></div>
+        <div id="web-development"><WebDevelopmentSection/></div>
         <EcommerceSection/>
         <CmsImplementationSection/>
-        <ApiIntegrationSection/>
+        <div id="api-integration"><ApiIntegrationSection/></div>
         <LandingPageSection/>
         <MaintenanceSection/>
         <CroSection/>

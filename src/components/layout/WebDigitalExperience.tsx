@@ -11,14 +11,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const services = [
   {
-    number: "01",
-    title: "Performance Marketing",
-    items: ["Affiliate Channels", "Cost Per Action", "ROI Model"],
+    items: ["UX/UI", "Front & Back End", "API Integration"],
+    links: ["/web-digital-experience#ux-ui", "/web-digital-experience#web-development", "/web-digital-experience#api-integration"],
   },
   {
-    number: "02",
-    title: "Social & Content",
-    items: ["Content Strategy", "Leverage Influencers", "Paid Social"],
+    items: ["UX/UI", "Front & Back End", "API Integration"],
+    links: ["/web-digital-experience#ux-ui", "/web-digital-experience#web-development", "/web-digital-experience#api-integration"],
   },
 ];
 
@@ -120,7 +118,7 @@ const WebDigitalExperience = () => {
           {/* LEFT COLUMN: Text and Grid */}
           <div className="flex-grow w-full">
             <div>
-              <h2 className="web-title text-2xl md:text-6xl font-light mb-8 leading-tight">
+              <h2 className="web-title text-4xl md:text-7xl font-light mb-8 leading-tight">
                 Web & Digital  <br /> Experience
               </h2>
               <p className="web-desc text-lg md:text-3xl opacity-90 mb-20 font-light max-w-3xl">
@@ -132,7 +130,7 @@ const WebDigitalExperience = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 w-full">
               {services && services.map((service, index) => (
                 <div key={index} className="web-list w-full">
-                  <ServiceList items={service.items} />
+                  <ServiceList items={service.items} links={service.links} />
                 </div>
               ))}
             </div>

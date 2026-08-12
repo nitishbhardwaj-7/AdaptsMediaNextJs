@@ -45,102 +45,171 @@ const ServicesSection = () => {
     const splits: any[] = []
 
 
-    // ── 2. Heading — SplitText line mask reveal (Scroll-Interactive) ─────────
+    // ── 1. SplitText setup ───────────────────────────────────────────────────
     const headingSplit = SplitText.create(".services-heading", {
       type: "lines",
       mask: "lines",
     })
     splits.push(headingSplit)
 
-    gsap.from(headingSplit.lines, {
+    const cardTitleSplits: any[] = []
+    gsap.utils.toArray<HTMLElement>(".service-card-title").forEach((title) => {
+      const split = SplitText.create(title, { type: "words", mask: "words" })
+      splits.push(split)
+      cardTitleSplits.push(split)
+    })
+
+    // ── 2. Set INITIAL HIDDEN STATES immediately on mount ────────────────────
+    gsap.set(headingSplit.lines, {
       yPercent: 110,
       opacity: 0,
       rotationX: -12,
       transformOrigin: "0% 50% -60px",
-      stagger: 0.12,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".services-heading",
-        start: "top 95%",
-        end: "top 60%",
-        scrub: 1.2,
-      },
     })
 
-    // ── 3. Subtitle fade-up (Scroll-Interactive) ────────────────────────────
-    gsap.from(".services-subtitle", {
+    gsap.set(".services-subtitle", {
       opacity: 0,
       y: 28,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".services-heading",
-        start: "top 85%",
-        end: "top 60%",
-        scrub: 1.2,
-      },
     })
 
-    // ── 4. Master Services Grid Scroll-Scrub Timeline ──────────────────────
-    const servicesTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".services-grid",
-        start: "top 92%",
-        end: "bottom 70%",
-        scrub: 1.2,
-        invalidateOnRefresh: true,
-      }
-    });
-
-    // A. Service Cards (Slide, Fade & 3D Tilt)
-    servicesTl.from(".service-card", {
+    gsap.set(".service-card", {
       opacity: 0,
       y: isMobile ? 35 : 70,
       rotationX: isMobile ? 0 : 22,
-      rotationY: (i: number) => isMobile ? 0 : i % 2 === 0 ? -6 : 6,
+      rotationY: (i: number) => (isMobile ? 0 : i % 2 === 0 ? -6 : 6),
       scale: 0.94,
       transformOrigin: "center top",
-      stagger: 0.15,
-      ease: "power1.out",
-    }, 0.0);
+    })
 
-    // B. Service Numbers
-    gsap.utils.toArray<HTMLElement>(".service-number").forEach((num, i) => {
-      servicesTl.from(num, {
-        opacity: 0,
-        x: -20,
-        scale: 0.75,
-        ease: "back.out(1.7)",
-      }, 0.1 + i * 0.08);
-    });
+    gsap.set(".service-number", {
+      opacity: 0,
+      x: -20,
+      scale: 0.75,
+    })
 
-    // C. Card Title Word Reveal
-    gsap.utils.toArray<HTMLElement>(".service-card-title").forEach((title, i) => {
-      const split = SplitText.create(title, { type: "words", mask: "words" })
-      splits.push(split)
-      servicesTl.from(split.words, {
+    cardTitleSplits.forEach((split) => {
+      gsap.set(split.words, {
         yPercent: 100,
         opacity: 0,
-        stagger: 0.04,
-        ease: "power1.out",
-      }, 0.2 + i * 0.08);
-    });
+      })
+    })
 
-    // D. Divider Line Draw-In
-    servicesTl.from(".service-divider", {
+    gsap.set(".service-divider", {
       scaleX: 0,
       transformOrigin: "left center",
-      stagger: 0.05,
-      ease: "power1.out",
-    }, 0.1);
+    })
 
-    // E. CTA Buttons Fade-Up
-    servicesTl.from(".services-cta-buttons > *", {
+    gsap.set(".services-cta-buttons > *", {
       opacity: 0,
       y: 30,
       scale: 0.96,
+    })
+
+    // ── 3. Heading — SplitText line mask reveal (Scroll-Interactive) ─────────
+    gsap.to(headingSplit.lines, {
+      yPercent: 0,
+      opacity: 1,
+      rotationX: 0,
       stagger: 0.12,
-      ease: "back.out(1.4)",
-    }, 0.8);
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".services-heading",
+        start: "top bottom-=40",
+        end: "top 65%",
+        scrub: 1.2,
+      },
+    })
+
+    // ── 4. Subtitle fade-up (Scroll-Interactive) ────────────────────────────
+    gsap.to(".services-subtitle", {
+      opacity: 1,
+      y: 0,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".services-heading",
+        start: "top bottom-=20",
+        end: "top 65%",
+        scrub: 1.2,
+      },
+    })
+
+    // ── 5. Master Services Grid Scroll-Scrub Timeline ──────────────────────
+    const servicesTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".services-grid",
+        start: "top bottom-=20",
+        end: "bottom 75%",
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+      },
+    })
+
+    // A. Service Cards (Slide, Fade & 3D Tilt)
+    servicesTl.to(
+      ".service-card",
+      {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        rotationY: 0,
+        scale: 1,
+        stagger: 0.15,
+        ease: "power1.out",
+      },
+      0.0
+    )
+
+    // B. Service Numbers
+    gsap.utils.toArray<HTMLElement>(".service-number").forEach((num, i) => {
+      servicesTl.to(
+        num,
+        {
+          opacity: 0.5,
+          x: 0,
+          scale: 1,
+          ease: "back.out(1.7)",
+        },
+        0.1 + i * 0.08
+      )
+    })
+
+    // C. Card Title Word Reveal
+    cardTitleSplits.forEach((split, i) => {
+      servicesTl.to(
+        split.words,
+        {
+          yPercent: 0,
+          opacity: 1,
+          stagger: 0.04,
+          ease: "power1.out",
+        },
+        0.2 + i * 0.08
+      )
+    })
+
+    // D. Divider Line Draw-In
+    servicesTl.to(
+      ".service-divider",
+      {
+        scaleX: 1,
+        stagger: 0.05,
+        ease: "power1.out",
+      },
+      0.1
+    )
+
+    // E. CTA Buttons Fade-Up
+    servicesTl.to(
+      ".services-cta-buttons > *",
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.12,
+        ease: "back.out(1.4)",
+      },
+      0.8
+    )
 
     // ── 9. Item row hover (desktop, remains trigger-based) ─────────────────
     if (!isMobile) {

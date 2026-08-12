@@ -66,7 +66,6 @@ const ImpactSection = () => {
       const isReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
-      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 
       // 1. Idle Floating Animation for 3D Icon Wrappers
       const wrappers = gsap.utils.toArray<HTMLElement>(".impact-stat-icon-wrapper");
@@ -134,11 +133,15 @@ const ImpactSection = () => {
           "-=0.4"
         );
 
+      const mm = gsap.matchMedia();
+
       // -------------------------------------------------------------
       // 4. DESKTOP: PINNED SCROLL SEQUENTIAL REVEAL FOR RIGHT SIDE STATS
       // (Pins when section hits top top)
       // -------------------------------------------------------------
-      if (isDesktop && outerWrapperRef.current && pinnedSectionRef.current) {
+      mm.add("(min-width: 1024px)", () => {
+        if (!outerWrapperRef.current || !pinnedSectionRef.current) return;
+
         const pinTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: outerWrapperRef.current,
@@ -209,16 +212,14 @@ const ImpactSection = () => {
 
         // Settling Buffer before unpinning
         pinTimeline.to({}, { duration: 0.4 });
-
-        return () => {
-          headingSplit.revert();
-        };
-      }
+      });
 
       // -------------------------------------------------------------
       // MOBILE & TABLET FALLBACK FOR RIGHT SIDE STATS
       // -------------------------------------------------------------
-      if (!isDesktop && outerWrapperRef.current) {
+      mm.add("(max-width: 1023px)", () => {
+        if (!outerWrapperRef.current) return;
+
         const mobileTl = gsap.timeline({
           scrollTrigger: {
             trigger: outerWrapperRef.current,
@@ -259,11 +260,12 @@ const ImpactSection = () => {
             "-=0.6"
           );
         });
+      });
 
-        return () => {
-          headingSplit.revert();
-        };
-      }
+      return () => {
+        headingSplit.revert();
+        mm.revert();
+      };
     },
     { scope: outerWrapperRef }
   );
@@ -290,7 +292,7 @@ const ImpactSection = () => {
       <section
         ref={pinnedSectionRef}
         onMouseMove={handleMouseMove}
-        className="w-full min-h-screen flex items-center py-16 px-8 md:px-16 overflow-hidden relative"
+        className="w-full min-h-fit lg:min-h-screen flex items-center py-12 lg:py-16 px-8 md:px-16 overflow-hidden relative"
       >
         <div className="max-w-[1350px] 2xl:max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full relative z-10">
           {/* LEFT COLUMN (Fixed / Stationary on pin) */}

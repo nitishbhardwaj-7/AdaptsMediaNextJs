@@ -10,15 +10,13 @@ export default function HyundaiServicesSection() {
   useServiceDetailAnimation(containerRef);
 
   return (
-    <section ref={containerRef} className="relative w-full overflow-hidden py-32 md:py-44 text-white">
-      {/* Background Image (BgYellow.png) */}
-      <Image
-        src="/images/portfolio/Hyundai/BgYellow.png"
-        alt="Services Delivered Background"
-        fill
-        quality={90}
-        className="absolute inset-0 z-0 pointer-events-none object-cover"
-      />
+    <section
+      ref={containerRef}
+      className="relative w-full overflow-hidden py-32 md:py-44 text-white"
+      style={{
+        background: "radial-gradient(circle 850px at top left, #df382b 0%, #f08924 55%, transparent 100%), radial-gradient(circle 850px at bottom right, #df382b 0%, #f08924 55%, transparent 100%), #FAC02E",
+      }}
+    >
 
       {/* Content Container */}
       <div className="relative z-10 max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">

@@ -5,6 +5,7 @@ export interface Project {
   tagline: string;
   tags: string[];
   bgImage: string;
+  cardImage?: string;
   logoSrc?: string;
   industry?: string;
   service?: string;
@@ -16,9 +17,10 @@ export const allCaseStudies: Project[] = [
     id: 1,
     brand: "HYUNDAI MOBIS",
     displayName: "Hyundai Mobis",
-    tagline: "Driving Trust Through Genuine Parts",
+    tagline: "Driving Awareness for Genuine Parts",
     tags: ["Branding", "AI Generation", "Marketing"],
     bgImage: "/images/portfolio/Hyundai/butterfly_2 1.png",
+    cardImage: "/images/portfolio/Hyundai/HyundaiPortfolioCardImg2.png",
     logoSrc: "/images/portfolio/Hyundai/Group.png",
     industry: "Automotive",
     service: "Web Development",

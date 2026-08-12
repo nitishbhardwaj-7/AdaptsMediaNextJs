@@ -59,33 +59,8 @@ const ServicesHero = () => {
       delay: 0.5,
     });
 
-    // Cursor-tracking radial gradient background animation
-    const container = containerRef.current;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-      gsap.to(container, {
-        "--mouse-x": x,
-        "--mouse-y": y,
-        duration: 1.4,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
-    };
-
-    if (container) {
-      container.addEventListener("mousemove", handleMouseMove);
-    }
-
     return () => {
       splits.forEach((s) => s.revert());
-      if (container) {
-        container.removeEventListener("mousemove", handleMouseMove);
-      }
     };
   }, { scope: containerRef });
 
@@ -94,10 +69,12 @@ const ServicesHero = () => {
       ref={containerRef}
       className="relative w-full min-h-screen overflow-hidden flex items-center justify-center pt-28 pb-16 text-white"
       style={{
-        "--mouse-x": 80,
-        "--mouse-y": 50,
-        background: "radial-gradient(circle 800px at calc(var(--mouse-x, 80) * 1%) calc(var(--mouse-y, 50) * 1%), #064ED3 0%, #761da1 60%, #C12126 100%)",
-      } as React.CSSProperties}
+        background: `
+          radial-gradient(circle 600px at 0% 0%, rgba(6, 78, 211, 0.6) 0%, rgba(118, 29, 161, 0.6) 60%, rgba(193, 33, 38, 0) 100%),
+          radial-gradient(circle 600px at 100% 100%, rgba(6, 78, 211, 0.6) 0%, rgba(118, 29, 161, 0.6) 60%, rgba(193, 33, 38, 0) 100%),
+          #C12126
+        `,
+      }}
     >
       {/* Globe Watermark in Right Bottom of Page */}
       <div className="absolute right-30 bottom-0 w-[280px] h-[280px] md:w-[420px] md:h-[420px] opacity-55 pointer-events-none z-0">
@@ -114,7 +91,7 @@ const ServicesHero = () => {
       {/* Hero Content */}
       <div className="grid grid-cols-1 z-10 gap-8 min-[1200px]:grid-cols-2 max-w-[1350px] 2xl:max-w-[1600px] w-full px-8 md:px-16">
         {/* Left Side */}
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-start">
           <h1 className="hero-left-title text-5xl tracking-wide md:text-7xl font-opensans font-medium leading-[1.2] pb-4 text-left">
             Services
           </h1>

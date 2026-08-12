@@ -11,14 +11,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const services = [
   {
-    number: "01",
-    title: "Performance Marketing",
-    items: ["Affiliate Channels", "Cost Per Action", "ROI Model"],
+    items: ["Strategic PR", "Press Releases", "Events & Activation"],
+    links: ["/public-relations#strategic-pr", "/public-relations#press-releases", "/public-relations#events-activation"],
   },
   {
-    number: "02",
-    title: "Social & Content",
-    items: ["Content Strategy", "Leverage Influencers", "Paid Social"],
+    items: ["Crisis Communications", "Influencer Ambassador", "Sponsorship & Partnership"],
+    links: ["/public-relations#crisis-communications", "/public-relations#influencer-ambassador", "/public-relations#sponsorship-partnership"],
   },
 ];
 
@@ -130,7 +128,7 @@ const PublicRelations = () => {
           {/* LEFT COLUMN: Text and Grid */}
           <div className="flex-grow w-full">
             <div>
-              <h2 className="pr-title text-2xl md:text-6xl font-light mb-8 leading-tight">
+              <h2 className="pr-title text-4xl md:text-7xl font-light mb-8 leading-tight">
                 Public Relations  <br/> & Activations
               </h2>
               <p className="pr-desc text-lg md:text-3xl opacity-90 mb-20 font-light max-w-3xl">
@@ -142,7 +140,7 @@ const PublicRelations = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 w-full">
               {services && services.map((service, index) => (
                 <div key={index} className="pr-list w-full">
-                  <ServiceList items={service.items} />
+                  <ServiceList items={service.items} links={service.links} />
                 </div>
               ))}
             </div>

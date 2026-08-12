@@ -1,28 +1,47 @@
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 interface ServiceListProps {
   items: string[]; // Explicitly telling TS this is an array of strings
+  links?: string[];
 }
 
-const ServiceList = ({ items }: ServiceListProps) => {
+const ServiceList = ({ items, links }: ServiceListProps) => {
   return (
     <div className="flex flex-col">
 
       {/* List Items - Your Exact UI */}
       <div className="flex flex-col">
-        {items.map((item, itemIndex) => (
-          <motion.div
-            key={itemIndex}
-            initial="initial"
-            whileHover="hover"
-            className="flex items-center justify-between py-3 px-2 border-t border-white/60 group cursor-pointer hover:bg-white/5 transition-colors"
-          >
-            <span className="text-sm md:text-lg font-extralight tracking-wide opacity-90">
-              {item}
-            </span>
-            <ArrowIcon />
-          </motion.div>
-        ))}
+        {items.map((item, itemIndex) => {
+          const itemLink = links?.[itemIndex];
+
+          const content = (
+            <motion.div
+              initial="initial"
+              whileHover="hover"
+              className="flex items-center justify-between py-3 px-2 border-t border-white/60 group cursor-pointer hover:bg-white/5 transition-colors"
+            >
+              <span className="text-sm md:text-lg font-extralight tracking-wide opacity-90">
+                {item}
+              </span>
+              <ArrowIcon />
+            </motion.div>
+          );
+
+          if (itemLink) {
+            return (
+              <Link key={itemIndex} href={itemLink} className="block no-underline text-inherit">
+                {content}
+              </Link>
+            );
+          }
+
+          return (
+            <div key={itemIndex}>
+              {content}
+            </div>
+          );
+        })}
         {/* Exact closing border from your snippet */}
         <div className="border-t border-white/60 mb-20" />
       </div>

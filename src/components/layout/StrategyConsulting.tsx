@@ -11,14 +11,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const services = [
   {
-    number: "01",
-    title: "Performance Marketing",
-    items: ["Affiliate Channels", "Cost Per Action", "ROI Model"],
+    items: ["Industry & Competitor Analysis", "Market Research", "Audience Insights", "Digital Audit"],
+    links: ["/strategy-consulting#industry-analysis", "/strategy-consulting#market-research", "/strategy-consulting#audience-insights", "/strategy-consulting#digital-audit"],
   },
   {
-    number: "02",
-    title: "Social & Content",
-    items: ["Content Strategy", "Leverage Influencers", "Paid Social"],
+    items: ["Growth Strategies", "Data & Analytics", "Targeted Campaigns"],
+    links: ["/strategy-consulting#growth-strategies", "/strategy-consulting#data-analytics", "/strategy-consulting#targeted-campaigns"],
   },
 ];
 
@@ -144,7 +142,7 @@ const StrategyConsulting = () => {
           {/* 2. Right Side: Text & Content */}
           <div className="flex-grow w-full">
             <div>
-              <h2 className="strategy-title text-2xl md:text-6xl font-light mb-8 leading-tight max-w-3xl">
+              <h2 className="strategy-title text-4xl md:text-7xl font-light mb-8 leading-tight max-w-3xl">
                 Strategy & <br /> Consulting
               </h2>
               <p className="strategy-desc text-lg md:text-3xl opacity-90 max-w-3xl font-light leading-relaxed mb-20">
@@ -159,7 +157,7 @@ const StrategyConsulting = () => {
                   key={index} 
                   className="strategy-list flex flex-col w-full"
                 >
-                  <ServiceList items={service.items} />
+                  <ServiceList items={service.items} links={service.links} />
                 </div>
               ))}
             </div>

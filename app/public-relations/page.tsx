@@ -17,12 +17,12 @@ const page = () => {
     <div>
         <Hero/>
         <Intro/>
-        <StrategicPrSection/>
-        <PressReleasesSection/>
-        <EventsActivationSection/>
-        <SponsorshipPartnershipSection/>
-        <InfluencerAmbassadorSection/>
-        <CrisisCommunicationsSection/>
+        <div id="strategic-pr"><StrategicPrSection/></div>
+        <div id="press-releases"><PressReleasesSection/></div>
+        <div id="events-activation"><EventsActivationSection/></div>
+        <div id="sponsorship-partnership"><SponsorshipPartnershipSection/></div>
+        <div id="influencer-ambassador"><InfluencerAmbassadorSection/></div>
+        <div id="crisis-communications"><CrisisCommunicationsSection/></div>
         <PortfolioSection/>
         <ClientsSection/>
         <ContactCTA/>

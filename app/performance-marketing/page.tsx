@@ -22,17 +22,17 @@ const page = () => {
     <div>
         <Hero/>
         <Intro/>
-        <SeoServicesSection/>
-        <SemGoogleAdsSection/>
+        <div id="seo-services"><SeoServicesSection/></div>
+        <div id="sem-google-ads"><SemGoogleAdsSection/></div>
         <ProgrammaticSection/>
-        <DisplayCampaignSection/>
+        <div id="display-campaigns"><DisplayCampaignSection/></div>
         <PerformanceMarketingSection/>
-        <MediaPlanningSection/>
-        <AdOpsAgenciesSection/>
+        <div id="media-planning"><MediaPlanningSection/></div>
+        <div id="adops-solutions"><AdOpsAgenciesSection/></div>
         <AdOpsPublishersSection/>
-        <AffiliateMarketingSection/>
-        <RetargetingSection/>
-        <RetailMediaSection/>
+        <div id="affiliate-marketing"><AffiliateMarketingSection/></div>
+        <div id="retargeting"><RetargetingSection/></div>
+        <div id="retail-media"><RetailMediaSection/></div>
         <PortfolioSection/>
         <ClientsSection/>
         <ContactCTA/>

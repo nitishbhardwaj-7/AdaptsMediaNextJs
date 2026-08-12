@@ -15,11 +15,11 @@ const page = () => {
     <div>
         <Hero/>
         <BrandingIntro/>
-        <IdentitySection/>
-        <CampaignsSection/>
-        <DesignSystemsSection/>
-        <ContentStrategySection/>
-        <LeverageInfluencersSection/>
+        <div id="identity"><IdentitySection/></div>
+        <div id="campaigns"><CampaignsSection/></div>
+        <div id="design-systems"><DesignSystemsSection/></div>
+        <div id="content-strategy"><ContentStrategySection/></div>
+        <div id="influencers"><LeverageInfluencersSection/></div>
         <PortfolioSection/>
         <ClientsSection/>
         <ContactCTA/>

@@ -49,7 +49,6 @@ const PortfolioSection = () => {
           {allCaseStudies.map((project, index: number) => {
             const name = project.displayName || project.brand;
             const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-            const title = `${name}: ${project.tagline}`;
             
             return (
               <Link 
@@ -58,9 +57,10 @@ const PortfolioSection = () => {
                 className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] snap-start"
               >
                 <Tailwind3DCard 
-                  title={title} 
-                  image={project.bgImage} 
-                  label="Portfolio"
+                  title={project.tagline} 
+                  image={project.cardImage || project.bgImage} 
+                  logo={project.logoSrc}
+                  tags={project.tags}
                 />
               </Link>
             );

@@ -11,14 +11,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const services = [
   {
-    number: "01",
-    title: "Performance Marketing",
-    items: ["Affiliate Channels", "Cost Per Action", "ROI Model"],
+    items: ["Brand Identity", "Design Systems", "Content Strategy"],
+    links: ["/branding-creative#identity", "/branding-creative#design-systems", "/branding-creative#content-strategy"],
   },
   {
-    number: "02",
-    title: "Social & Content",
-    items: ["Content Strategy", "Leverage Influencers", "Paid Social"],
+    items: ["Campaigns & Activations", "Leverage Influencers"],
+    links: ["/branding-creative#campaigns", "/branding-creative#influencers"],
   },
 ];
 
@@ -144,7 +142,7 @@ const BrandingCreative = () => {
           {/* 2. Right Side: Text & Content */}
           <div className="flex-grow w-full">
             <div>
-              <h2 className="brand-title text-2xl md:text-6xl font-light mb-8 leading-tight max-w-3xl">
+              <h2 className="brand-title text-4xl md:text-7xl font-light mb-8 leading-tight max-w-3xl">
                 Branding & <br /> Creative
               </h2>
               <p className="brand-desc text-lg md:text-3xl opacity-90 max-w-3xl font-light leading-relaxed mb-20">
@@ -159,7 +157,7 @@ const BrandingCreative = () => {
                   key={index} 
                   className="brand-list flex flex-col w-full"
                 >
-                  <ServiceList items={service.items} />
+                  <ServiceList items={service.items} links={service.links} />
                 </div>
               ))}
             </div>

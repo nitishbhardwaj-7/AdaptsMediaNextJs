@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
-import CustomCursor from "@/components/layout/CustomCursor";
+
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import Script from "next/script";
 
@@ -111,7 +111,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <CustomCursor />
+
         <SmoothScroll>
           <Navbar />
           <main style={{ paddingTop: '0px' }}>

@@ -20,9 +20,9 @@ const page = () => {
         <Hero/>
         <Intro/>
         <SocialMediaSection/>
-        <PaidSocialAdvertisingSection/>
-        <InfluencerMarketingSection/>
-        <ContentStrategySection/>
+        <div id="paid-social"><PaidSocialAdvertisingSection/></div>
+        <div id="influencer-marketing"><InfluencerMarketingSection/></div>
+        <div id="content-strategy"><ContentStrategySection/></div>
         <ContentCreationSection/>
         <CommunityManagementSection/>
         <EmailMarketingSection/>

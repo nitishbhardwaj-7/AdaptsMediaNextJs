@@ -18,13 +18,13 @@ const page = () => {
     <div>
         <Hero/>
         <Intro/>
-        <MarketResearchSection/>
-        <IndustryAnalysisSection/>
-        <AudienceInsightsSection/>
-        <GrowthStrategiesSection/>
-        <DigitalAuditSection/>
-        <TargetedCampaignsSection/>
-        <DataAnalyticsSection/>
+        <div id="market-research"><MarketResearchSection/></div>
+        <div id="industry-analysis"><IndustryAnalysisSection/></div>
+        <div id="audience-insights"><AudienceInsightsSection/></div>
+        <div id="growth-strategies"><GrowthStrategiesSection/></div>
+        <div id="digital-audit"><DigitalAuditSection/></div>
+        <div id="targeted-campaigns"><TargetedCampaignsSection/></div>
+        <div id="data-analytics"><DataAnalyticsSection/></div>
         <PortfolioSection/>
         <ClientsSection/>
         <ContactCTA/>

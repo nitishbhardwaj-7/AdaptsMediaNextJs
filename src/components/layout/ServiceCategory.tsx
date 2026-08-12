@@ -71,7 +71,7 @@ const ServiceCategory = ({
             {description}
           </p>
 
-          <h2 className="text-2xl md:text-6xl font-light mb-8 leading-tight max-w-3xl"
+          <h2 className="text-4xl md:text-7xl font-light mb-8 leading-tight max-w-3xl"
               dangerouslySetInnerHTML={{ __html: categoryTitle }}
           />
 

@@ -1,11 +1,39 @@
-const Tailwind3DCard = ({ title, image, label = "Blog Post" }: { title: string; image: string; label?: string }) => {
+const BookmarkIcon = () => (
+  <svg
+    width="12"
+    height="12"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="shrink-0"
+  >
+    <path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+  </svg>
+);
+
+const Tailwind3DCard = ({
+  title,
+  image,
+  logo,
+  tags,
+  label = "Blog Post"
+}: {
+  title: string;
+  image: string;
+  logo?: string;
+  tags?: string[];
+  label?: string;
+}) => {
   return (
     <div className="w-full">
       <div className="
         group relative aspect-[9/14] w-full overflow-hidden rounded-2xl 
         bg-zinc-900 border border-white/10 
         transition-all duration-500 ease-out
-        hover:border-white/30 hover:shadow-[0_20px_40px_rgba(245,166,35,0.15)]
+        hover:border-white/30 hover:shadow-[0_20px_40px_rgba(255,255,255,0.05)]
       ">
 
         {/* Image Layer */}
@@ -15,9 +43,8 @@ const Tailwind3DCard = ({ title, image, label = "Blog Post" }: { title: string; 
           <img
             src={image}
             alt={title}
-            className="h-full w-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-700"
+            className="h-full w-full object-cover opacity-100 transition-opacity duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         </div>
 
         {/* Overlay Shine */}
@@ -27,16 +54,38 @@ const Tailwind3DCard = ({ title, image, label = "Blog Post" }: { title: string; 
 
         {/* Content Layer */}
         <div
-          className="absolute bottom-0 left-0 right-0 p-8 z-20 transition-all duration-500"
+          className="absolute inset-0 z-20 flex flex-col justify-end p-6 bg-transparent"
         >
-          <span className="text-[10px] font-bold tracking-[0.3em] text-[#f5a623] uppercase mb-3 block opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-700">
-            {label}
-          </span>
-          <h3 className="text-2xl font-heading font-light leading-tight text-white">
+          {/* Logo */}
+          {logo && (
+            <div className="mb-4 relative w-32 h-10 select-none pointer-events-none">
+              <img
+                src={logo}
+                alt="Brand Logo"
+                className="w-full h-full object-contain object-left"
+              />
+            </div>
+          )}
+
+          {/* Title */}
+          <h3 className="text-xl md:text-2xl font-heading font-light leading-tight text-white mb-6">
             {title}
           </h3>
 
-          <div className="h-[1px] w-0 group-hover:w-12 bg-[#f5a623] mt-4 transition-all duration-1000" />
+          {/* Tags */}
+          {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="flex items-center gap-1.5 border border-white/30 text-white/90 rounded-full px-3 py-[4px] text-[11px] bg-white/5 font-sans"
+                >
+                  <BookmarkIcon />
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Border Highlight */}
