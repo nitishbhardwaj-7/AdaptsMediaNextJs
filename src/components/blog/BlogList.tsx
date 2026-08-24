@@ -26,14 +26,20 @@ const ArrowDown = ({ isOpen }: { isOpen?: boolean }) => (
 export default function BlogList({ posts }: { posts: any[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const filterRowRef = useRef<HTMLDivElement>(null);
+  const sharedGlowRef = useRef<HTMLDivElement>(null);
   
   useGSAP(() => {
-    // Filter section entrance
-    gsap.from(".filter-title", {
-      opacity: 0,
-      y: 20,
-      duration: 0.8,
-      ease: "power2.out",
+    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+    const cleanups: (() => void)[] = [];
+
+    // Initial setup for drawing borders
+    gsap.set(".border-draw-path", {
+      strokeDasharray: 2000,
+      strokeDashoffset: 2000,
+    });
+
+    // Create the ScrollTrigger-based entrance timeline
+    const entranceTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".filter-title",
         start: "top 90%",
@@ -41,18 +47,91 @@ export default function BlogList({ posts }: { posts: any[] }) {
       }
     });
 
-    gsap.from(".filter-item, .filter-btn-apply", {
+    // 1. Title fade up
+    entranceTl.from(".filter-title", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+
+    // 2. Dropdown elements and Apply button reveal
+    const fields = gsap.utils.toArray<HTMLElement>(".filter-item");
+    const paths = fields.map((f) => f.querySelector(".border-draw-path")).filter(Boolean);
+
+    entranceTl.from(fields, {
       opacity: 0,
       y: 25,
-      duration: 0.8,
+      scale: 0.96,
+      duration: 0.45,
       ease: "power2.out",
       stagger: 0.1,
-      scrollTrigger: {
-        trigger: ".filter-title",
-        start: "top 85%",
-        toggleActions: "play none none none",
+    }, "-=0.25");
+
+    entranceTl.to(paths, {
+      strokeDashoffset: 0,
+      duration: 0.55,
+      ease: "power2.out",
+      stagger: 0.1,
+    }, "<");
+
+    entranceTl.from(".filter-btn-apply", {
+      opacity: 0,
+      y: 25,
+      scale: 0.96,
+      duration: 0.45,
+      ease: "power2.out",
+    }, "-=0.25");
+
+    // --- Shared Glow Follower for Dropdowns ---
+    if (!isMobile) {
+      const dropButtons = containerRef.current?.querySelectorAll(".filter-item button");
+      dropButtons?.forEach((btn) => {
+        const handleMouseEnter = () => {
+          const parent = containerRef.current?.querySelector(".filter-fields-row") as HTMLElement;
+          if (sharedGlowRef.current && parent) {
+            const rect = btn.getBoundingClientRect();
+            const parentRect = parent.getBoundingClientRect();
+            const left = rect.left - parentRect.left;
+            const top = rect.top - parentRect.top - 2;
+            const width = rect.width;
+            const height = rect.height;
+
+            gsap.to(sharedGlowRef.current, {
+              opacity: 1,
+              x: left,
+              y: top,
+              width: width,
+              height: height,
+              duration: 0.2,
+              ease: "power2.out",
+            });
+          }
+        };
+
+        btn.addEventListener("mouseenter", handleMouseEnter);
+        cleanups.push(() => btn.removeEventListener("mouseenter", handleMouseEnter));
+      });
+
+      const fieldsRow = containerRef.current?.querySelector(".filter-fields-row") as HTMLElement;
+      if (fieldsRow) {
+        const handleMouseLeave = () => {
+          if (sharedGlowRef.current) {
+            gsap.to(sharedGlowRef.current, {
+              opacity: 0,
+              duration: 0.2,
+              ease: "power2.out",
+            });
+          }
+        };
+        fieldsRow.addEventListener("mouseleave", handleMouseLeave);
+        cleanups.push(() => fieldsRow.removeEventListener("mouseleave", handleMouseLeave));
       }
-    });
+    }
+
+    return () => {
+      cleanups.forEach((fn) => fn());
+    };
   }, { scope: containerRef });
 
   const [selectedTopic, setSelectedTopic] = useState("All Topics");
@@ -128,7 +207,7 @@ export default function BlogList({ posts }: { posts: any[] }) {
     <div ref={containerRef} className="w-full bg-[#004dc3] text-white font-heading relative z-20">
       
       {/* ── 1ST VIEWPORT CONTAINER (HERO + FILTER = EXACTLY 100VH) ── */}
-      <div className="w-full min-h-screen lg:h-screen lg:max-h-screen flex flex-col justify-between relative overflow-hidden bg-[#004dc3]">
+      <div className="w-full min-h-screen lg:h-screen lg:max-h-screen flex flex-col justify-between relative z-20 bg-[#004dc3]">
         <BlogHero />
 
         {/* ── FILTER SECTION ── */}
@@ -138,147 +217,230 @@ export default function BlogList({ posts }: { posts: any[] }) {
               Filter by
             </h2>
 
-            <div ref={filterRowRef} className="flex flex-col lg:flex-row items-start lg:items-end gap-5 lg:gap-8 w-full z-30">
-            {/* Topic Filter */}
-            <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isTopicOpen ? "z-50" : "z-40"}`}>
-              <span className="text-sm font-heading font-normal text-white/80">Topic:</span>
-              <button
-                onClick={() => {
-                  setIsTopicOpen(!isTopicOpen);
-                  setIsIndustryOpen(false);
-                  setIsGoalOpen(false);
-                  setIsTagOpen(false);
+            <div ref={filterRowRef} className="relative filter-fields-row flex flex-col lg:flex-row items-start lg:items-end gap-5 lg:gap-8 w-full z-30">
+              {/* Shared Glow Follower */}
+              <div
+                ref={sharedGlowRef}
+                className="absolute border border-white rounded-full pointer-events-none opacity-0 transition-all duration-200 ease-out"
+                style={{
+                  left: 0,
+                  top: 0,
+                  width: 0,
+                  height: 0,
+                  boxShadow: "0 0 12px rgba(255, 255, 255, 0.25)",
+                  borderColor: "rgba(255, 255, 255, 0.8)",
+                  willChange: "transform, width, height, opacity"
                 }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-colors"
-              >
-                <span>{selectedTopic}</span>
-                <ArrowDown isOpen={isTopicOpen} />
-              </button>
-              {isTopicOpen && (
-                <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
-                  {uniqueTopics.map((topic) => (
-                    <button
-                      key={topic}
-                      onClick={() => {
-                        setSelectedTopic(topic);
-                        setIsTopicOpen(false);
-                      }}
-                      className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
-                    >
-                      {topic}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+              />
 
-            {/* Industry Filter */}
-            <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isIndustryOpen ? "z-50" : "z-30"}`}>
-              <span className="text-sm font-heading font-normal text-white/80">Industry:</span>
+              {/* Topic Filter */}
+              <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isTopicOpen ? "z-50" : "z-40"}`}>
+                <span className="text-sm font-heading font-normal text-white/80">Topic:</span>
+                <button
+                  onClick={() => {
+                    setIsTopicOpen(!isTopicOpen);
+                    setIsIndustryOpen(false);
+                    setIsGoalOpen(false);
+                    setIsTagOpen(false);
+                  }}
+                  className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                >
+                  <span className="relative z-10">{selectedTopic}</span>
+                  <ArrowDown isOpen={isTopicOpen} />
+                  {/* SVG border drawing */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <svg className="absolute inset-0 w-full h-full" fill="none">
+                      <rect
+                        className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
+                        x="1"
+                        y="1"
+                        width="calc(100% - 2px)"
+                        height="calc(100% - 2px)"
+                        rx="21"
+                        ry="21"
+                        stroke="rgba(255, 255, 255, 0.25)"
+                        strokeWidth="1.2"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                {isTopicOpen && (
+                  <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
+                    {uniqueTopics.map((topic) => (
+                      <button
+                        key={topic}
+                        onClick={() => {
+                          setSelectedTopic(topic);
+                          setIsTopicOpen(false);
+                        }}
+                        className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
+                      >
+                        {topic}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Industry Filter */}
+              <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isIndustryOpen ? "z-50" : "z-30"}`}>
+                <span className="text-sm font-heading font-normal text-white/80">Industry:</span>
+                <button
+                  onClick={() => {
+                    setIsIndustryOpen(!isIndustryOpen);
+                    setIsTopicOpen(false);
+                    setIsGoalOpen(false);
+                    setIsTagOpen(false);
+                  }}
+                  className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                >
+                  <span className="relative z-10">{selectedIndustry}</span>
+                  <ArrowDown isOpen={isIndustryOpen} />
+                  {/* SVG border drawing */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <svg className="absolute inset-0 w-full h-full" fill="none">
+                      <rect
+                        className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
+                        x="1"
+                        y="1"
+                        width="calc(100% - 2px)"
+                        height="calc(100% - 2px)"
+                        rx="21"
+                        ry="21"
+                        stroke="rgba(255, 255, 255, 0.25)"
+                        strokeWidth="1.2"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                {isIndustryOpen && (
+                  <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
+                    {uniqueIndustries.map((ind) => (
+                      <button
+                        key={ind}
+                        onClick={() => {
+                          setSelectedIndustry(ind);
+                          setIsIndustryOpen(false);
+                        }}
+                        className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
+                      >
+                        {ind}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Marketing Goal Filter */}
+              <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isGoalOpen ? "z-50" : "z-20"}`}>
+                <span className="text-sm font-heading font-normal text-white/80">Marketing Goal:</span>
+                <button
+                  onClick={() => {
+                    setIsGoalOpen(!isGoalOpen);
+                    setIsIndustryOpen(false);
+                    setIsTopicOpen(false);
+                    setIsTagOpen(false);
+                  }}
+                  className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                >
+                  <span className="relative z-10">{selectedGoal}</span>
+                  <ArrowDown isOpen={isGoalOpen} />
+                  {/* SVG border drawing */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <svg className="absolute inset-0 w-full h-full" fill="none">
+                      <rect
+                        className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
+                        x="1"
+                        y="1"
+                        width="calc(100% - 2px)"
+                        height="calc(100% - 2px)"
+                        rx="21"
+                        ry="21"
+                        stroke="rgba(255, 255, 255, 0.25)"
+                        strokeWidth="1.2"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                {isGoalOpen && (
+                  <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
+                    {uniqueGoals.map((goal) => (
+                      <button
+                        key={goal}
+                        onClick={() => {
+                          setSelectedGoal(goal);
+                          setIsGoalOpen(false);
+                        }}
+                        className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
+                      >
+                        {goal}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Popular Tags Filter */}
+              <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isTagOpen ? "z-50" : "z-10"}`}>
+                <span className="text-sm font-heading font-normal text-white/80">Popular Tags:</span>
+                <button
+                  onClick={() => {
+                    setIsTagOpen(!isTagOpen);
+                    setIsIndustryOpen(false);
+                    setIsTopicOpen(false);
+                    setIsGoalOpen(false);
+                  }}
+                  className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                >
+                  <span className="relative z-10">{selectedTag}</span>
+                  <ArrowDown isOpen={isTagOpen} />
+                  {/* SVG border drawing */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <svg className="absolute inset-0 w-full h-full" fill="none">
+                      <rect
+                        className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
+                        x="1"
+                        y="1"
+                        width="calc(100% - 2px)"
+                        height="calc(100% - 2px)"
+                        rx="21"
+                        ry="21"
+                        stroke="rgba(255, 255, 255, 0.25)"
+                        strokeWidth="1.2"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                {isTagOpen && (
+                  <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
+                    {uniqueTags.map((tag) => (
+                      <button
+                        key={tag}
+                        onClick={() => {
+                          setSelectedTag(tag);
+                          setIsTagOpen(false);
+                        }}
+                        className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Apply Button */}
               <button
-                onClick={() => {
-                  setIsIndustryOpen(!isIndustryOpen);
-                  setIsTopicOpen(false);
-                  setIsGoalOpen(false);
-                  setIsTagOpen(false);
-                }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-colors"
+                onClick={filterBlogs}
+                className="filter-btn-apply w-full lg:w-auto bg-white text-[#004dc3] hover:bg-white/95 hover:-translate-y-[2px] hover:shadow-[0_8px_25px_rgba(255,255,255,0.15)] active:scale-[0.97] font-heading font-semibold px-16 py-3 rounded-full text-sm tracking-wide transition-all duration-200 cursor-pointer relative z-0"
               >
-                <span>{selectedIndustry}</span>
-                <ArrowDown isOpen={isIndustryOpen} />
+                Apply
               </button>
-              {isIndustryOpen && (
-                <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
-                  {uniqueIndustries.map((ind) => (
-                    <button
-                      key={ind}
-                      onClick={() => {
-                        setSelectedIndustry(ind);
-                        setIsIndustryOpen(false);
-                      }}
-                      className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
-                    >
-                      {ind}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
-
-            {/* Marketing Goal Filter */}
-            <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isGoalOpen ? "z-50" : "z-20"}`}>
-              <span className="text-sm font-heading font-normal text-white/80">Marketing Goal:</span>
-              <button
-                onClick={() => {
-                  setIsGoalOpen(!isGoalOpen);
-                  setIsIndustryOpen(false);
-                  setIsTopicOpen(false);
-                  setIsTagOpen(false);
-                }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-colors"
-              >
-                <span>{selectedGoal}</span>
-                <ArrowDown isOpen={isGoalOpen} />
-              </button>
-              {isGoalOpen && (
-                <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
-                  {uniqueGoals.map((goal) => (
-                    <button
-                      key={goal}
-                      onClick={() => {
-                        setSelectedGoal(goal);
-                        setIsGoalOpen(false);
-                      }}
-                      className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
-                    >
-                      {goal}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Popular Tags Filter */}
-            <div className={`filter-item relative w-full lg:flex-1 flex flex-col gap-2 ${isTagOpen ? "z-50" : "z-10"}`}>
-              <span className="text-sm font-heading font-normal text-white/80">Popular Tags:</span>
-              <button
-                onClick={() => {
-                  setIsTagOpen(!isTagOpen);
-                  setIsIndustryOpen(false);
-                  setIsTopicOpen(false);
-                  setIsGoalOpen(false);
-                }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-colors"
-              >
-                <span>{selectedTag}</span>
-                <ArrowDown isOpen={isTagOpen} />
-              </button>
-              {isTagOpen && (
-                <div className="dropdown-panel absolute top-full left-0 w-full mt-2 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl z-50">
-                  {uniqueTags.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => {
-                        setSelectedTag(tag);
-                        setIsTagOpen(false);
-                      }}
-                      className="dropdown-item w-full px-5 py-3 text-left text-sm hover:bg-white/10 text-white/90 hover:text-white transition-colors cursor-pointer"
-                    >
-                      {tag}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Apply Button */}
-            <button
-              onClick={filterBlogs}
-              className="filter-btn-apply w-full lg:w-auto bg-white text-[#004dc3] hover:bg-white/90 font-heading font-semibold px-16 py-3 rounded-full text-sm tracking-wide transition-colors cursor-pointer relative z-0"
-            >
-              Apply
-            </button>
-          </div>
         </div>
       </div>
       </div>

@@ -62,15 +62,15 @@ const CrisisCommunicationsSection = () => {
               Crisis Communications
             </span>
             <h2 className="crisis-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl text-slate-900 font-heading font-normal">
-              Control the Narrative Before Someone Else Does.
+              Turn Critical Moments Into Trust-Building Opportunities
             </h2>
 
             <div className="crisis-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-slate-600">
               <p>
-                When a brand crisis hits, the first 48 hours define how it is remembered. Companies that go quiet or respond badly turn manageable situations into long-term reputation damage. We provide crisis communications support that helps you respond quickly, accurately and credibly.
+                When a brand crisis hits, the first 48 hours define how it is remembered. Companies that go quiet or respond badly turn manageable situations into long-term reputation damage. We provide crisis communications support that helps you respond quickly, accurately, and credibly.
               </p>
               <p>
-                We work with your leadership team to develop crisis response protocols before an incident occurs, and stand ready to manage communications if one does. From drafting holding statements and coordinating media responses to briefing spokespeople and monitoring sentiment, we handle the communications layer so your team can focus on resolving the actual problem.
+                We work with your leadership team to develop crisis response protocols before an incident occurs, and stand ready to manage communications if one does. From drafting holding statements and coordinating media responses to briefing spokespeople and monitoring sentiment, we handle the communications layer, so your team can focus on resolving the actual problem.
               </p>
             </div>
           </div>

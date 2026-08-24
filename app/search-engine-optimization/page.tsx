@@ -1,0 +1,31 @@
+import Hero from "@/ServicesPages/SearchEngineOptimization/Hero";
+import Intro from "@/ServicesPages/SearchEngineOptimization/Intro";
+import OnPageSeoSection from "@/ServicesPages/SearchEngineOptimization/OnPageSeoSection";
+import OffPageSeoSection from "@/ServicesPages/SearchEngineOptimization/OffPageSeoSection";
+import LocalSeoSection from "@/ServicesPages/SearchEngineOptimization/LocalSeoSection";
+import TechnicalSeoSection from "@/ServicesPages/SearchEngineOptimization/TechnicalSeoSection";
+import AiSeoGeoSection from "@/ServicesPages/SearchEngineOptimization/AiSeoGeoSection";
+import ContactCTA from "@/components/homepage/ContactCTA";
+import Footer from "@/components/layout/Footer";
+import PortfolioSection from "@/components/servicespage/PortfolioSection";
+import ClientsSection from "@/components/homepage/ClientsSection";
+
+const page = () => {
+  return (
+    <div>
+      <Hero />
+      <Intro />
+      <div id="on-page-seo"><OnPageSeoSection /></div>
+      <div id="off-page-seo"><OffPageSeoSection /></div>
+      <div id="local-seo"><LocalSeoSection /></div>
+      <div id="technical-seo"><TechnicalSeoSection /></div>
+      <div id="ai-seo-geo"><AiSeoGeoSection /></div>
+      <PortfolioSection />
+      <ClientsSection />
+      <ContactCTA />
+      <Footer />
+    </div>
+  );
+};
+
+export default page;

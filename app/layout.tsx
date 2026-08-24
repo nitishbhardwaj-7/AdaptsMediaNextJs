@@ -52,46 +52,50 @@ export async function generateMetadata(): Promise<Metadata> {
     // Fetch the Yoast SEO data for the homepage specifically
     const response = await fetch(
       `https://adaptsmedia.com/wp-json/yoast/v1/get_head?url=https://adaptsmedia.com/`,
-      { next: { revalidate: 3600 } } // Cache for 1 hour
+      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(4000) }
     );
 
-    const data = await response.json();
-    const yoast = data.json; // This contains the raw SEO objects
-
-    return {
-      metadataBase: new URL('https://adaptsmedia.com'),
-      title: {
-        default: yoast.title || "Adapts Media",
-        template: "%s" // Keeps the "Blog Title | Adapts Media" format
-      },
-      description: yoast.description,
-      openGraph: {
-        title: yoast.og_title,
-        description: yoast.og_description,
-        siteName: yoast.og_site_name,
-        images: [
-          {
-            url: yoast.og_image?.[0]?.url || "/default-og.jpg",
-          }
-        ],
-        type: 'website',
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: yoast.twitter_title,
-        description: yoast.twitter_description,
-        images: [yoast.twitter_image || yoast.og_image?.[0]?.url],
-      },
-      // This pulls in robots settings (index/noindex) from Yoast settings
-      robots: yoast.robots?.index === 'noindex' ? 'noindex, nofollow' : 'index, follow',
-    };
+    if (response.ok) {
+      const data = await response.json();
+      const yoast = data?.json;
+      if (yoast) {
+        return {
+          metadataBase: new URL('https://adaptsmedia.com'),
+          title: {
+            default: yoast.title || "Adapts Media",
+            template: "%s"
+          },
+          description: yoast.description,
+          openGraph: {
+            title: yoast.og_title,
+            description: yoast.og_description,
+            siteName: yoast.og_site_name,
+            images: [
+              {
+                url: yoast.og_image?.[0]?.url || "/default-og.jpg",
+              }
+            ],
+            type: 'website',
+          },
+          twitter: {
+            card: 'summary_large_image',
+            title: yoast.twitter_title,
+            description: yoast.twitter_description,
+            images: [yoast.twitter_image || yoast.og_image?.[0]?.url],
+          },
+          robots: yoast.robots?.index === 'noindex' ? 'noindex, nofollow' : 'index, follow',
+        };
+      }
+    }
   } catch (error) {
-    // Fallback if the API fails
-    return {
-      title: "Adapts Media | Digital Marketing Agency",
-      description: "Expert digital marketing solutions in Dubai and globally."
-    };
+    console.error("Failed to fetch layout Yoast metadata:", error);
   }
+
+  // Fallback if API fails or yoast object is missing
+  return {
+    title: "Adapts Media | Digital Marketing Agency",
+    description: "Expert digital marketing solutions in Dubai and globally."
+  };
 }
 
 export default function RootLayout({

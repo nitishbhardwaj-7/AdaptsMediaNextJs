@@ -306,14 +306,14 @@ export default function PortfolioShowcase({ projects: externalProjects, variant 
       const cursorX = gsap.quickTo(cursorRef.current, "x", { duration: 0.35, ease: "power3.out" });
       const cursorY = gsap.quickTo(cursorRef.current, "y", { duration: 0.35, ease: "power3.out" });
 
-      const onSectionMouseEnter = () => {
+      const onCardMouseEnter = () => {
         gsap.to(cursorRef.current, { opacity: 1, scale: 1, duration: 0.3 });
         document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
           el.classList.add("cursor-hidden");
         });
       };
 
-      const onSectionMouseLeave = () => {
+      const onCardMouseLeave = () => {
         gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.3 });
         document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
           el.classList.remove("cursor-hidden");
@@ -321,19 +321,31 @@ export default function PortfolioShowcase({ projects: externalProjects, variant 
       };
 
       const onSectionMouseMove = (e: MouseEvent) => {
-        // Adjust coordinate offset to center the cursor circle (112px / 2 = 56px)
-        cursorX(e.clientX - 56);
-        cursorY(e.clientY - 56);
+        if (!sectionRef.current) return;
+        const rect = sectionRef.current.getBoundingClientRect();
+        // Adjust coordinate offset relative to parent container, centering the 112px cursor
+        cursorX(e.clientX - rect.left - 56);
+        cursorY(e.clientY - rect.top - 56);
       };
 
-      sectionRef.current.addEventListener("mouseenter", onSectionMouseEnter);
-      sectionRef.current.addEventListener("mouseleave", onSectionMouseLeave);
+      // Register mousemove and mouseleave on section so coordinates are updated dynamically and cursor is hidden on exit
       sectionRef.current.addEventListener("mousemove", onSectionMouseMove);
+      sectionRef.current.addEventListener("mouseleave", onCardMouseLeave);
+
+      // Register hover events on individual cards to show/hide the custom cursor
+      const cards = sectionRef.current.querySelectorAll(".portfolio-card");
+      cards.forEach((card) => {
+        card.addEventListener("mouseenter", onCardMouseEnter);
+        card.addEventListener("mouseleave", onCardMouseLeave);
+      });
 
       return () => {
-        sectionRef.current?.removeEventListener("mouseenter", onSectionMouseEnter);
-        sectionRef.current?.removeEventListener("mouseleave", onSectionMouseLeave);
         sectionRef.current?.removeEventListener("mousemove", onSectionMouseMove);
+        sectionRef.current?.removeEventListener("mouseleave", onCardMouseLeave);
+        cards.forEach((card) => {
+          card.removeEventListener("mouseenter", onCardMouseEnter);
+          card.removeEventListener("mouseleave", onCardMouseLeave);
+        });
         document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
           el.classList.remove("cursor-hidden");
         });
@@ -431,10 +443,11 @@ export default function PortfolioShowcase({ projects: externalProjects, variant 
       {/* Custom Mouse Cursor */}
       <div
         ref={cursorRef}
-        className="fixed w-28 h-28 rounded-full border border-white/20 bg-white/5 backdrop-blur-[2px] flex items-center justify-center pointer-events-none z-50 opacity-0 font-sans text-[10px] tracking-[0.2em] text-white uppercase select-none hidden lg:flex"
+        className="absolute top-0 left-0 w-28 h-28 rounded-full border border-white/20 bg-white/5 backdrop-blur-[2px] flex items-center justify-center pointer-events-none z-50 opacity-0 font-sans text-[10px] tracking-[0.2em] text-white uppercase select-none hidden lg:flex"
         style={{
           boxShadow: "0 0 35px rgba(255, 255, 255, 0.05)",
-          willChange: "transform, opacity"
+          willChange: "transform, opacity",
+          transform: "scale(0.5)"
         }}
       >
         Explore

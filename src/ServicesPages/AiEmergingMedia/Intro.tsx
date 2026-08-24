@@ -15,7 +15,8 @@ const Intro = () => {
     "AI-Powered Content & Creative Production",
     "Marketing Automation & Agentic Workflows",
     "Conversational AI & Chatbots",
-    "Predictive Analytics & AI Media Optimisation"
+    "Predictive Analytics & AI Media Optimisation",
+    "Adapts Media AI Framework - AM-AI-MVP"
   ];
 
   useGSAP(() => {

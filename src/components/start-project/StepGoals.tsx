@@ -117,7 +117,7 @@ function GoalCard({
         <motion.div
           initial={false}
           animate={{ scale: isSelected ? 1 : 0, opacity: isSelected ? 1 : 0.2 }}
-          transition={{ type: "spring", stiffness: 350, damping: 25 }}
+          transition={{ type: "spring" as const, stiffness: 350, damping: 25 }}
           className={`
             w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center transition-all duration-300
             ${isSelected 

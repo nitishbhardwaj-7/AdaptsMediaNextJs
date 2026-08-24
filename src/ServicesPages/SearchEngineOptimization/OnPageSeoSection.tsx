@@ -5,15 +5,15 @@ import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
 import ArrowButton from "@/components/buttons/ArrowButton";
 
-const EventsActivationSection = () => {
+const OnPageSeoSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   const deliverables = [
-    "Event Strategy & Concept Design",
-    "Venue & Supplier Management",
-    "On-Ground Logistics & Execution",
-    "Brand Experience Design",
-    "Post-Event Coverage & Reporting",
+    "Semantic Keyword Research & Intent Mapping",
+    "High-Converting On-Page Content Optimization",
+    "Title Tag, Meta Description & Header Hierarchy Sculpting",
+    "Internal Linking Architecture Strategy",
+    "Content Gap & Refresh Analysis",
   ];
 
   useServiceDetailAnimation(containerRef);
@@ -23,7 +23,7 @@ const EventsActivationSection = () => {
       ref={containerRef}
       className="relative w-full py-24 md:py-32 flex justify-center overflow-hidden text-white"
       style={{
-        background: "radial-gradient(circle 600px at top left, rgba(250, 192, 46, 0.75) 0%, transparent 100%), radial-gradient(circle 600px at bottom right, rgba(250, 192, 46, 0.75) 0%, transparent 100%), #C12126"
+        background: "radial-gradient(circle 600px at top left, rgba(7, 71, 107, 0.75) 0%, transparent 100%), radial-gradient(circle 600px at bottom right, rgba(7, 71, 107, 0.75) 0%, transparent 100%), #064ED3"
       }}
     >
       <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
@@ -32,18 +32,18 @@ const EventsActivationSection = () => {
           {/* Left Column: Text Content */}
           <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start">
             <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Events & Activations
+              On-Page SEO
             </span>
-            <h2 className="events-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Turn Brand Moments Into Lasting Movement
+            <h2 className="onpage-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
+              Match Search Intent. Convert Every Visit into Value.
             </h2>
 
-            <div className="events-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
+            <div className="onpage-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
               <p>
-                A well-run event creates coverage, conversations and customer relationships that no digital campaign produces on its own. We plan and produce events aligned with your brand objectives, whether it is a product launch, trade exhibition, retailer experience or press event.
+                Search intent is the cornerstone of organic growth. We optimize your website’s structure, content, and metadata so search engines understand your authority and users find exactly what they are looking for. No keyword stuffing, no thin content, no outdated tactics that fail to convert.
               </p>
               <p>
-                Our team handles venue selection, supplier management and logistics through on-ground execution and post-event reporting. We design each event around a clear commercial goal and build the activation mechanics around that goal, not around a generic event format that fits every brief.
+                Our On-Page team conducts comprehensive content audits, semantic keyword mapping, visual asset optimization, and user experience enhancements. We optimize for actual business outcomes, ensuring that every ranking page drives qualified leads, sales, or conversions.
               </p>
             </div>
           </div>
@@ -51,21 +51,21 @@ const EventsActivationSection = () => {
           {/* Right Column: Illustration & CTA */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
             {/* Illustration Container */}
-            <div className="events-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
+            <div className="onpage-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
               <div className="w-full h-full relative">
                 {/* Background Grid */}
                 <img
-                  src="/images/BrandingCreative/DesignSystemLogoBg.png"
-                  className="events-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
+                  src="/images/BrandingCreative/LogoBgBlue.png"
+                  className="onpage-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
                   style={{ filter: 'brightness(0)' }}
-                  alt="Events Background Grid"
+                  alt="On-Page SEO Background Grid"
                 />
 
                 {/* Main Illustration */}
                 <img
-                  src="/images/BrandingCreative/DesignSystemLogo.png"
-                  className="events-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
-                  alt="Events Illustration"
+                  src="/images/BrandingCreative/LogoBlue.png"
+                  className="onpage-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
+                  alt="On-Page SEO Illustration"
                 />
               </div>
             </div>
@@ -81,12 +81,12 @@ const EventsActivationSection = () => {
 
         {/* Bottom Content Row: What We Deliver */}
         <div className="w-full mt-8">
-          <h3 className="events-deliverables-header service-deliverables-header text-xl md:text-2xl mb-6">
+          <h3 className="onpage-deliverables-header service-deliverables-header text-xl md:text-2xl mb-6">
             What We Deliver
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4">
             {deliverables.map((item, idx) => (
-              <div key={idx} className="events-deliverable-item service-deliverable-item flex items-start gap-2.5">
+              <div key={idx} className="onpage-deliverable-item service-deliverable-item flex items-start gap-2.5">
                 <div className="service-deliverable-icon mt-1 flex-shrink-0">
                   <svg
                     className="w-4 h-4 text-[#FAC02E]"
@@ -108,4 +108,4 @@ const EventsActivationSection = () => {
   );
 };
 
-export default EventsActivationSection;
+export default OnPageSeoSection;

@@ -35,7 +35,7 @@ const AeoGeoSection = () => {
               AEO & GEO (LLM Search Visibility)
             </span>
             <h2 className="aeogeo-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              If You Are Not in the AI Answer, You Are Not in the Consideration Set.
+              Out of AI Answer. Out of Consideration Set.
             </h2>
 
             <div className="aeogeo-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
@@ -43,7 +43,7 @@ const AeoGeoSection = () => {
                 When a buyer asks ChatGPT, Perplexity or Gemini which agency to hire, which brand to buy or which product solves their problem, traditional SEO rankings mean nothing. Only brands cited by AI models get recommended. AEO (Answer Engine Optimisation) and GEO (Generative Engine Optimisation) are the disciplines that determine whether your brand appears in those answers or gets passed over entirely.
               </p>
               <p>
-                We audit your brand's current AI search visibility, identify the gaps between what LLMs say about you and what you want them to say, and build a programme of content, entity establishment and digital authority development that gets your brand cited accurately across ChatGPT, Claude, Perplexity, Gemini and Google AI Overviews.
+                We audit your brand's current AI search visibility, identify the gaps between what LLMs say about you and what you want them to say, and build a programme of content, entity establishment and digital authority development that gets your brand cited accurately across ChatGPT, Claude, Perplexity, Gemini and Google AI Overviews. It is one of the fastest-growing service areas globally, and one of the least crowded. Agencies with this on their nav right now have a real first-mover window.
               </p>
             </div>
           </div>

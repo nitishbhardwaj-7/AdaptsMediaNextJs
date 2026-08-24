@@ -13,7 +13,7 @@ export async function getWordPressPosts(limit: number = 100) {
   try {
     const res = await fetch(
       `${BASE_URL}/wp-json/wp/v2/posts?_embed&per_page=${safeLimit}&_fields=title,slug,date,categories,featured_media,_links,_embedded,yoast_head_json`,
-      { cache: "no-store" } // Disable cache because payload can be over 2MB
+      { next: { revalidate: 600 }, signal: AbortSignal.timeout(6000) }
     );
 
     if (!res.ok) throw new Error(`WordPress API returned status: ${res.status}`);
@@ -126,21 +126,14 @@ export async function getSinglePost(slug: string) {
   const url = `${BASE_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`;
 
   try {
-    // Use no-store so we always get fresh data (revalidate:600 can cache a failed/empty response)
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(url, { next: { revalidate: 600 }, signal: AbortSignal.timeout(5000) });
 
     if (!res.ok) return null;
 
     const posts = await res.json();
 
     if (!posts || posts.length === 0) {
-      // Retry once — WP REST API occasionally returns empty transiently
-      await new Promise((r) => setTimeout(r, 400));
-      const retry = await fetch(url, { cache: "no-store" });
-      if (!retry.ok) return null;
-      const retryPosts = await retry.json();
-      if (!retryPosts || retryPosts.length === 0) return null;
-      return retryPosts[0];
+      return null;
     }
 
     return posts[0];
@@ -156,7 +149,7 @@ export async function getWordPressTeamMembers() {
   const teamUrl = BASE_URL ? `${BASE_URL}/team/` : 'https://adaptsmedia.com/team/';
 
   try {
-    const res = await fetch(teamUrl, { cache: 'no-store' });
+    const res = await fetch(teamUrl, { next: { revalidate: 3600 }, signal: AbortSignal.timeout(5000) });
     if (!res.ok) return teamMembers;
 
     const html = await res.text();

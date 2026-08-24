@@ -123,7 +123,7 @@ const Hero = () => {
         {/* Right Side */}
         <div className="relative z-10 flex flex-col justify-center items-start text-left max-w-lg mx-auto w-full">
           <h2 className="hero-right-title mb-6 text-3xl leading-snug md:text-5xl font-opensans font-normal leading-[1.2] pb-2 text-left w-full">
-            The Brands That Win in AI <br /> Are Building Their Advantage Now.
+            Be Among Early Movers. <br /> Build Your AI Advantage.
           </h2>
           <p className="hero-desc text-2xl font-opensans font-extralight leading-tight tracking-wide text-white text-left w-full">
             We help brands get found, get recommended and move faster using AI — before the competition works out how.

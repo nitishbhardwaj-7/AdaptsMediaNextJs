@@ -11,15 +11,11 @@ const Intro = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const pills = [
-    "SEM / Google Ads",
-    "Programmatic Advertising",
-    "Display Campaign Management",
-    "Media Planning & Buying",
-    "Ad Operations for Advertising Agencies",
-    "Ad Operations for Publishers",
-    "Affiliate Marketing",
-    "Retargeting & Remarketing",
-    "Retail Media & Marketplace Advertising"
+    "On-Page SEO",
+    "Off-Page SEO",
+    "Local SEO",
+    "Technical SEO",
+    "AI SEO & GEO"
   ];
 
   useGSAP(() => {
@@ -119,13 +115,12 @@ const Intro = () => {
       >
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
-            Paid media without strategy is burning budget.<br className="hidden md:inline" />
-            We build <span className="highlight text-[#2563eb] font-bold">performance-led campaigns</span> across search,<br className="hidden md:inline" />
-            social, programmatic and direct channels,<br className="hidden md:inline" />
-            combining <span className="highlight text-[#2563eb] font-bold">precise audience targeting</span><br className="hidden md:inline" />
-            with <span className="highlight text-[#2563eb] font-bold">relentless optimisation</span><br className="hidden md:inline" />
-            to drive qualified traffic, lower acquisition costs<br className="hidden md:inline" />
-            and scale what delivers returns.
+            SEO without technical precision and business alignment is burning resources.<br className="hidden md:inline" />
+            We build <span className="highlight text-[#2563eb] font-bold">revenue-led organic search campaigns</span> across<br className="hidden md:inline" />
+            technical infrastructure, content architecture, authority building, and modern search ecosystems,<br className="hidden md:inline" />
+            combining <span className="highlight text-[#2563eb] font-bold">deep search intent analysis</span><br className="hidden md:inline" />
+            with <span className="highlight text-[#2563eb] font-bold">continuous optimization</span> to capture high-intent traffic,<br className="hidden md:inline" />
+            lower acquisition costs, and dominate search results.
           </p>
         </div>
 

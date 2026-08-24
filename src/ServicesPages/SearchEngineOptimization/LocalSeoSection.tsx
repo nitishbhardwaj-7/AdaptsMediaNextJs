@@ -5,15 +5,15 @@ import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
 import ArrowButton from "@/components/buttons/ArrowButton";
 
-const EventsActivationSection = () => {
+const LocalSeoSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   const deliverables = [
-    "Event Strategy & Concept Design",
-    "Venue & Supplier Management",
-    "On-Ground Logistics & Execution",
-    "Brand Experience Design",
-    "Post-Event Coverage & Reporting",
+    "Google Business Profile Setup & Complete Optimization",
+    "Local Citation Building & NAP Consistency Audits",
+    "Geo-Targeted Landing Page Architecture",
+    "Local Review Generation & Reputation Strategy",
+    "Hyper-Local Keyword & Competitor Targeting",
   ];
 
   useServiceDetailAnimation(containerRef);
@@ -32,18 +32,18 @@ const EventsActivationSection = () => {
           {/* Left Column: Text Content */}
           <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start">
             <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Events & Activations
+              Local SEO
             </span>
-            <h2 className="events-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Turn Brand Moments Into Lasting Movement
+            <h2 className="localseo-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
+              Dominate Geo-Targeted Searches. Win Nearby Buyers.
             </h2>
 
-            <div className="events-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
+            <div className="localseo-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
               <p>
-                A well-run event creates coverage, conversations and customer relationships that no digital campaign produces on its own. We plan and produce events aligned with your brand objectives, whether it is a product launch, trade exhibition, retailer experience or press event.
+                Local search intent leads directly to offline and online transactions. When nearby buyers search for your products or services, your business must appear at the top of the Map Pack and localized search engine result pages (SERPs).
               </p>
               <p>
-                Our team handles venue selection, supplier management and logistics through on-ground execution and post-event reporting. We design each event around a clear commercial goal and build the activation mechanics around that goal, not around a generic event format that fits every brief.
+                We optimize your multi-location or local presence across Google Business Profile, local directories, and geo-targeted landing pages. We manage review generation workflows, local citation consistency, and hyper-local content strategies to ensure you capture the highest-intent local traffic available.
               </p>
             </div>
           </div>
@@ -51,21 +51,21 @@ const EventsActivationSection = () => {
           {/* Right Column: Illustration & CTA */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
             {/* Illustration Container */}
-            <div className="events-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
+            <div className="localseo-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
               <div className="w-full h-full relative">
                 {/* Background Grid */}
                 <img
                   src="/images/BrandingCreative/DesignSystemLogoBg.png"
-                  className="events-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
+                  className="localseo-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
                   style={{ filter: 'brightness(0)' }}
-                  alt="Events Background Grid"
+                  alt="Local SEO Background Grid"
                 />
 
                 {/* Main Illustration */}
                 <img
                   src="/images/BrandingCreative/DesignSystemLogo.png"
-                  className="events-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
-                  alt="Events Illustration"
+                  className="localseo-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
+                  alt="Local SEO Illustration"
                 />
               </div>
             </div>
@@ -81,12 +81,12 @@ const EventsActivationSection = () => {
 
         {/* Bottom Content Row: What We Deliver */}
         <div className="w-full mt-8">
-          <h3 className="events-deliverables-header service-deliverables-header text-xl md:text-2xl mb-6">
+          <h3 className="localseo-deliverables-header service-deliverables-header text-xl md:text-2xl mb-6">
             What We Deliver
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4">
             {deliverables.map((item, idx) => (
-              <div key={idx} className="events-deliverable-item service-deliverable-item flex items-start gap-2.5">
+              <div key={idx} className="localseo-deliverable-item service-deliverable-item flex items-start gap-2.5">
                 <div className="service-deliverable-icon mt-1 flex-shrink-0">
                   <svg
                     className="w-4 h-4 text-[#FAC02E]"
@@ -108,4 +108,4 @@ const EventsActivationSection = () => {
   );
 };
 
-export default EventsActivationSection;
+export default LocalSeoSection;

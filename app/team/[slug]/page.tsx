@@ -60,7 +60,7 @@ export default async function TeamMemberPage({ params }: PageProps) {
   return (
     <>
       <TeamMemberProfileClient member={member} allPosts={allPosts} />
-      <SocialBar />
+      
       <Footer />
     </>
   );

@@ -5,15 +5,15 @@ import { useRef } from "react";
 import { useServiceDetailAnimation } from "../../hooks/useServiceDetailAnimation";
 import ArrowButton from "@/components/buttons/ArrowButton";
 
-const MarketResearchSection = () => {
+const MotionGraphicsSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   const deliverables = [
-    "Primary & Secondary Research",
-    "Consumer Surveys & Interviews",
-    "Category Trend Analysis",
-    "Research Synthesis & Reporting",
-    "Strategic Implications Framework",
+    "Animated Explainer Videos",
+    "Social Video Ad Production",
+    "Brand Films & Product Demos",
+    "Platform-Ready Format Delivery",
+    "Motion Design for Digital Channels",
   ];
 
   useServiceDetailAnimation(containerRef);
@@ -27,45 +27,26 @@ const MarketResearchSection = () => {
       }}
     >
       <div className="max-w-[1350px] 2xl:max-w-[1600px] w-full mx-auto px-8 md:px-16 flex flex-col gap-16 relative z-10">
-        {/* Top Content Row: Text Left, Image Right */}
+        {/* Top Content Row: Image Left, Text Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* Left Column: Text Content */}
-          <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start">
-            <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Market Research
-            </span>
-            <h2 className="market-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Know Your Market Before You Spend on It.
-            </h2>
-
-            <div className="market-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
-              <p>
-                Assumptions about your market are expensive. Real research gives you data on customer behaviour, category trends and competitive gaps that make every marketing decision sharper. We conduct primary and secondary market research tailored to your specific business questions, not generic category reports.
-              </p>
-              <p>
-                Our research team runs surveys, consumer interviews, focus groups and desk research projects that produce actionable findings, not raw data dumps. We translate research into clear strategic implications so your team knows exactly what to do with the findings and why.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column: Illustration & CTA */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center">
+          {/* Left Column: Illustration & CTA */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center order-2 lg:order-1">
             {/* Illustration Container */}
-            <div className="market-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
+            <div className="motion-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
               <div className="w-full h-full relative">
                 {/* Background Grid */}
                 <img
                   src="/images/BrandingCreative/LogoBgBlue.png"
-                  className="market-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
+                  className="motion-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-40 pointer-events-none"
                   style={{ filter: 'brightness(0)' }}
-                  alt="Market Research Background Grid"
+                  alt="Motion Graphics Background Grid"
                 />
 
                 {/* Main Illustration */}
                 <img
                   src="/images/BrandingCreative/LogoBlue.png"
-                  className="market-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
-                  alt="Market Research Illustration"
+                  className="motion-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]"
+                  alt="Motion Graphics Illustration"
                 />
               </div>
             </div>
@@ -77,16 +58,35 @@ const MarketResearchSection = () => {
               </a>
             </div>
           </div>
+
+          {/* Right Column: Text Content */}
+          <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start order-1 lg:order-2">
+            <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
+              Motion Graphics & Video
+            </span>
+            <h2 className="motion-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
+              Motion Design That Halts The Scroll
+            </h2>
+
+            <div className="motion-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
+              <p>
+                Video and motion are no longer optional in a content strategy. Short-form video is the default format across TikTok, Instagram, YouTube, and LinkedIn. We make engaging videos and motion graphics that capture attention quickly on the platforms where your audience spends their time.
+              </p>
+              <p>
+                From animated explainers and social video ads to brand films and product demos, we handle scripting, storyboarding, motion design and final delivery. All work is produced in the formats and aspect ratios each platform requires, so you are not cropping widescreen content for vertical feeds.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Content Row: What We Deliver */}
         <div className="w-full mt-8">
-          <h3 className="market-deliverables-header service-deliverables-header text-xl md:text-2xl mb-6">
+          <h3 className="motion-deliverables-header service-deliverables-header text-xl md:text-2xl mb-6">
             What We Deliver
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4">
             {deliverables.map((item, idx) => (
-              <div key={idx} className="market-deliverable-item service-deliverable-item flex items-start gap-2.5">
+              <div key={idx} className="motion-deliverable-item service-deliverable-item flex items-start gap-2.5">
                 <div className="service-deliverable-icon mt-1 flex-shrink-0">
                   <svg
                     className="w-4 h-4 text-[#FAC02E]"
@@ -108,4 +108,4 @@ const MarketResearchSection = () => {
   );
 };
 
-export default MarketResearchSection;
+export default MotionGraphicsSection;

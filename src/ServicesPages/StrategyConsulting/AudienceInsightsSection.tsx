@@ -35,12 +35,12 @@ const AudienceInsightsSection = () => {
               Audience & Consumer Insights
             </span>
             <h2 className="audience-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Know Exactly Who You Are Talking To. And What They Want.
+              Know Your Audience. Master Their Motive.
             </h2>
 
             <div className="audience-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
               <p>
-                Broad target demographics are not useful. "Adults 25 to 45" tells you almost nothing. Real audience understanding means knowing what problems your customers have, how they make decisions, what language they use and where they spend their attention.
+                Broad target demographics are not useful. ‘Adults 25 to 45’ tells you almost nothing. Real audience understanding means knowing what problems your customers have, how they make decisions, what language they use and where they spend their attention.
               </p>
               <p>
                 We build audience profiles grounded in real data, including behavioural research, social listening, search trend analysis and first-party customer data review. The output is a clear audience architecture your whole marketing team can use across campaigns, content and product decisions.

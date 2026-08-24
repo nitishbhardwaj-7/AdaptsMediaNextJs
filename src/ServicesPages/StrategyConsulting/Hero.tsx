@@ -126,7 +126,7 @@ const Hero = () => {
             Decisions Built on Data. <br /> Strategies Built to Win.
           </h2>
           <p className="hero-desc text-2xl font-opensans font-extralight leading-tight tracking-wide text-white text-left w-full">
-            We help brands cut through noise with research, analysis and strategy that gives your marketing a real foundation.
+            We help brands take strategic decisions with research, analysis and strategy that gives your marketing a real foundation.
           </p>
         </div>
       </div>

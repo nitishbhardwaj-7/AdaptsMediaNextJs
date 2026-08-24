@@ -65,15 +65,15 @@ const AiContentSection = () => {
               AI-Powered Content & Creative Production
             </span>
             <h2 className="aicontent-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              More Content. Faster. Without Losing Brand Quality.
+              Scale Creative Output Rapidly Without Losing Brand Quality
             </h2>
 
             <div className="aicontent-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-gray-300">
               <p>
-                Content volume requirements have outpaced what traditional production teams can handle. The brands performing on social, search and email in 2026 built AI-native content pipelines that generate, test and iterate at speed, without sacrificing brand consistency or handing creative decisions over to a model with no knowledge of the brand.
+                Content volume requirements have outpaced what traditional production teams can handle. The brands performing on social, search and email built AI-native content pipelines that generate, test and iterate at speed, without sacrificing brand consistency or handing creative decisions over to a model with no knowledge of the brand.
               </p>
               <p>
-                We build and manage AI content production workflows tailored to your brand guidelines, tone of voice and creative standards. From AI-assisted copy and image generation to automated video scripting and multi-format asset production, we help you produce more content, test it faster and identify what your audience responds to.
+                We build and manage AI content production workflows tailored to your brand guidelines, tone of voice and creative standards. From AI-assisted copy and image generation to automated video scripting and multi-format asset production, we help you produce more content, test it faster and identify what your audience responds to before committing full production budgets to it.
               </p>
             </div>
           </div>

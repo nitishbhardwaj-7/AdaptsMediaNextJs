@@ -65,7 +65,7 @@ const PressReleasesSection = () => {
               Press Releases & Media Outreach
             </span>
             <h2 className="press-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Get Written About by the Right People.
+              Strategic Releases That Capture Media Mindshare
             </h2>
 
             <div className="press-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-gray-300">

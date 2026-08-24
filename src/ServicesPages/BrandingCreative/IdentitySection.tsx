@@ -9,11 +9,11 @@ const IdentitySection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   const deliverables = [
-    "Brand Strategy and Positioning",
-    "Logo and Visual Identity Design",
-    "Typography and Color Systems",
-    "Brand Guidelines and Usage Systems",
-    "Verbal Identity and Tone of Voice",
+    "Logo & Brand Mark Design",
+    "Color System & Typography",
+    "Brand Usage Guidelines",
+    "Full Asset Pack (Print & Digital)",
+    "Scalable Visual Identity System",
   ];
 
   useServiceDetailAnimation(containerRef);
@@ -33,18 +33,18 @@ const IdentitySection = () => {
           {/* Left Column: Text Content */}
           <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start">
             <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Identity
+              Brand Identity & Logo Design
             </span>
             <h2 className="identity-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Creating Brands with Purpose and Personality
+              An Iconic Identity Engineered For Scale
             </h2>
 
             <div className="identity-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
               <p>
-                A strong identity creates recognition, trust, and differentiation. We develop brand identities that go beyond aesthetics — building systems that communicate who you are, what you stand for, and why your audience should care.
+                Your brand is more than just a logo. We build complete brand identities that work across all platforms and marketing materials. It all starts with understanding your business, values, and goals before any design work begins.
               </p>
               <p>
-                From logos and typography to color systems and brand language, every detail is crafted to create a cohesive and memorable presence.
+                Our identity process covers logo design, color systems, typography selection, and brand mark usage rules. We deliver complete brand packs with print and digital assets, style guidelines, and a clear visual system your team can apply consistently without coming back to us for every new output.
               </p>
             </div>
           </div>

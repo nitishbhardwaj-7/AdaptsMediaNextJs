@@ -9,11 +9,11 @@ const CampaignsSection = () => {
   const containerRef = useRef<HTMLElement>(null);
   
   const deliverables = [
-    "Campaign Concepts and Ideation",
-    "Creative Direction and Art Direction",
-    "Integrated Marketing Campaigns",
-    "Launch and Awareness Campaigns",
-    "Multi-platform Campaign Execution",
+    "Campaign Concept Development",
+    "Art Direction & Copy",
+    "Multi-Channel Asset Production",
+    "Digital & OOH Formats",
+    "Brand-Consistent Creative Execution",
   ];
 
   useServiceDetailAnimation(containerRef);
@@ -62,23 +62,18 @@ const CampaignsSection = () => {
           {/* Right Column: Text Content */}
           <div className="lg:col-span-7 service-content-wrapper flex flex-col items-start order-1 lg:order-2">
             <span className="service-category text-[#FAC02E] text-lg tracking-wider mb-3">
-              Campaigns
+              Campaign Creative
             </span>
             <h2 className="campaigns-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Creative Campaigns Designed to Make an Impact
+              Creative That Works in the Real World. Not Just in Decks.
             </h2>
 
             <div className="campaigns-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-gray-300">
               <p>
-                Modern audiences are exposed to content constantly. To stand out,
-                brands need campaigns that are not only visually strong, but
-                strategically built to connect and perform.
+                A great campaign idea means nothing without execution that lands. We develop campaign concepts from initial brief through to final production assets, with a creative approach rooted in your brand positioning and built for the channels where your audience actually spends time.
               </p>
               <p>
-                We conceptualize and execute integrated campaigns that align
-                creativity with business objectives - helping brands launch
-                products, drive awareness, increase engagement, and create
-                lasting impressions.
+                Our creative team handles concept development, copy direction, art direction and production coordination. We produce campaigns for digital, out-of-home, social, print and broadcast. Every asset is built to communicate fast because attention is short and the message needs to land in seconds.
               </p>
             </div>
           </div>

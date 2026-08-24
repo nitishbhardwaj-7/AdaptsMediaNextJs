@@ -65,7 +65,7 @@ const SponsorshipPartnershipSection = () => {
               Sponsorship & Partnerships
             </span>
             <h2 className="sponsorship-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              The Right Sponsorship Puts Your Brand Exactly Where It Needs to Be.
+              Strategic Alliances That Drive Real Growth
             </h2>
 
             <div className="sponsorship-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
@@ -73,7 +73,7 @@ const SponsorshipPartnershipSection = () => {
                 A sponsorship is only as good as the audience it reaches and the creative it comes with. We identify opportunities that genuinely fit your brand and target audience, negotiate terms that maximise your exposure and develop assets to activate each partnership properly.
               </p>
               <p>
-                We manage the full sponsorship lifecycle, from opportunity identification and due diligence through to on-site branding, digital activation and post-event performance assessment. We treat every partnership as a marketing channel with its own objectives, not a logo placement exercise.
+                We manage the full sponsorship lifecycle, from opportunity identification and due diligence through to on-site branding, digital activation and post-event performance assessment, treating every partnership as a marketing channel with its own objectives, not a logo placement exercise.
               </p>
             </div>
           </div>

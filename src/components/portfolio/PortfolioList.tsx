@@ -132,8 +132,8 @@ export default function PortfolioList() {
     });
 
     gsap.set(".border-draw-path", {
-      strokeDasharray: 800,
-      strokeDashoffset: 800,
+      strokeDasharray: 2000,
+      strokeDashoffset: 2000,
     });
 
     // Master Entrance sequence for the filter section (slower, elegant pace)
@@ -209,7 +209,7 @@ export default function PortfolioList() {
             const rect = btn.getBoundingClientRect();
             const parentRect = parent.getBoundingClientRect();
             const left = rect.left - parentRect.left;
-            const top = rect.top - parentRect.top;
+            const top = rect.top - parentRect.top - 2;
             const width = rect.width;
             const height = rect.height;
 
@@ -356,7 +356,7 @@ export default function PortfolioList() {
       </div>
 
       {/* ── FILTER SECTION ── */}
-      <div className="filter-section-container w-full bg-[#004dc3] py-10 relative overflow-hidden">
+      <div className="filter-section-container w-full bg-[#004dc3] py-10 relative z-20">
         {/* Breathing background light */}
         <div className="filter-bg-light absolute inset-0 opacity-100" />
 
@@ -390,21 +390,21 @@ export default function PortfolioList() {
                   setIsServiceOpen(false);
                   setIsObjectiveOpen(false);
                 }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
               >
                 <span className="relative z-10">{selectedIndustry}</span>
                 <ArrowDown isOpen={isIndustryOpen} />
                 {/* SVG border drawing */}
-                <div className="absolute inset-0 pointer-events-none rounded-full overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
                   <svg className="absolute inset-0 w-full h-full" fill="none">
                     <rect
                       className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
-                      x="0.5"
-                      y="0.5"
-                      width="calc(100% - 1px)"
-                      height="calc(100% - 1px)"
-                      rx="24"
-                      ry="24"
+                      x="1"
+                      y="1"
+                      width="calc(100% - 2px)"
+                      height="calc(100% - 2px)"
+                      rx="21"
+                      ry="21"
                       stroke="rgba(255, 255, 255, 0.25)"
                       strokeWidth="1.2"
                       vectorEffect="non-scaling-stroke"
@@ -439,21 +439,21 @@ export default function PortfolioList() {
                   setIsIndustryOpen(false);
                   setIsObjectiveOpen(false);
                 }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
               >
                 <span className="relative z-10">{selectedService}</span>
                 <ArrowDown isOpen={isServiceOpen} />
                 {/* SVG border drawing */}
-                <div className="absolute inset-0 pointer-events-none rounded-full overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
                   <svg className="absolute inset-0 w-full h-full" fill="none">
                     <rect
                       className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
-                      x="0.5"
-                      y="0.5"
-                      width="calc(100% - 1px)"
-                      height="calc(100% - 1px)"
-                      rx="24"
-                      ry="24"
+                      x="1"
+                      y="1"
+                      width="calc(100% - 2px)"
+                      height="calc(100% - 2px)"
+                      rx="21"
+                      ry="21"
                       stroke="rgba(255, 255, 255, 0.25)"
                       strokeWidth="1.2"
                       vectorEffect="non-scaling-stroke"
@@ -488,21 +488,21 @@ export default function PortfolioList() {
                   setIsIndustryOpen(false);
                   setIsServiceOpen(false);
                 }}
-                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
+                className="w-full flex items-center justify-between bg-transparent hover:bg-white/5 rounded-full px-5 py-3 text-sm text-white/50 font-medium cursor-pointer transition-all duration-200 relative group overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)]"
               >
                 <span className="relative z-10">{selectedObjective}</span>
                 <ArrowDown isOpen={isObjectiveOpen} />
                 {/* SVG border drawing */}
-                <div className="absolute inset-0 pointer-events-none rounded-full overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
                   <svg className="absolute inset-0 w-full h-full" fill="none">
                     <rect
                       className="border-draw-path transition-all duration-200 group-hover:stroke-white group-hover:stroke-[1.5px]"
-                      x="0.5"
-                      y="0.5"
-                      width="calc(100% - 1px)"
-                      height="calc(100% - 1px)"
-                      rx="24"
-                      ry="24"
+                      x="1"
+                      y="1"
+                      width="calc(100% - 2px)"
+                      height="calc(100% - 2px)"
+                      rx="21"
+                      ry="21"
                       stroke="rgba(255, 255, 255, 0.25)"
                       strokeWidth="1.2"
                       vectorEffect="non-scaling-stroke"

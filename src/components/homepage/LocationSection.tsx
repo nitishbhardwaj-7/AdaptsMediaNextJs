@@ -190,7 +190,12 @@ const LocationSection = () => {
       gsap.set(arrow, { rotate: -25, opacity: 0, scale: 0.8 })
     }
     if (mapImage) {
-      gsap.set(mapImage, { clipPath: "polygon(0 0, 0% 0, 0% 100%, 0 100%)", opacity: 0, scale: 0.96 })
+      gsap.set(mapImage, { 
+        clipPath: "circle(0% at 58.5% 39.5%)", 
+        opacity: 0, 
+        scale: 0.94,
+        filter: "blur(12px)"
+      })
     }
     gsap.set(".map-pin-element", { opacity: 0, scale: 0 })
     gsap.set(".dubai-item", { y: 20, opacity: 0 })
@@ -232,14 +237,15 @@ const LocationSection = () => {
       }, 0.6)
     }
 
-    // 2. World Map assembly sweep
+    // 2. World Map assembly sweep (reveals outwards from Dubai coordinates)
     if (mapImage) {
       entranceTl.to(mapImage, {
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        clipPath: "circle(125% at 58.5% 39.5%)",
         opacity: 1,
         scale: 1,
-        duration: 2.2,
-        ease: "power2.inOut"
+        filter: "blur(0px)",
+        duration: 2.0,
+        ease: "power2.out"
       }, 0.3)
     }
 
@@ -326,41 +332,7 @@ const LocationSection = () => {
       cleanups.push(() => clearInterval(ambientInterval))
     }
 
-    // --- F. Map Subtle Ambient Float ---
-    // --- G. Cursor Spotlight on Map ---
-    const mapContainer = sectionRef.current?.querySelector<HTMLElement>(".map-container")
-    const mapSpotlight = sectionRef.current?.querySelector(".map-spotlight") as HTMLElement
-
-    if (!isMobile && mapContainer && mapSpotlight) {
-      const spotX = gsap.quickTo(mapSpotlight, "x", { duration: 0.4, ease: "power2.out" })
-      const spotY = gsap.quickTo(mapSpotlight, "y", { duration: 0.4, ease: "power2.out" })
-
-      const onMapMouseMove = (e: MouseEvent) => {
-        const rect = mapContainer.getBoundingClientRect()
-        const x = e.clientX - rect.left - 96 // Center spotlight (192px / 2)
-        const y = e.clientY - rect.top - 96
-        spotX(x)
-        spotY(y)
-      }
-
-      const onMapMouseEnter = () => {
-        gsap.to(mapSpotlight, { opacity: 1, duration: 0.3 })
-      }
-
-      const onMapMouseLeave = () => {
-        gsap.to(mapSpotlight, { opacity: 0, duration: 0.3 })
-      }
-
-      mapContainer.addEventListener("mousemove", onMapMouseMove)
-      mapContainer.addEventListener("mouseenter", onMapMouseEnter)
-      mapContainer.addEventListener("mouseleave", onMapMouseLeave)
-
-      cleanups.push(() => {
-        mapContainer.removeEventListener("mousemove", onMapMouseMove)
-        mapContainer.removeEventListener("mouseenter", onMapMouseEnter)
-        mapContainer.removeEventListener("mouseleave", onMapMouseLeave)
-      })
-    }
+    // --- G. Cursor Spotlight on Map (Removed) ---
 
     // --- I. Background Gradient Slow Animation ---
     const lightX = gsap.quickTo(".location-bg-light", "--light-x", { duration: 2, ease: "sine.inOut" })
@@ -376,6 +348,7 @@ const LocationSection = () => {
     cleanups.push(() => clearInterval(lightInterval))
 
     // --- J. Scroll Exit Timeline ---
+    const mapContainer = sectionRef.current?.querySelector(".map-container")
     if (heading && mapContainer) {
       gsap.timeline({
         scrollTrigger: {
@@ -418,17 +391,6 @@ const LocationSection = () => {
           --light-y: 40%;
         }
 
-        .map-spotlight {
-          position: absolute;
-          pointer-events: none;
-          z-index: 5;
-          width: 192px;
-          height: 192px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
-          opacity: 0;
-          will-change: transform, opacity;
-        }
 
         .map-pin-element {
           will-change: transform, opacity;
@@ -532,8 +494,6 @@ const LocationSection = () => {
                 className="w-full object-contain opacity-100 map-image-el"
               />
 
-              {/* Spotlight Follower */}
-              <div className="map-spotlight" />
 
               {/* Location Pins */}
               {mapPins.map((pin) => (

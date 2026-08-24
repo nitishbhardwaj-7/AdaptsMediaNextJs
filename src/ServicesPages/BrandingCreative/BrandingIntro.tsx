@@ -11,11 +11,13 @@ const BrandingIntro = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const pills = [
-    "Identity",
-    "Campaigns",
+    "Brand Identity & Logo Design",
+    "Brand Strategy",
+    "Campaign Creative",
+    "Visual Design & Artwork",
     "Design Systems",
-    "Content Strategy",
-    "Leverage Influencers",
+    "Motion Graphics & Video",
+    "Photography & Production"
   ];
 
   useGSAP(() => {
@@ -123,15 +125,11 @@ const BrandingIntro = () => {
         {/* Paragraph Description */}
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
-            We combine strategic thinking<br className="hidden md:inline" />
-            with creative execution to build brands<br className="hidden md:inline" />
-            that are <span className="highlight text-[#2563eb] font-bold">visually distinctive</span>,<br className="hidden md:inline" />
-            <span className="highlight text-[#2563eb] font-bold">emotionally engaging</span>,<br className="hidden md:inline" />
-            and positioned for long-term growth.<br className="hidden md:inline" /><br className="hidden md:inline" />
-            From identity creation to campaign storytelling,<br className="hidden md:inline" />
-            every element is designed to create<br className="hidden md:inline" />
-            consistency, relevance,<br className="hidden md:inline" />
-            and <span className="highlight text-[#2563eb] font-bold">impact</span> across every touchpoint.
+            Standing out takes more than a good logo.<br className="hidden md:inline" />
+            It takes a <span className="highlight text-[#2563eb] font-bold">consistent visual language</span>,<br className="hidden md:inline" />
+            a <span className="highlight text-[#2563eb] font-bold">sharp brand voice</span>,<br className="hidden md:inline" />
+            and <span className="highlight text-[#2563eb] font-bold">creative that works</span> across every channel your audience operates.<br className="hidden md:inline" />
+            We build complete brand and creative systems from initial identity work through to full campaign production.
           </p>
         </div>
 

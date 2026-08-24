@@ -35,7 +35,7 @@ const MarketingAutomationSection = () => {
               Marketing Automation & Agentic Workflows
             </span>
             <h2 className="auto-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Automate the Repetitive Work. Free Your Team for What Matters.
+              Automate Repetitive Work. Free Your Team to Scale.
             </h2>
 
             <div className="auto-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
@@ -43,7 +43,7 @@ const MarketingAutomationSection = () => {
                 Most marketing teams spend a large part of their week on tasks that should not require human attention: pulling reports, updating dashboards, scheduling posts, qualifying leads and routing briefs. Agentic AI workflows handle these tasks autonomously, without a developer having to build every step from scratch.
               </p>
               <p>
-                We design and implement marketing automation and agentic workflow systems across your CRM, ad platforms, content tools and data stack. Whether you need a lead nurturing sequence that adapts based on buyer behaviour, a reporting agent that delivers summaries automatically, or a campaign briefing workflow that cuts turnaround, we build it.
+                We design and implement marketing automation and agentic workflow systems across your CRM, ad platforms, content tools and data stack. Whether you need a lead nurturing sequence that adapts based on buyer behaviour, a reporting agent that delivers weekly performance summaries automatically, or a campaign briefing workflow that cuts turnaround from days to hours, we build it around your actual operational needs.
               </p>
             </div>
           </div>

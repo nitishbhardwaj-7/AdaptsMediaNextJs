@@ -65,7 +65,7 @@ const TargetedCampaignsSection = () => {
               Campaign Planning & Measurement
             </span>
             <h2 className="campaigns-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Every Campaign Starts with a Clear Brief and Ends with Real Data.
+              Every Campaign Grounded In intent & Driven By Data.
             </h2>
 
             <div className="campaigns-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">

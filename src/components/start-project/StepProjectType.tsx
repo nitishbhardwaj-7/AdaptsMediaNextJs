@@ -175,7 +175,7 @@ function ProjectCard({
           <motion.div
             initial={false}
             animate={{ scale: isSelected ? 1 : 0, opacity: isSelected ? 1 : 0 }}
-            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            transition={{ type: "spring" as const, stiffness: 350, damping: 25 }}
             className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-tr from-[#C52A27] to-[#FAC02D] flex items-center justify-center shadow-[0_0_20px_rgba(250,192,45,0.4)] border border-[#FAC02D]/30"
           >
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">

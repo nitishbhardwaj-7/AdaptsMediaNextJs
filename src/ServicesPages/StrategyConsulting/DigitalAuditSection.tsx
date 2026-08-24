@@ -35,7 +35,7 @@ const DigitalAuditSection = () => {
               Digital Audit
             </span>
             <h2 className="audit-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Find Out What Is Actually Happening in Your Marketing.
+              Uncover Your True Marketing ROI
             </h2>
 
             <div className="audit-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-gray-300">

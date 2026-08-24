@@ -9,11 +9,11 @@ const DesignSystemsSection = () => {
   const containerRef = useRef<HTMLElement>(null);
   
   const deliverables = [
-    "UI and Visual Design Systems",
-    "Brand Asset Libraries",
-    "Component and Layout Systems",
-    "Marketing Templates and Guidelines",
-    "Cross-platform Consistency Frameworks",
+    "Component Library Creation",
+    "Design Token Documentation",
+    "Typography & Spacing Systems",
+    "Developer-Ready Style Guide",
+    "Cross-Platform Usage Rules",
   ];
 
   useServiceDetailAnimation(containerRef);
@@ -36,19 +36,15 @@ const DesignSystemsSection = () => {
               Design Systems
             </span>
             <h2 className="designsystems-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Consistency Across Every Brand Touchpoint
+              One Unified System, Scalable Across Every Platform
             </h2>
 
             <div className="designsystems-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-red-50/90">
               <p>
-                A scalable brand needs structure. Our design systems create
-                consistency across digital, print, social, and marketing assets -
-                ensuring your brand looks unified wherever it appears.
+                Design inconsistency costs brands credibility. When every communication looks like it came from a different company, trust deteriorates. A design system fixes that. It gives your team shared components, tokens, and usage rules they can apply without any doubts or waiting for a designer.
               </p>
               <p>
-                We build flexible systems that simplify execution while
-                maintaining visual quality and brand integrity across teams and
-                platforms.
+                We build design systems for growing teams and product-driven businesses that need to produce content at scale without losing brand integrity. Our systems include component libraries, spacing and typography scales, color tokens, and usage documentation that works for both designers and developers.
               </p>
             </div>
           </div>

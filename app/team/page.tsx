@@ -63,7 +63,6 @@ export default async function TeamPage() {
       )}
       <TeamSection members={teamMembers} title="Meet Our Expert Team" />
       <ContactCTA />
-      <SocialBar />
       <Footer />
     </main>
   );

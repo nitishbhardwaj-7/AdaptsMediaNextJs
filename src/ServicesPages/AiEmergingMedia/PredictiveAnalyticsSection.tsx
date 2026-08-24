@@ -32,15 +32,15 @@ const PredictiveAnalyticsSection = () => {
               Predictive Analytics & AI Media Optimisation
             </span>
             <h2 className="predictive-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl text-slate-900 font-heading font-normal">
-              Stop Reacting to Yesterday's Data. Start Acting on What Comes Next.
+              Next-Gen Analytics. Maximum Return.
             </h2>
 
             <div className="predictive-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-slate-600">
               <p>
-                Standard marketing dashboards tell you what happened. Predictive analytics tells you what is about to happen: which audience segments are most likely to convert, which creative is losing effectiveness before it shows in results, and where budget will generate the highest return if reallocated now.
+                Standard marketing dashboards tell you what happened. Predictive analytics tells you what is about to happen: which audience segments are most likely to convert, which creative is losing effectiveness before it shows in results, and where budget will generate the highest return if reallocated now. That shift from reactive to predictive changes how fast a marketing team can move.
               </p>
               <p>
-                We build predictive analytics frameworks and AI media optimisation systems that sit across your ad platforms, CRM and first-party data. The output is a live decision layer that flags underperforming spend, predicts campaign fatigue, models audience saturation and surfaces budget reallocation opportunities.
+                We build predictive analytics frameworks and AI media optimisation systems that sit across your ad platforms, CRM and first-party data. The output is a live decision layer that flags underperforming spend, predicts campaign fatigue, models audience saturation and surfaces budget reallocation opportunities before standard analysis would catch them.
               </p>
             </div>
           </div>

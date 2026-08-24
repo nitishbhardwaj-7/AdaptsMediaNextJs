@@ -16,35 +16,64 @@ import HeroSection from "@/components/homepage/HeroSection";
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  const res = await fetch(`https://adaptsmedia.com/wp-json/yoast/v1/get_head?url=https://adaptsmedia.com/`);
-  const data = await res.json();
-  const yoast = data.json;
+  try {
+    const res = await fetch(
+      `https://adaptsmedia.com/wp-json/yoast/v1/get_head?url=https://adaptsmedia.com/`,
+      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(4000) }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      const yoast = data?.json;
+      if (yoast) {
+        return {
+          title: yoast.title || "Adapts Media | Digital Marketing Agency",
+          description: yoast.description || "Expert digital marketing solutions in Dubai and globally.",
+          alternates: {
+            canonical: "https://adaptsmedia.com/",
+          },
+          openGraph: {
+            title: yoast.og_title || yoast.title || "Adapts Media",
+            description: yoast.og_description || yoast.description,
+            images: yoast.og_image?.[0]?.url ? [yoast.og_image[0].url] : [],
+          }
+        };
+      }
+    }
+  } catch (err) {
+    console.error("Failed to fetch homepage Yoast metadata:", err);
+  }
 
   return {
-    title: yoast.title,
-    description: yoast.description,
+    title: "Adapts Media | Digital Marketing Agency in Dubai",
+    description: "Expert digital marketing solutions in Dubai and globally.",
     alternates: {
       canonical: "https://adaptsmedia.com/",
     },
-    openGraph: {
-      title: yoast.og_title,
-      description: yoast.og_description,
-      images: [yoast.og_image?.[0]?.url],
-    }
   };
 }
 
 export default async function Home() {
-  // To get the Homepage SCHEMA, you fetch the head data again or create a helper
-  const res = await fetch(`https://adaptsmedia.com/wp-json/yoast/v1/get_head?url=https://adaptsmedia.com/`);
-  const data = await res.json();
+  let schema: any = null;
+  try {
+    const res = await fetch(
+      `https://adaptsmedia.com/wp-json/yoast/v1/get_head?url=https://adaptsmedia.com/`,
+      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(4000) }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      schema = data?.json?.schema;
+    }
+  } catch (err) {
+    console.error("Failed to fetch homepage Schema:", err);
+  }
+
   return (
     <>
       {/* Homepage specific Schema (Organization, WebSite, etc.) */}
-      {data.json?.schema && (
+      {schema && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data.json.schema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       )}
       <main>
@@ -55,7 +84,7 @@ export default async function Home() {
 
         <OrangeSection />
         
-<ServicesSection />
+        <ServicesSection />
 
         <PortfolioShowcase/>
 

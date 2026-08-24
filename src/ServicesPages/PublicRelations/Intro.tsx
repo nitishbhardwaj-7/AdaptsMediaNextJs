@@ -117,7 +117,7 @@ const Intro = () => {
         <div className="w-full max-w-[1050px] mx-auto">
           <p className="intro-paragraph reveal-text text-[clamp(24px,4.0vw,54px)] font-semibold text-[#1a1a2e] leading-[1.38] tracking-tight font-heading mx-auto text-center">
             Paid media can buy reach. <span className="highlight text-[#2563eb] font-bold">PR earns it</span>.<br className="hidden md:inline" />
-            When your brand gets written about, talked about and remembered,<br className="hidden md:inline" />
+            When your brand gets written about, talked about, and remembered,<br className="hidden md:inline" />
             it builds a <span className="highlight text-[#2563eb] font-bold">layer of credibility</span> no ad budget can replicate.<br className="hidden md:inline" />
             We handle the <span className="highlight text-[#2563eb] font-bold">full scope of brand communications</span>,<br className="hidden md:inline" />
             from media relations and press to live events and brand activations.

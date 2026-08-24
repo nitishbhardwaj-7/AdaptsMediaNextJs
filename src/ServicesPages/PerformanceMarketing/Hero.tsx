@@ -126,7 +126,7 @@ const Hero = () => {
             Where Every Ad Spend <br /> Has a Job to Do
           </h2>
           <p className="hero-desc text-2xl font-opensans font-extralight leading-tight tracking-wide text-white text-left w-full">
-            We build campaigns that are measured, optimised and accountable — from first click to closed deal.
+            We build campaigns that are measured, optimised and accountable from first click to closed deal.
           </p>
         </div>
       </div>

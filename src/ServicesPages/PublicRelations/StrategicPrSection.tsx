@@ -35,7 +35,7 @@ const StrategicPrSection = () => {
               Strategic PR
             </span>
             <h2 className="pr-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              Positioned to Lead. Built to Be Taken Seriously.
+              Command The Narrative. Lead The Industry.
             </h2>
 
             <div className="pr-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
@@ -43,7 +43,7 @@ const StrategicPrSection = () => {
                 PR without strategy is just press releases. We approach public relations as a reputation-building discipline tied directly to your business goals. Our PR strategies position your brand and leadership team as credible voices in your industry, not just another company sending announcements.
               </p>
               <p>
-                We develop PR roadmaps aligned with your commercial calendar, identify the right media targets across print, broadcast and digital, and brief your spokespeople on how to communicate your story clearly. Every piece of coverage we pursue serves your brand's long-term positioning, not just a short-term news cycle.
+                We develop PR roadmaps aligned with your commercial calendar, identify the right media targets across print, broadcast, and digital, and brief your spokespeople on how to communicate your story clearly. Every piece of coverage we pursue serves your brand's long-term positioning, not just a short-term news cycle.
               </p>
             </div>
           </div>

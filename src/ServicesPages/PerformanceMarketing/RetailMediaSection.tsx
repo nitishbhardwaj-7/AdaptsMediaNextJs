@@ -32,7 +32,7 @@ const RetailMediaSection = () => {
               Retail Media & Marketplace Advertising
             </span>
             <h2 className="retail-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl text-slate-900 font-heading font-normal">
-              Sell More Where People Are Already Buying.
+              Sell More Where People Are Already Buying
             </h2>
 
             <div className="retail-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-slate-600">

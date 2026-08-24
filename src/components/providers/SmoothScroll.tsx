@@ -2,11 +2,22 @@
 
 import { ReactLenis } from 'lenis/react';
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<any>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Reset scroll to top on route change
+    if (lenisRef.current?.lenis) {
+      lenisRef.current.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
 
   // Detect touch/mobile devices — no smooth scroll on mobile
   const isMobile =

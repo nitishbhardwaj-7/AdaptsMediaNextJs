@@ -10,12 +10,16 @@ function cleanZeroByteFiles(dir) {
     const files = fs.readdirSync(dir);
     for (const file of files) {
       const fullPath = path.join(dir, file);
-      const stat = fs.statSync(fullPath);
-      if (stat.isDirectory()) {
-        cleanZeroByteFiles(fullPath);
-      } else if (stat.isFile() && stat.size === 0) {
-        fs.unlinkSync(fullPath);
-        console.log(`[Cache Cleaner] Removed corrupted 0-byte cache file: ${fullPath}`);
+      try {
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {
+          cleanZeroByteFiles(fullPath);
+        } else if (stat.isFile() && stat.size === 0) {
+          fs.unlinkSync(fullPath);
+          console.log(`[Cache Cleaner] Removed corrupted 0-byte cache file: ${fullPath}`);
+        }
+      } catch (fileErr) {
+        // Ignore individual file lock errors
       }
     }
   } catch (err) {

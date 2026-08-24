@@ -65,7 +65,7 @@ const GrowthStrategiesSection = () => {
               Tailor-made Growth Strategies
             </span>
             <h2 className="growth-title service-title text-4xl md:text-5xl lg:text-[56px] tracking-tight leading-[1.25] pb-2 mb-8 max-w-2xl font-heading font-normal">
-              A Plan That Fits Your Business. Not a Template.
+              Bespoke Plans That Fit Your Business Right
             </h2>
 
             <div className="growth-desc service-desc space-y-6 max-w-2xl text-[17px] md:text-[19px] font-light leading-relaxed text-blue-50/90">
@@ -73,7 +73,7 @@ const GrowthStrategiesSection = () => {
                 Generic growth playbooks do not account for your market, your resources or your competitive position. We develop growth strategies built around your specific commercial goals, audience and budget, whether you are entering a new market, scaling an existing channel or repositioning entirely.
               </p>
               <p>
-                Our consulting process starts with a deep review of your business situation, data and objectives. From there we build a prioritised growth plan covering channel mix, messaging, budget allocation and success metrics. You get a clear, executable roadmap rather than a presentation full of frameworks with no clear next step.
+                Our consulting process starts with a deep review of your business situation, data and objectives. From there, we build a prioritised growth plan covering channel mix, messaging, budget allocation and success metrics. You get a clear, executable roadmap rather than a presentation full of frameworks with no clear next step.
               </p>
             </div>
           </div>
