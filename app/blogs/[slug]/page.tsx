@@ -1,5 +1,6 @@
 import { getSinglePost, getWordPressPosts, getResolvedAuthor } from "@/lib/getPosts";
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -108,11 +109,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             className="blog-featured-image relative z-20 max-w-5xl mx-auto px-6 -mt-32 md:-mt-40 mb-12"
             style={{ opacity: 0 }}
           >
-            <div className="relative w-full overflow-hidden shadow-2xl bg-gray-100 rounded-xl">
-              <img 
+            <div className="relative w-full overflow-hidden shadow-2xl bg-gray-100 rounded-xl aspect-[16/9]">
+              <Image 
                 src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url} 
                 alt="Featured Image"
-                className="w-full h-auto block" 
+                fill
+                priority
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="w-full h-full object-cover block" 
               />
             </div>
           </div>

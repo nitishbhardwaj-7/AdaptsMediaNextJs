@@ -259,9 +259,11 @@ export default function TeamMemberProfileClient({
                     >
                       <Link href={`/blogs/${post.slug}`} className="block relative aspect-[16/10] overflow-hidden shrink-0">
                         {hasImage ? (
-                          <img
+                          <Image
                             src={post.image}
                             alt={post.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         ) : (

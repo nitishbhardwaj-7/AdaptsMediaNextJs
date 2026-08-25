@@ -1,26 +1,24 @@
 import { teamMembers } from "@/data/teamData";
 
-const BASE_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_WORDPRESS_URL || "https://adaptsmedia.com";
 
-export async function getWordPressPosts(limit: number = 100) {
-  if (!BASE_URL) {
-    console.error("WORDPRESS_URL is not defined in environment variables");
-    return [];
-  }
+let memoryPostsCache: any[] | null = null;
+let memoryTeamCache: any[] | null = null;
 
-  const safeLimit = Math.min(limit, 100);
+export async function getWordPressPosts(limit: number = 30) {
+  const safeLimit = Math.min(limit, 30);
 
   try {
     const res = await fetch(
-      `${BASE_URL}/wp-json/wp/v2/posts?_embed&per_page=${safeLimit}&_fields=title,slug,date,categories,featured_media,_links,_embedded,yoast_head_json`,
-      { next: { revalidate: 600 }, signal: AbortSignal.timeout(6000) }
+      `${BASE_URL}/wp-json/wp/v2/posts?_embed&per_page=${safeLimit}&_fields=title,slug,date,categories,featured_media,_embedded,yoast_head_json`,
+      { next: { revalidate: 1800 }, signal: AbortSignal.timeout(4000) }
     );
 
     if (!res.ok) throw new Error(`WordPress API returned status: ${res.status}`);
 
     const posts = await res.json();
 
-    return posts.map((post: any) => {
+    const formattedPosts = posts.map((post: any) => {
       let authorName = post.yoast_head_json?.author;
       if (!authorName && post._embedded?.author && post._embedded.author.length > 0) {
         authorName = post._embedded.author[0].name;
@@ -45,8 +43,7 @@ export async function getWordPressPosts(limit: number = 100) {
       if (cats.length === 0) cats = ["SEO", "Content Marketing", "Digital Strategy"];
 
       return {
-        // Decoding titles for production-ready text
-        title: post.title.rendered.replace(/&#(\d+);/g, (match: string, dec: number) => String.fromCharCode(dec)),
+        title: post.title?.rendered?.replace(/&#(\d+);/g, (_: string, dec: number) => String.fromCharCode(dec)) || "",
         image: post._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.medium_large?.source_url || 
                post._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.large?.source_url || 
                post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
@@ -61,9 +58,13 @@ export async function getWordPressPosts(limit: number = 100) {
         _embedded: post._embedded,
       };
     });
+
+    memoryPostsCache = formattedPosts;
+    return formattedPosts;
   } catch (error) {
-    console.error("Error fetching WordPress posts:", error);
-    return []; // Return empty array so .map() doesn't break your UI
+    if (memoryPostsCache) return memoryPostsCache;
+    console.warn("WordPress posts fetch failed, returning empty fallback:", (error as Error).message);
+    return [];
   }
 }
 
@@ -74,7 +75,6 @@ export async function getResolvedAuthor(post: any) {
 
   const authorName = post.yoast_head_json?.author || schemaPerson?.name || "Shruti Goswami";
 
-  // Fetch team members (scraping live WP page and fallback to local team data)
   const team = await getWordPressTeamMembers();
   const matchingMember = team.find((m: any) => 
     m.name.toLowerCase().trim() === authorName.toLowerCase().trim() ||
@@ -115,7 +115,7 @@ export async function getResolvedAuthor(post: any) {
 }
 
 export async function getPostsByAuthor(authorSlug: string) {
-  const posts = await getWordPressPosts(100);
+  const posts = await getWordPressPosts(30);
   return posts.filter((post: any) => post.authorSlug === authorSlug);
 }
 
@@ -126,7 +126,7 @@ export async function getSinglePost(slug: string) {
   const url = `${BASE_URL}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`;
 
   try {
-    const res = await fetch(url, { next: { revalidate: 600 }, signal: AbortSignal.timeout(5000) });
+    const res = await fetch(url, { next: { revalidate: 1800 }, signal: AbortSignal.timeout(4000) });
 
     if (!res.ok) return null;
 
@@ -138,19 +138,24 @@ export async function getSinglePost(slug: string) {
 
     return posts[0];
   } catch (error) {
-    console.error(`Error fetching single post [${slug}]:`, error);
+    console.warn(`Single post fetch error [${slug}]:`, (error as Error).message);
     return null;
   }
 }
 
 
 export async function getWordPressTeamMembers() {
+  if (memoryTeamCache) return memoryTeamCache;
+
   const { teamMembers } = await import('@/data/teamData');
-  const teamUrl = BASE_URL ? `${BASE_URL}/team/` : 'https://adaptsmedia.com/team/';
+  const teamUrl = `${BASE_URL}/team/`;
 
   try {
-    const res = await fetch(teamUrl, { next: { revalidate: 3600 }, signal: AbortSignal.timeout(5000) });
-    if (!res.ok) return teamMembers;
+    const res = await fetch(teamUrl, { next: { revalidate: 3600 }, signal: AbortSignal.timeout(3000) });
+    if (!res.ok) {
+      memoryTeamCache = teamMembers;
+      return teamMembers;
+    }
 
     const html = await res.text();
     const cardBlocks = html.split(/<div[^>]*class=["'][^"']*card-wrapper[^"']*["']/gi).slice(1);
@@ -179,7 +184,7 @@ export async function getWordPressTeamMembers() {
             name,
             slug,
             role,
-            image: img, // Directly from WordPress card-wrapper
+            image: img,
             initials: name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase(),
             initialsBg: existing?.initialsBg || "bg-blue-600",
             bio: bio || existing?.bio || `${role} at Adapts Media.`,
@@ -195,14 +200,17 @@ export async function getWordPressTeamMembers() {
       }
 
       if (parsed.length > 0) {
+        memoryTeamCache = parsed;
         return parsed;
       }
     }
   } catch (error) {
-    console.error("Error fetching live WordPress team page:", error);
+    // Return local team members on error
   }
 
+  memoryTeamCache = teamMembers;
   return teamMembers;
 }
+
 
 

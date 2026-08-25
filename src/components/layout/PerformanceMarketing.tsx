@@ -184,19 +184,19 @@ const PerformanceMarketing = () => {
           <div className="img-container flex-shrink-0 md:sticky md:top-20">
             <div className="h-40 w-40 md:h-72 md:w-72 relative">
               <div className="w-full h-full relative">
-                {/* 1. THE BACKGROUND IMAGE (Small Jump) */}
-                <img 
-                  loading="lazy"
+                {/* 1. THE BACKGROUND IMAGE */}
+                <Image 
                   src="/images/services/commonbg.png" 
+                  fill
                   className="img-bg absolute inset-0 w-full h-full object-contain scale-150 z-0 opacity-50 pointer-events-none" 
                   style={{ filter: 'brightness(0)' }}
                   alt="Background" 
                 />
 
-                {/* 2. THE MAIN IMAGE (Large Jump) */}
-                <img 
-                  loading="lazy"
+                {/* 2. THE MAIN IMAGE */}
+                <Image 
                   src="/images/services/i1.png" 
+                  fill
                   className="img-main relative z-10 w-full h-full object-contain" 
                   alt="Rocket" 
                 />

@@ -35,16 +35,18 @@ const CampaignsSection = () => {
             {/* Illustration Container */}
             <div className="campaigns-img-container service-img-container relative w-full max-w-[300px] aspect-square flex items-center justify-center">
               <div className="w-full h-full relative">
-                {/* 1. THE BACKGROUND IMAGE (Small Scrub / Dot Grid) */}
-                <img 
+                {/* 1. THE BACKGROUND IMAGE */}
+                <Image 
                   src="/images/BrandingCreative/DigitalMarketingLogoBg.png" 
+                  fill
                   className="campaigns-img-bg service-img-bg absolute inset-0 w-full h-full object-contain scale-110 z-0 opacity-80 pointer-events-none" 
                   alt="Logo Background Grid" 
                 />
               
-                {/* 2. THE MAIN IMAGE (Large Scrub / Illustration) */}
-                <img 
+                {/* 2. THE MAIN IMAGE */}
+                <Image 
                   src="/images/BrandingCreative/DigitalMarketingLogo.png" 
+                  fill
                   className="campaigns-img-main service-img-main relative z-10 w-full h-full object-contain scale-[0.75]" 
                   alt="Digital Marketing Logo" 
                 />

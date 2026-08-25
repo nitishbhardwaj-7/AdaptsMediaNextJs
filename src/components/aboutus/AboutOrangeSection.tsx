@@ -5,9 +5,10 @@ const AboutOrangeSection = () => {
     <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center bg-[#C52A27] text-white py-20">
       
       {/* LAYER 0: The Background Image */}
-      <img 
+      <Image 
         src="/images/About_Us_Bg.png" 
         alt="Background"
+        fill
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 

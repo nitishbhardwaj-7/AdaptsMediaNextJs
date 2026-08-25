@@ -1,9 +1,3 @@
-"use client"
-
-import dynamic from "next/dynamic"
-
-const VideoRipple = dynamic(() => import("./VideoRipple"), { ssr: false })
-
 const HeroVideo = () => {
   return (
     <section className="relative w-full h-screen overflow-hidden">
@@ -17,9 +11,8 @@ const HeroVideo = () => {
         <source src="/assets/Comp.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <VideoRipple />
     </section>
   );
 };
 
-export default HeroVideo;
+export default HeroVideo;

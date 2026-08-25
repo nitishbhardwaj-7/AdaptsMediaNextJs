@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Roboto, Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 
@@ -37,22 +37,33 @@ const openSans = localFont({
     },
   ],
   variable: "--font-heading",
-  preload: false,
+  preload: true,
 });
 
 const roboto = Roboto({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
-  preload: false,
+  preload: true,
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    // Fetch the Yoast SEO data for the homepage specifically
     const response = await fetch(
       `https://adaptsmedia.com/wp-json/yoast/v1/get_head?url=https://adaptsmedia.com/`,
-      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(4000) }
+      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(2000) }
     );
 
     if (response.ok) {
@@ -88,10 +99,9 @@ export async function generateMetadata(): Promise<Metadata> {
       }
     }
   } catch (error) {
-    console.error("Failed to fetch layout Yoast metadata:", error);
+    // Fallback if API fails or yoast object is missing
   }
 
-  // Fallback if API fails or yoast object is missing
   return {
     title: "Adapts Media | Digital Marketing Agency",
     description: "Expert digital marketing solutions in Dubai and globally."
@@ -106,16 +116,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${roboto.variable} h-full antialiased`}
+      className={`${openSans.variable} ${roboto.variable} ${cormorant.variable} ${dmSans.variable} h-full antialiased`}
     >
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body>
-
         <SmoothScroll>
           <Navbar />
           <main style={{ paddingTop: '0px' }}>
@@ -134,3 +137,4 @@ export default function RootLayout({
     </html>
   );
 }
+

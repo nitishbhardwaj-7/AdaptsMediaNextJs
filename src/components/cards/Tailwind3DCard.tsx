@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const BookmarkIcon = () => (
   <svg
     width="12"
@@ -40,9 +42,11 @@ const Tailwind3DCard = ({
         <div
           className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105"
         >
-          <img
+          <Image
             src={image}
             alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="h-full w-full object-cover opacity-100 transition-opacity duration-700"
           />
         </div>
@@ -59,9 +63,10 @@ const Tailwind3DCard = ({
           {/* Logo */}
           {logo && (
             <div className="mb-4 relative w-32 h-10 select-none pointer-events-none">
-              <img
+              <Image
                 src={logo}
                 alt="Brand Logo"
+                fill
                 className="w-full h-full object-contain object-left"
               />
             </div>

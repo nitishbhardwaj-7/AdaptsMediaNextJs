@@ -303,47 +303,73 @@ export default function PortfolioShowcase({ projects: externalProjects, variant 
 
     // Custom cursor movement tracking
     if (cursorRef.current && sectionRef.current) {
-      const cursorX = gsap.quickTo(cursorRef.current, "x", { duration: 0.35, ease: "power3.out" });
-      const cursorY = gsap.quickTo(cursorRef.current, "y", { duration: 0.35, ease: "power3.out" });
+      // Explicitly initialize cursor as hidden
+      gsap.set(cursorRef.current, { opacity: 0, scale: 0.5 });
 
-      const onCardMouseEnter = () => {
-        gsap.to(cursorRef.current, { opacity: 1, scale: 1, duration: 0.3 });
+      const cursorX = gsap.quickTo(cursorRef.current, "x", { duration: 0.25, ease: "power3.out" });
+      const cursorY = gsap.quickTo(cursorRef.current, "y", { duration: 0.25, ease: "power3.out" });
+
+      const updateCursorPos = (e: MouseEvent) => {
+        if (!sectionRef.current) return;
+        const rect = sectionRef.current.getBoundingClientRect();
+        cursorX(e.clientX - rect.left - 56);
+        cursorY(e.clientY - rect.top - 56);
+      };
+
+      const onCardMouseEnter = (e: MouseEvent) => {
+        if (!sectionRef.current || !cursorRef.current) return;
+        
+        // Immediately update position before animating opacity to prevent top-left (0,0) jump
+        const rect = sectionRef.current.getBoundingClientRect();
+        if (e.clientX && e.clientY) {
+          gsap.set(cursorRef.current, {
+            x: e.clientX - rect.left - 56,
+            y: e.clientY - rect.top - 56,
+          });
+        }
+
+        gsap.to(cursorRef.current, { opacity: 1, scale: 1, duration: 0.25 });
         document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
           el.classList.add("cursor-hidden");
         });
       };
 
       const onCardMouseLeave = () => {
-        gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.3 });
+        if (cursorRef.current) {
+          gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.25 });
+        }
         document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
           el.classList.remove("cursor-hidden");
         });
       };
 
       const onSectionMouseMove = (e: MouseEvent) => {
-        if (!sectionRef.current) return;
-        const rect = sectionRef.current.getBoundingClientRect();
-        // Adjust coordinate offset relative to parent container, centering the 112px cursor
-        cursorX(e.clientX - rect.left - 56);
-        cursorY(e.clientY - rect.top - 56);
+        updateCursorPos(e);
       };
 
-      // Register mousemove and mouseleave on section so coordinates are updated dynamically and cursor is hidden on exit
-      sectionRef.current.addEventListener("mousemove", onSectionMouseMove);
-      sectionRef.current.addEventListener("mouseleave", onCardMouseLeave);
+      const onSectionMouseLeave = () => {
+        if (cursorRef.current) {
+          gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.25 });
+        }
+        document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
+          el.classList.remove("cursor-hidden");
+        });
+      };
 
-      // Register hover events on individual cards to show/hide the custom cursor
+      sectionRef.current.addEventListener("mousemove", onSectionMouseMove);
+      sectionRef.current.addEventListener("mouseleave", onSectionMouseLeave);
+
       const cards = sectionRef.current.querySelectorAll(".portfolio-card");
       cards.forEach((card) => {
-        card.addEventListener("mouseenter", onCardMouseEnter);
+        card.addEventListener("mouseenter", onCardMouseEnter as EventListener);
         card.addEventListener("mouseleave", onCardMouseLeave);
       });
 
       return () => {
         sectionRef.current?.removeEventListener("mousemove", onSectionMouseMove);
-        sectionRef.current?.removeEventListener("mouseleave", onCardMouseLeave);
+        sectionRef.current?.removeEventListener("mouseleave", onSectionMouseLeave);
         cards.forEach((card) => {
-          card.removeEventListener("mouseenter", onCardMouseEnter);
+          card.removeEventListener("mouseenter", onCardMouseEnter as EventListener);
           card.removeEventListener("mouseleave", onCardMouseLeave);
         });
         document.querySelectorAll(".cursor-dot, .cursor-ring").forEach((el) => {
@@ -447,7 +473,9 @@ export default function PortfolioShowcase({ projects: externalProjects, variant 
         style={{
           boxShadow: "0 0 35px rgba(255, 255, 255, 0.05)",
           willChange: "transform, opacity",
-          transform: "scale(0.5)"
+          transform: "scale(0.5)",
+          opacity: 0,
+          pointerEvents: "none"
         }}
       >
         Explore

@@ -141,18 +141,18 @@ const WebDigitalExperience = () => {
             <div className="h-40 w-40 md:h-72 md:w-72 relative">
               <div className="w-full h-full relative">
                 {/* 1. THE BACKGROUND IMAGE */}
-                <img
-                  loading="lazy"
+                <Image
                   src="/images/services/commonbg.png"
+                  fill
                   className="img-bg-web absolute inset-0 w-full h-full object-contain scale-150 z-0 opacity-50 pointer-events-none"
                   style={{ filter: 'brightness(0)' }}
                   alt="Background"
                 />
 
                 {/* 2. THE MAIN IMAGE */}
-                <img
-                  loading="lazy"
+                <Image
                   src="/images/services/i3.png"
+                  fill
                   className="img-main-web relative z-10 w-full h-full object-contain"
                   alt="Rocket"
                 />
